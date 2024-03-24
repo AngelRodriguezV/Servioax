@@ -11,3 +11,6 @@ Documentacion
 |[Jetstream](https://jetstream.laravel.com/installation.html)| Paquete que proporciona un sistema de autenticación de usuarios y una interfaz de usuario para administrar las cuentas de los usuarios |
 |[Spatie](https://spatie.be/docs/laravel-permission/v6/introduction)| Paquete nos permite asociar a nuestros usuarios roles y permisos |
 |[Flowbite](https://flowbite.com/docs/getting-started/introduction/)| En una biblioteca de componentes de código abierto construida sobre el marco CSS de Tailwind |
+
+
+## Instrucciones 
