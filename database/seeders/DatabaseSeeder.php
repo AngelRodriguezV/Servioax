@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categoria;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RolePermisionsSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CategoriaSeeder::class);
     }
 }

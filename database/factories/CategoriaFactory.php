@@ -17,10 +17,10 @@ class CategoriaFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->uniqid()->word();
+        $name = fake()->unique()->word();
         return [
             'name' => $name,
-            'descripcion' => fake()->text(),
+            'descripcion' => fake()->text(10),
             'slug' => Str::slug($name)
         ];
     }
