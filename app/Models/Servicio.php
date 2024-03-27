@@ -5,20 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Servicio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion', 'slug'];
+    protected $fillable = ['nombre', 'slug', 'descripcion'];
 
     public function getRouteKeyName()
     {
         return "slug";
     }
 
-    public function servicios()
+    public function proveedor()
     {
-        return $this->hasMany(Servicio::class, 'categoria_id', $this->primaryKey);
+        return $this->belongsTo(User::class);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
     }
 
     public function image()

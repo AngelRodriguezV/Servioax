@@ -57,6 +57,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
