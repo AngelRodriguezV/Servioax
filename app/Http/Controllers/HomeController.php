@@ -11,4 +11,8 @@ class HomeController extends Controller
         $categorias = Categoria::all();
         return view('welcome', compact('categorias'));
     }
+
+    public function categoria(Categoria $categoria) {
+        return view('categoria', compact('categoria'));
+    }
 }
