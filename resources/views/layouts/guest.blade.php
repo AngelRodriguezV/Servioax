@@ -24,7 +24,7 @@
     @livewire('navigation')
 
     <main>
-        <div class="mt-16 font-sans text-gray-900 dark:text-gray-100 antialiased">
+        <div class="mt-16 font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
     </main>

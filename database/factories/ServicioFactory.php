@@ -23,7 +23,7 @@ class ServicioFactory extends Factory
         return [
             'nombre' => $name,
             'slug' => Str::slug($name),
-            'descripcion' => fake()->text(20),
+            'descripcion' => fake()->text(100),
             'categoria_id' => Categoria::all()->random()->id,
             'proveedor_id' => User::role('Proveedor')->get()->random()->id
         ];

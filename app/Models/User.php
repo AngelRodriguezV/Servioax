@@ -32,6 +32,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -59,7 +61,27 @@ class User extends Authenticatable
 
     public function servicios()
     {
-        return $this->hasMany(Servicio::class);
+        return $this->hasMany(Servicio::class, 'proveedor_id', $this->primaryKey);
+    }
+
+    public function direcciones() 
+    {
+        return $this->hasMany(Direccion::class);
+    }
+
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class);
+    }
+
+    public function solicitudes()
+    {
+        return $this->hasMany(Solicitud::class);
+    }
+
+    public function valoraciones()
+    {
+        return $this->hasMany(Valoracion::class);
     }
 
     public function image()

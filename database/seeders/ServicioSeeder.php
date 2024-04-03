@@ -18,6 +18,6 @@ class ServicioSeeder extends Seeder
         foreach ($users as $user) {
             $user->assignRole('Proveedor');
         }
-        Servicio::factory(100)->create();
+        Servicio::factory(150)->create();
     }
 }
