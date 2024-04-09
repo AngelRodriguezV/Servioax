@@ -59,6 +59,16 @@ class Servicio extends Model
         return $valoracion;
     }
 
+    public function ratings()
+    {
+        $valoracion = Valoracion::select('valoracion', DB::raw('count(*) as rating'))
+        ->groupBy('valoracion')
+        ->where('servicio_id', $this->id)
+        ->latest('valoracion')
+        ->get();
+        return $valoracion;
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');

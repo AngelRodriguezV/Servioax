@@ -34,5 +34,5 @@ Route::get('/d', function() {
         ->where('servicio_id', $servicio->id)
         ->latest('rating')
         ->get();
-    return $servicio->rating();
+    return $servicio->ratings();
 });

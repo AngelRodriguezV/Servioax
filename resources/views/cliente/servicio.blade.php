@@ -47,16 +47,18 @@
                     Opiniones de los clientes
                 </p>
                 <x-rating :rating="$servicio->rating()['valoracion']" :size="6" />
-                @for ($i = 5; $i > 0; $i--)
+                @foreach ($rating as $item)
                     <div class="flex items-center mt-4 pl-4">
                         <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                            {{ $i }} estrellas
+                            {{ $item['estrellas'] }} estrellas
                         </a>
                         <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                            <div class="h-5 bg-yellow-300 rounded" style="width: 70%"></div>
+                            <div class="h-5 bg-yellow-300 rounded" style="width: {{ $item['porcentaje'] }}%"></div>
                         </div>
+                        <span
+                            class="text-sm font-medium text-gray-500">{{ sprintf('%01.0f', $item['porcentaje']) }}%</span>
                     </div>
-                @endfor
+                @endforeach
             </div>
             {{-- Reseñas de los clientes --}}
             <div class="lg:col-span-2 grid gap-2 my-2">

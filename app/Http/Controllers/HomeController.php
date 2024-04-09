@@ -32,6 +32,26 @@ class HomeController extends Controller
         ->where('proveedor_id', '!=', $servicio->proveedor_id)
         ->get();
 
-        return view('cliente.servicio', compact('servicio', 'valoraciones', 'sv_pros'));
+        $ratings = $servicio->ratings();
+        $total = 0;
+        foreach ($ratings as $valor) {
+            $total += $valor['rating'];
+        }
+        $rating = [];
+        for ($i=5; $i > 0; $i--) {
+            $rt = 0;
+            foreach ($ratings as $valor) {
+                if ($valor['valoracion'] == $i) {
+                    $rt = $valor['rating'];
+                }
+            }
+            array_push($rating, [
+                'estrellas' => $i,
+                'porcentaje' => ($rt*100)/$total
+            ]);        
+        }
+
+
+        return view('cliente.servicio', compact('servicio', 'valoraciones', 'sv_pros', 'rating'));
     }
 }
