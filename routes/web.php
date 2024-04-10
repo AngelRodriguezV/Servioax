@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Models\Conversacion;
 use App\Models\Direccion;
 use App\Models\Servicio;
 use App\Models\User;
@@ -28,11 +29,10 @@ Route::middleware([
 
 
 Route::get('/d', function() {
-    $servicio = Servicio::all()->random();
-    $valoracion = Valoracion::select('valoracion', DB::raw('count(*) as rating'))
-        ->groupBy('valoracion')
-        ->where('servicio_id', $servicio->id)
-        ->latest('rating')
-        ->get();
-    return $servicio->ratings();
+    $user = User::all()->random();
+    $conversaciones = Conversacion::select('*')
+            ->join('mensajes', 'mensajes.conversacion_id', '=', 'conversaciones.id')
+            ->where('mensajes.remitente_id', $user->id)
+            ->get();
+    return $conversaciones;
 });

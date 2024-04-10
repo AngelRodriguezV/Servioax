@@ -25,6 +25,8 @@ class DireccionFactory extends Factory
             'num_exterior' => 0,
             'codigo_postal' => 0,
             'referencias' => fake()->text(30),
+            'entre_calle1' => '',
+            'entre_calle2' => '',
         ];
     }
 }

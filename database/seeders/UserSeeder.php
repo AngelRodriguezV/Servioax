@@ -15,7 +15,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Admin',
+            'nombre' => 'Admin',
+            'apellido_paterno' => '',
+            'apellido_materno' => '',
             'email' => 'admin@servioax.com',
             'password' => Hash::make('servioax2024'),
         ])->assignRole('Admin');

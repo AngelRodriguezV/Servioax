@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
             $table->string('email')->unique();
-            $table->integer('telefono')->unique();
+            $table->string('telefono')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
