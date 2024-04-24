@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use App\Models\Servicio;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,6 +19,13 @@ class ServicioSeeder extends Seeder
         foreach ($users as $user) {
             $user->assignRole('Proveedor');
         }
-        Servicio::factory(150)->create();
+        $servicios = Servicio::factory(150)->create();
+
+        foreach ($servicios as $servicio) {
+            Image::factory()->create([
+                'imageable_id' => $servicio->id,
+                'imageable_type' => Servicio::class
+            ]);
+        }
     }
 }

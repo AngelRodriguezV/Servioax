@@ -15,6 +15,10 @@ class HomeController extends Controller
         return view('welcome', compact('categorias', 'servicios'));
     }
 
+    public function categorias() {
+        return view('cliente.categorias');
+    }
+
     public function categoria(Categoria $categoria) {
         return view('categoria', compact('categoria'));
     }

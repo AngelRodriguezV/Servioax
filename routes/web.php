@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 # Vistas que se muestran al cliente publicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('categorias/{categoria}', [HomeController::class, 'categoria'])->name('categorias');
+Route::get('categorias', [HomeController::class, 'categorias'])->name('categorias');
+Route::get('categorias/{categoria}', [HomeController::class, 'categoria'])->name('categoria');
 
 Route::get('servicios', [HomeController::class, 'servicios'])->name('servicios');
 Route::get('servicio/{servicio}', [HomeController::class, 'servicio'])->name('servicio');
