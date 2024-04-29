@@ -1,18 +1,18 @@
-@props(['size' => 'cuadro', 'url' => null])
+@props(['size' => '', 'url' => null])
 
 @php
     switch ($size) {
         case 'cuadro':
             $classes = 'w-80 h-80 md:w-96 md:h-96 rounded-full';
-            $img_defaut = 'svg/upload.svg';
+            $img_defaut = 'svg/upload.jpeg';
             break;
         case 'horizontal':
             $classes = 'w-full h-40 md:h-56 lg:h-96';
-            $img_defaut = 'svg/upload-lg-horizontal.svg';
+            $img_defaut = 'svg/upload.jpeg';
             break;
         default:
             $classes = 'w-96 h-96 rounded-lg';
-            $img_defaut = 'svg/upload.svg';
+            $img_defaut = 'svg/upload.jpeg';
             break;
     }
 @endphp

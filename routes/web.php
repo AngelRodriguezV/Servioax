@@ -4,6 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Models\Conversacion;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\PerfilsController;
+use App\Http\Controllers\RegistrarUsuarioController;
+use App\Http\Controllers\SubirIdentificacionController;
 
 # Vistas que se muestran al cliente publicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -14,6 +18,7 @@ Route::get('categorias/{categoria}', [HomeController::class, 'categoria'])->name
 Route::get('servicios', [HomeController::class, 'servicios'])->name('servicios');
 Route::get('servicio/{servicio}', [HomeController::class, 'servicio'])->name('servicio');
 
+
 # Vistas que requieren auntenticación
 Route::middleware([
     'auth:sanctum',
@@ -23,6 +28,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/seleccion-rol', [RegistrarUsuarioController::class, 'elegirRol'])->name('elegirRol');
+    Route::get('/subir-id', [SubirIdentificacionController::class, 'subirId'])->name('subirId');
 
     # Vistas auntenticadas para el Administrador
     Route::group(['middleware' => ['role:Admin']], function () {
@@ -44,6 +52,7 @@ Route::middleware([
                 return 'Dashboard proveedor';
             })->name('dashboard');
 
+            Route::resource('servicios', ServiciosController::class);
         });
     });
 
