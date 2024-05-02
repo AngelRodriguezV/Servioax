@@ -4,15 +4,15 @@
     switch ($size) {
         case 'cuadro':
             $classes = 'w-80 h-80 md:w-96 md:h-96 rounded-full';
-            $img_defaut = 'svg/upload.jpeg';
+            $img_defaut = 'svg/upload.png';
             break;
         case 'horizontal':
             $classes = 'w-full h-40 md:h-56 lg:h-96';
-            $img_defaut = 'svg/upload.jpeg';
+            $img_defaut = 'svg/upload.png';
             break;
         default:
             $classes = 'w-96 h-96 rounded-lg';
-            $img_defaut = 'svg/upload.jpeg';
+            $img_defaut = 'svg/upload.png';
             break;
     }
 @endphp
