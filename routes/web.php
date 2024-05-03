@@ -3,6 +3,8 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\UserRegisterController;
 use App\Models\Conversacion;
 use App\Models\User;
 use App\Livewire\Messenger;
@@ -26,6 +28,10 @@ Route::middleware([
     Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
     Route::get('/messenger/{proveedor}', Messenger::class)->name('messenger');
 
+    # ---
+    Route::get('/seleccion-rol', [UserRegisterController::class, 'elegirRol'])->name('elegirRol');
+    Route::get('/subir-id', [UserRegisterController::class, 'subirId'])->name('subirId');
+
     # Vistas auntenticadas para el Administrador
     Route::group(['middleware' => ['role:Admin']], function () {
         Route::prefix('admin')->name('admin.')->group(function() {
@@ -47,6 +53,7 @@ Route::middleware([
                 return 'Dashboard proveedor';
             })->name('dashboard');
 
+            Route::resource('servicios', ServiciosController::class);
         });
     });
 
