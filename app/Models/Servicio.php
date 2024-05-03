@@ -14,11 +14,6 @@ class Servicio extends Model
 
     protected $fillable = ['nombre', 'slug', 'descripcion'];
 
-    public function getRouteKeyName()
-    {
-        return "slug";
-    }
-
     public function proveedor()
     {
         return $this->belongsTo(User::class);

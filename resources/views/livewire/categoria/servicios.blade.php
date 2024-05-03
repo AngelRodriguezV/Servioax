@@ -42,8 +42,8 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2">
-                @foreach ($categorias as $categoria)
-                    <x-cards.categoria :categoria="$categoria"/>
+                @foreach ($servicios as $servicio)
+                    <x-cards.servicio :servicio="$servicio"/>
                 @endforeach
             </div>
         </div>

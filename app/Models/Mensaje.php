@@ -9,10 +9,7 @@ class Mensaje extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'mensaje',
-        'estatus',
-    ];
+    protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function remitente()
     {

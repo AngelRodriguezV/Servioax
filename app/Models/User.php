@@ -11,7 +11,6 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Image;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -68,7 +67,7 @@ class User extends Authenticatable
         return $this->hasMany(Servicio::class, 'proveedor_id', $this->primaryKey);
     }
 
-    public function direcciones() 
+    public function direcciones()
     {
         return $this->hasMany(Direccion::class);
     }
@@ -95,10 +94,12 @@ class User extends Authenticatable
 
     public function conversaciones()
     {
-        $conversaciones = Conversacion::select('*')
-            ->join('mensajes', 'mensajes.conversacion_id', '=', 'conversacion.id')
-            ->where()
-            ->get();
+        return $this->belongsToMany(Conversacion::class, 'conversacion_user', 'user_id', 'conversacion_id', $this->primaryKey);
+    }
+
+    public function mesanjes()
+    {
+        return $this->hasMany(Mensaje::class);
     }
 
     public function image()

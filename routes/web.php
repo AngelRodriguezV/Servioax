@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Models\Conversacion;
 use App\Models\User;
+use App\Livewire\Messenger;
 use Illuminate\Support\Facades\Route;
 
 # Vistas que se muestran al cliente publicas
@@ -20,21 +23,21 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
+    Route::get('/messenger/{proveedor}', Messenger::class)->name('messenger');
 
     # Vistas auntenticadas para el Administrador
     Route::group(['middleware' => ['role:Admin']], function () {
         Route::prefix('admin')->name('admin.')->group(function() {
-            
+
             # Agregar las rutas del admin
             Route::get('dashboard', function () {
                 return 'Dashboard admin';
             })->name('dashboard');
 
-        });  
+        });
     });
+
     # Vistas auntenticadas para el Proveedor
     Route::group(['middleware' => ['role:Proveedor']], function () {
         Route::prefix('proveedor')->name('proveedor.')->group(function() {
@@ -52,9 +55,15 @@ Route::middleware([
         Route::prefix('cliente')->name('cliente.')->group(function() {
 
             # Agregar las rutas del proveedor
-            Route::get('dashboard', function () {
-                return 'Dashboard cliente';
-            })->name('dashboard');
+            Route::get('home', [ClienteController::class, 'dashboard'])->name('dashboard');
+            Route::get('mis-solicitudes', [ClienteController::class, 'solicitudes'])->name('solicitudes');
+            Route::get('mis-solicitudes/{solicitud}', [ClienteController::class, 'solicitud'])->name('solicitud');
+            Route::get('direcciones', [ClienteController::class, 'direcciones'])->name('direcciones');
+            Route::get('perfil', [ClienteController::class, 'perfil'])->name('perfil');
+            Route::get('soporte', [ClienteController::class, 'soporte'])->name('soporte');
+            Route::get('solicitud/create', [ClienteController::class, 'saveSolicitud'])->name('solicitud.show');
+
+            Route::get('solicitar-servicio/{servicio}', [ClienteController::class, 'solicitarServicio'])->name('solicitarservicio');
 
         });
     });

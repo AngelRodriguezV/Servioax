@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Solicitud extends Model
 {
@@ -18,7 +19,7 @@ class Solicitud extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function servicio() 
+    public function servicio()
     {
         return $this->belongsTo(Servicio::class);
     }

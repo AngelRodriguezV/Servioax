@@ -7,9 +7,18 @@
                 src="{{ Storage::url($servicio->image ? $servicio->image->url : 'image/Carpinteria.jpg') }}"
                 alt="image description">
 
-            <h1 class="text-2xl font-bold mt-2">{{ $servicio->nombre }}</h1>
+            <div class="grid grid-cols-2 mx-4">
 
-            <div class="grid grid-cols-2">
+                <h1 class="text-2xl font-bold mt-4">{{ $servicio->nombre }}</h1>
+
+                <div class="flex mt-3">
+                    <img class="w-10 h-10 rounded-full bg-gray-300"
+                        src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                        alt="Rounded avatar">
+                    <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre }}</a>
+                </div>
+
+                <p class="mt-3">{{ $servicio->descripcion }}</p>
 
                 <div class="flex mt-3">
                     <p class="font-bold mr-2 my-auto">{{ $servicio->rating()['valoracion'] }}</p>
@@ -19,23 +28,19 @@
                     </a>
                 </div>
 
-                <div class="flex mt-3">
-                    <img class="w-10 h-10 rounded-full bg-gray-300"
-                        src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
-                        alt="Rounded avatar">
-                    <a href="" class="my-auto ml-4">{{ $servicio->proveedor->name }}</a>
-                </div>
+                <a href="{{ route('cliente.solicitarservicio', $servicio) }}" class="p-2 px-4 bg-blue-700 text-white mx-auto mt-2">Solicitar servicio</a>
+
             </div>
 
-            <p class="mt-3">{{ $servicio->descripcion }}</p>
+
 
         </div>
 
         {{-- Recomendaciones --}}
-        <div class="mt-6">
-            <p class="text-xl font-bold">Mas servicios del proveedor {{ $servicio->proveedor->name }}</p>
-            <x-carousel.servicios :servicios="$sv_pros" />
-            <p class="text-xl font-bold">Servicios similares</p>
+        <div class="mt-6 grid gap-2">
+            <p class="text-xl font-bold ml-16">Mas servicios del proveedor {{ $servicio->proveedor->name }}</p>
+            <x-carousel.servicios :servicios="$sv_pros"/>
+            <p class="text-xl font-bold ml-16">Servicios similares</p>
             <x-carousel.servicios :servicios="$servicio->proveedor->servicios" />
         </div>
 

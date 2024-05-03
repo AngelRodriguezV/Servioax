@@ -17,10 +17,10 @@ class DireccionFactory extends Factory
     public function definition(): array
     {
         return [
-            'calle' => fake()->text(),
-            'colonia' => fake()->text(),
-            'municipio' => fake()->text(),
-            'estado' => fake()->text(),
+            'calle' => fake()->text(15),
+            'colonia' => fake()->text(15),
+            'municipio' => fake()->text(15),
+            'estado' => fake()->text(15),
             'num_interior' => 0,
             'num_exterior' => 0,
             'codigo_postal' => 0,

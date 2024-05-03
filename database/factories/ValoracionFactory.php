@@ -19,6 +19,7 @@ class ValoracionFactory extends Factory
         return [
             'valoracion' => fake()->randomElement([0, 1, 2, 3, 4, 5]),
             'comentario' => fake()->text(50),
+            'estatus' => fake()->randomElement(['ACTIVA', 'BLOQUEADA', 'REVISION'])
         ];
     }
 }

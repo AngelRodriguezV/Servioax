@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('direccion_id');
             $table->date('fecha');
             $table->time('hora');
-            $table->enum('estatus', [1, 2])->default(1);
+            $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO','COMPLETADA','CANCELADA']);
             $table->timestamps();
             $table->foreign('cliente_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('servicio_id');
             $table->timestamps();
+            $table->enum('estatus', ['ACTIVA', 'BLOQUEADA', 'REVISION']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
         });

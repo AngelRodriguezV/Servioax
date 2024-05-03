@@ -23,6 +23,10 @@ class HomeController extends Controller
         return view('categoria', compact('categoria'));
     }
 
+    public function servicios() {
+        return view('cliente.servicios');
+    }
+
     public function servicio(Servicio $servicio) {
         $valoraciones = Valoracion::where('servicio_id', $servicio->id)
         ->latest('valoracion')
@@ -51,7 +55,7 @@ class HomeController extends Controller
             }
             array_push($rating, [
                 'estrellas' => $i,
-                'porcentaje' => ($rt*100)/$total
+                'porcentaje' => ($rt==0 ) ? 0 : ($rt*100)/$total
             ]);        
         }
 

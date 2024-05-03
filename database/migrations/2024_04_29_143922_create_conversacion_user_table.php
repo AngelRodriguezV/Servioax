@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mensajes', function (Blueprint $table) {
+        Schema::create('conversacion_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('remitente_id');
             $table->unsignedBigInteger('conversacion_id');
-            $table->string('mensaje');
-            $table->enum('estatus', ['ENVIADO', 'ENTREGADO', 'LEIDO']);
+            $table->unsignedBigInteger('user_id');
+            $table->enum('estatus', ['ACTIVA', 'BLOQUEADA', 'PEPORTADA', 'INACTIVA']);
             $table->timestamps();
-            $table->foreign('remitente_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('conversacion_id')->references('id')->on('conversaciones')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mensajes');
+        Schema::dropIfExists('conversacion_user');
     }
 };

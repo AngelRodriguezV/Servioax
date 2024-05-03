@@ -45,6 +45,5 @@
 
         <h2 class="text-2xl font-bold">Servicios</h2>
         <x-carousel.servicios :servicios="$servicios" />
-
     </div>
 </x-guest-layout>
