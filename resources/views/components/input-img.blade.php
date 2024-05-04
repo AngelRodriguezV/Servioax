@@ -3,7 +3,7 @@
 @php
     switch ($size) {
         case 'cuadro':
-            $classes = 'w-80 h-80 md:w-96 md:h-96 rounded-full';
+            $classes = 'w-80 h-80 rounded-full';
             $img_defaut = 'svg/upload.svg';
             break;
         case 'horizontal':

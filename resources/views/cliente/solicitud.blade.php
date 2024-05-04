@@ -20,13 +20,18 @@
                 <p class="mt-2 rounded-lg p-2 w-32 bg-gray-300 text-center">
                     {{ $solicitud->estatus }}
                 </p>
-                {{ $solicitud->id }}
             </div>
         </div>
         <div class="grid gap-2 mt-4 p-2 border-2 rounded-lg border-gray-200">
-            <p>Dirección</p>
+            <p class="font-bold">Dirección</p>
             <div>
                 Calle: <span>{{ $solicitud->direccion->calle }}</span>
+            </div>
+            <div>
+                Numero exterior: <span>{{ $solicitud->direccion->num_exterior }}</span>
+            </div>
+            <div>
+                Numero interior: <span>{{ $solicitud->direccion->num_interior }}</span>
             </div>
             <div>
                 Colonia: <span>{{ $solicitud->direccion->colonia }}</span>
@@ -36,6 +41,9 @@
             </div>
             <div>
                 Estado: <span>{{ $solicitud->direccion->estado }}</span>
+            </div>
+            <div>
+                Codigo Postal: <span>{{ $solicitud->direccion->codigo_postal }}</span>
             </div>
         </div>
         <div class="mt-4">

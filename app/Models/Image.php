@@ -9,7 +9,7 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url'];
+    protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function imageable() {
         return $this->morphTo();

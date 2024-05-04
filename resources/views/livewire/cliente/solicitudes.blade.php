@@ -28,7 +28,6 @@
                     <p class="mt-2 rounded-lg p-2 w-32 bg-gray-300 text-center">
                         {{ $solicitud->estatus }}
                     </p>
-                    {{$solicitud->id}}
                 </div>
             </div>
         </a>

@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-slate-100">
 
     @livewire('navigation')
 
