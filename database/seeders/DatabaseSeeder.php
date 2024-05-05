@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('public/image');
         Storage::makeDirectory('public/image');
 
+        Storage::deleteDirectory('public/photo');
+        Storage::makeDirectory('public/photo');
+
         $this->call(RolePermisionsSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategoriaSeeder::class);

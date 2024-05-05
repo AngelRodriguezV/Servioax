@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Servicio;
 use App\Models\Categoria;
 use App\Http\Requests\ServicioRequest;
@@ -15,9 +14,7 @@ class ServiciosController extends Controller
      */
     public function index()
     {
-        $proveedors = User::role('Proveedor')->get()->random();
-        $servicios = Servicio::where('proveedor_id', $proveedors->id)->get();
-        return view('proveedor.index', compact('proveedors', 'servicios'));
+        return view('proveedor.servicios.index');
     }
 
     /**

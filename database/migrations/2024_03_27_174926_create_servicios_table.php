@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('proveedor_id');
+            $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO']);
             $table->timestamps();
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('proveedor_id')->references('id')->on('users')->onDelete('cascade');
