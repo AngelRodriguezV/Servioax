@@ -140,7 +140,7 @@
                     <x-input id="longitud" type="text" class="mt-1 block w-full" wire:model="state.longitud"/>
                     <x-input-error for="longitud" class="mt-2" />
                 </div>
-                <x-button type="submit" class="mt-4">Guardar</x-button>
+                <x-button type="submit" class="my-4">Guardar</x-button>
                 <script>
                     let cp = document.getElementById('codigo_postal')
                     let colonia = document.getElementById('inputColonia')
@@ -177,6 +177,7 @@
                 </script>
             </form>
         </x-slot>
-        <x-slot name="footer"></x-slot>
+        <x-slot name="footer">
+        </x-slot>
     </x-dialog-modal>
 </div>

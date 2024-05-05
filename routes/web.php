@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserRegisterController;
 use App\Models\Conversacion;
@@ -49,9 +50,9 @@ Route::middleware([
         Route::prefix('proveedor')->name('proveedor.')->group(function() {
 
             # Agregar las rutas del proveedor
-            Route::get('dashboard', function () {
-                return 'Dashboard proveedor';
-            })->name('dashboard');
+            Route::get('dashboard', [ProveedorController::class, 'dashboard'])->name('dashboard');
+            Route::get('direcciones', [ProveedorController::class, 'direcciones'])->name('direcciones');
+            Route::get('perfil', [ProveedorController::class, 'perfil'])->name('perfil');
 
             Route::resource('servicios', ServiciosController::class);
         });
