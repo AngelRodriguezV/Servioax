@@ -39,7 +39,7 @@ class ServicioHome extends Component
             $query->where('estatus', $this->estatu);
         }
 
-        $servicios = $query->get();
+        $servicios = $query->latest('updated_at')->get();
         return view('livewire.proveedor.servicio-home', compact('servicios'));
     }
 }
