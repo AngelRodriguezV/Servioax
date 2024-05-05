@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('colonia');
             $table->string('municipio');
             $table->string('estado');
-            $table->integer('num_interior')->nullable(false);
+            $table->integer('num_interior')->nullable();
             $table->integer('num_exterior');
             $table->integer('codigo_postal');
             $table->string('referencias');
-            $table->string('entre_calle1')->nullable(false);
-            $table->string('entre_calle2')->nullable(false);
+            $table->string('entre_calle1')->nullable();
+            $table->string('entre_calle2')->nullable();
+            $table->double('latitud')->nullable();
+            $table->double('longitud')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
