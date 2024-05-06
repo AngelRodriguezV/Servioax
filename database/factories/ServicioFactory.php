@@ -24,6 +24,7 @@ class ServicioFactory extends Factory
             'nombre' => $name,
             'slug' => Str::slug($name),
             'descripcion' => fake()->text(100),
+            'estatus' => fake()->randomElement(['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO']),
             'categoria_id' => Categoria::all()->random()->id,
             'proveedor_id' => User::role('Proveedor')->get()->random()->id
         ];

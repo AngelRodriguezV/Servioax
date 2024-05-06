@@ -11,19 +11,15 @@ class Direccion extends Model
 
     protected $table = 'direcciones';
 
-    protected $fillable = [
-        'calle', 
-        'colonia', 
-        'municipio', 
-        'estado', 
-        'num_interior', 
-        'num_exterior', 
-        'codigo_postal', 
-        'referencias'
-    ];
+    protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function documento()
+    {
+        return $this->belongsTo(Documento::class);
     }
 }

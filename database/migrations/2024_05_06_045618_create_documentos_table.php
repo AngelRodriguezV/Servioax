@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('servicios', function (Blueprint $table) {
+        Schema::create('documentos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('slug');
-            $table->string('descripcion');
-            $table->unsignedBigInteger('categoria_id');
+            $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA']);
+            $table->unsignedBigInteger('direccion_id');
             $table->unsignedBigInteger('proveedor_id');
-            $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO']);
+            $table->string('url_ine');
+            $table->string('url_domicilio');
             $table->timestamps();
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            $table->foreign('direccion_id')->references('id')->on('direcciones')->onDelete('cascade');
             $table->foreign('proveedor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('servicios');
+        Schema::dropIfExists('documentos');
     }
 };

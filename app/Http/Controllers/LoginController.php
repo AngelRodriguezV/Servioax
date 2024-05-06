@@ -13,7 +13,7 @@ class LoginController extends Controller
             return "Es admin";
         }
         if (auth()->user()->hasRole('Proveedor')) {
-            return "Es Proveedor";
+            return redirect()->route('proveedor.dashboard');
         }
         if (auth()->user()->hasRole('Cliente')) {
             return redirect()->route('cliente.dashboard');

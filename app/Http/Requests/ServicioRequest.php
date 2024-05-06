@@ -21,8 +21,13 @@ class ServicioRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'categoria' => 'required',
+            'file' => 'image'
         ];
+
+        return $rules;
     }
 }

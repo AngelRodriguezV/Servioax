@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\AdminController;
@@ -27,7 +28,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
-    Route::get('/messenger/{proveedor}', Messenger::class)->name('messenger');
+    Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
 
     # ---
     Route::get('/seleccion-rol', [UserRegisterController::class, 'elegirRol'])->name('elegirRol');
@@ -56,9 +57,10 @@ Route::middleware([
         Route::prefix('proveedor')->name('proveedor.')->group(function() {
 
             # Agregar las rutas del proveedor
-            Route::get('dashboard', function () {
-                return 'Dashboard proveedor';
-            })->name('dashboard');
+            Route::get('dashboard', [ProveedorController::class, 'dashboard'])->name('dashboard');
+            Route::get('direcciones', [ProveedorController::class, 'direcciones'])->name('direcciones');
+            Route::get('perfil', [ProveedorController::class, 'perfil'])->name('perfil');
+            Route::get('horarios', [ProveedorController::class, 'horarios'])->name('horarios');
 
             Route::resource('servicios', ServiciosController::class);
         });
