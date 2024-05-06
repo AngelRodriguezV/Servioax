@@ -21,10 +21,16 @@
                     <li>
                         <button type="button" wire:click="setConversacion({{ $conversacion }})"
                             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-800 hover:text-white group w-full">
-                            <img src="" alt=""
-                                class="w-10 h-10 bg-blue-700 rounded-full object-cover object-center">
                             @foreach ($conversacion->users as $user)
                                 @if (auth()->user()->id != $user->id)
+                                @isset($user->image)
+                                <img id="picture" src="{{ Storage::url($user->image->url) }}" alt=""
+                                    class="w-10 h-10 rounded-full bg-gray-300">
+                            @else
+                                <img id="picture"
+                                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
+                            @endisset
                                     <span class="flex-1 ms-3 whitespace-nowrap">{{ $user->nombre }}</span>
                                 @endif
                             @endforeach
@@ -38,16 +44,29 @@
     </aside>
 
     <div class="p-4 sm:ml-64 h-screen">
-        <div class="p-4 h-full border-2 border-gray-200 border-dashed rounded-lg content-end">
+        <div class="p-4 h-full rounded-lg content-end">
 
             @if ($conversacion_actual)
+                <div class="p-4 w-full border-2 border-gray-400 rounded-xl top-0 flex">
+                    @foreach ($conversacion_actual->users as $user)
+                        @if (auth()->user()->id != $user->id)
+                            @isset($user->image)
+                                <img id="picture" src="{{ Storage::url($user->image->url) }}" alt=""
+                                    class="w-10 h-10 rounded-full bg-gray-300">
+                            @else
+                                <img id="picture"
+                                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
+                            @endisset
+                            <span class="flex-1 ms-3 whitespace-nowrap my-auto">{{ $user->nombre }}</span>
+                        @endif
+                    @endforeach
+                </div>
 
-
-                <div class="grid my-4 px-2 gap-3 overflow-hidden overflow-y-scroll h-[89%]">
+                <div class="grid my-4 px-2 gap-3 overflow-hidden overflow-y-scroll h-[78%]">
 
                     @foreach ($conversacion_actual->mensajes as $sms)
                         @if ($sms->remitente->id == auth()->user()->id)
-
                             <div class="grid gap-1">
                                 <div class="place-self-end p-2 px-4 rounded-lg border-blue-600 border-2">
                                     {{ $sms->mensaje }}

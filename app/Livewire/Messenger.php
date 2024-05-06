@@ -15,19 +15,24 @@ class Messenger extends Component
 
     public $mensaje = '';
 
-    public function mount(User $proveedor)
+    public function mount(User $user2)
     {
-        $query = Conversacion::join('conversacion_user', 'conversacion_user.conversacion_id', '=', 'conversaciones.id')
-            ->where('user_id', auth()->user()->id)
-            ->where('user_id', $proveedor->id)->first();
-        if ($query) {
-            $this->conversacion_actual = $query;
-        } else {
+        $this->conversaciones = auth()->user()->conversaciones;
+
+        foreach ($this->conversaciones as $conversacion) {
+            foreach ($conversacion->users as $user) {
+                if ($user->id == $user2->id) {
+                    $this->conversacion_actual = $conversacion;
+                    break;
+                }
+            }
+        }
+
+        if ($this->conversacion_actual == null) {
             $this->conversacion_actual = Conversacion::create(['estatus' => 'ACTIVA']);
             $this->conversacion_actual->users()->attach(auth()->user()->id);
-            $this->conversacion_actual->users()->attach($proveedor->id);
+            $this->conversacion_actual->users()->attach($user2->id);
         }
-        $this->conversaciones = auth()->user()->conversaciones;
 
     }
 
@@ -44,6 +49,7 @@ class Messenger extends Component
 
     public function render()
     {
+        $this->conversaciones = auth()->user()->conversaciones;
         return view('livewire.messenger');
     }
 

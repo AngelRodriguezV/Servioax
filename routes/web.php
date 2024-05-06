@@ -27,7 +27,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
-    Route::get('/messenger/{proveedor}', Messenger::class)->name('messenger');
+    Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
 
     # ---
     Route::get('/seleccion-rol', [UserRegisterController::class, 'elegirRol'])->name('elegirRol');
