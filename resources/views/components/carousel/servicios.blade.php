@@ -5,7 +5,9 @@
         @for ($i = 0; $i < count($servicios) / 4; $i = $i + 4)
             <div class="grid grid-cols-4 px-16 p-4 gap-2" data-carousel-item>
                 @for ($j = 0; $j < 4; $j++)
+                    @if (($i+$j)<count($servicios))
                     <x-cards.servicio :servicio="$servicios[$i + $j]" />
+                    @endif
                 @endfor
             </div>
         @endfor

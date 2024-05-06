@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index() {
         $categorias = Categoria::all();
-        $servicios = Servicio::all();
+        $servicios = Servicio::where('estatus', 'ACEPTADA')->latest('updated_at')->get();
         return view('welcome', compact('categorias', 'servicios'));
     }
 
@@ -34,10 +34,12 @@ class HomeController extends Controller
 
         $sv_pros = Servicio::where('proveedor_id', $servicio->proveedor_id)
         ->where('id', '!=', $servicio->id)
+        ->where('estatus', 'ACEPTADA')
         ->get();
 
         $sv_siml = Servicio::where('categoria_id', $servicio->categoria_id)
         ->where('proveedor_id', '!=', $servicio->proveedor_id)
+        ->where('estatus', 'ACEPTADA')
         ->get();
 
         $ratings = $servicio->ratings();
@@ -56,9 +58,8 @@ class HomeController extends Controller
             array_push($rating, [
                 'estrellas' => $i,
                 'porcentaje' => ($rt==0 ) ? 0 : ($rt*100)/$total
-            ]);        
+            ]);
         }
-
 
         return view('cliente.servicio', compact('servicio', 'valoraciones', 'sv_pros', 'rating'));
     }

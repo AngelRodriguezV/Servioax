@@ -17,33 +17,34 @@
             <ul class="space-y-2 font-medium">
                 <li class="ml-4">
                     Calificacion
-                    <div class="ml-4 mt-2 grid gap-2">
-                        <a>
+                    <div class="ml-4 mt-4 grid gap-6">
+                        <button type="button" wire:click="setRating(5)">
                             <x-rating />
-                        </a>
-                        <a>
+                        </button>
+                        <button type="button" wire:click="setRating(4)">
                             <x-rating :rating="4" />
-                        </a>
-                        <a>
+                        </button>
+                        <button type="button" wire:click="setRating(3)">
                             <x-rating :rating="3" />
-                        </a>
-                        <a>
+                        </button>
+                        <button type="button" wire:click="setRating(2)">
                             <x-rating :rating="2" />
-                        </a>
-                        <a>
+                        </button>
+                        <button type="button" wire:click="setRating(1)">
                             <x-rating :rating="1" />
-                        </a>
+                        </button>
                     </div>
                 </li>
             </ul>
         </div>
     </aside>
-    
+
     <div class="p-4 sm:ml-64">
         <div class="p-4">
-            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2">
+            <x-search wire:model.live="search"/>
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2 mt-4">
                 @foreach ($servicios as $servicio)
-                    <x-cards.servicio :servicio="$servicio"/>
+                    <x-cards.servicio :servicio="$servicio" />
                 @endforeach
             </div>
         </div>

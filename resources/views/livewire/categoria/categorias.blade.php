@@ -15,33 +15,15 @@
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 border-r-2 border-gray-500">
             <ul class="space-y-2 font-medium">
-                <li class="ml-4">
-                    Calificacion
-                    <div class="ml-4 mt-2 grid gap-2">
-                        <a>
-                            <x-rating />
-                        </a>
-                        <a>
-                            <x-rating :rating="4" />
-                        </a>
-                        <a>
-                            <x-rating :rating="3" />
-                        </a>
-                        <a>
-                            <x-rating :rating="2" />
-                        </a>
-                        <a>
-                            <x-rating :rating="1" />
-                        </a>
-                    </div>
-                </li>
+
             </ul>
         </div>
     </aside>
-    
+
     <div class="p-4 sm:ml-64">
         <div class="p-4">
-            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2">
+            <x-search wire:model.live="search"/>
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2 mt-4">
                 @foreach ($categorias as $categoria)
                     <x-cards.categoria :categoria="$categoria"/>
                 @endforeach
