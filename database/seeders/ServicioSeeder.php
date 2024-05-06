@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Direccion;
+use App\Models\Documento;
 use App\Models\Image;
 use App\Models\Servicio;
 use App\Models\User;
@@ -18,6 +20,13 @@ class ServicioSeeder extends Seeder
         $users = User::factory(10)->create();
         foreach ($users as $user) {
             $user->assignRole('Proveedor');
+            $direccion = Direccion::factory()->create([
+                'user_id' => $user->id
+            ]);
+            Documento::factory()->create([
+                'proveedor_id' => $user->id,
+                'direccion_id' => $direccion->id
+            ]);
         }
         $servicios = Servicio::factory(150)->create();
 
