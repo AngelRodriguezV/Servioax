@@ -53,6 +53,7 @@ Route::middleware([
             Route::get('dashboard', [ProveedorController::class, 'dashboard'])->name('dashboard');
             Route::get('direcciones', [ProveedorController::class, 'direcciones'])->name('direcciones');
             Route::get('perfil', [ProveedorController::class, 'perfil'])->name('perfil');
+            Route::get('horarios', [ProveedorController::class, 'horarios'])->name('horarios');
 
             Route::resource('servicios', ServiciosController::class);
         });

@@ -20,4 +20,9 @@ class ProveedorController extends Controller
     {
         return view('proveedor.direcciones');
     }
+
+    public function horarios()
+    {
+        return view('proveedor.horarios');
+    }
 }
