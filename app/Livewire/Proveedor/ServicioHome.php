@@ -40,6 +40,7 @@ class ServicioHome extends Component
         }
 
         $servicios = $query->latest('updated_at')->get();
+
         return view('livewire.proveedor.servicio-home', compact('servicios'));
     }
 }

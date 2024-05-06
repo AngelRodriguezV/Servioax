@@ -2,7 +2,7 @@
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
     {{-- Image --}}
     <a href="{{ route('servicio', $servicio) }}">
-        <img class="rounded-t-lg"
+        <img class="object-cover object-center h-64 rounded-t-lg"
             src="{{ Storage::url($servicio->image ? $servicio->image->url : 'image/Carpinteria.jpg') }}" alt="" />
     </a>
     <div class="p-5">

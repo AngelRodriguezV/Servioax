@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Direccion extends Model
+class Documento extends Model
 {
     use HasFactory;
 
-    protected $table = 'direcciones';
-
     protected $guarded = ['id', 'created_at', 'update_at'];
 
-    public function user()
+    protected $table = 'documentos';
+
+    public function proveedor()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function documento()
+    public function direccion()
     {
-        return $this->belongsTo(Documento::class);
+        return $this->belongsTo(Direccion::class);
     }
 }
