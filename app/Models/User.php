@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Direccion::class);
     }
 
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class, 'proveedor_id', $this->primaryKey);
+    }
+
     public function documento()
     {
         return $this->belongsTo(Documento::class);

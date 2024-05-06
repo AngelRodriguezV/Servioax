@@ -2,15 +2,16 @@
 
     <div class="w-4/5 mx-auto py-6">
 
-        <h1>
+        <h1 class="my-4">
             Solicitud del servicio {{ $servicio->nombre }}
         </h1>
 
         <form method="GET" action="{{ route('cliente.solicitud.show') }}" class="grid">
             <input type="text" name="servicio_id" value="{{$servicio->id}}" hidden>
 
-            @livewire('calendario')
-            <input type="time" name="hora" id="hora" required>
+            @livewire('calendario', ["servicio" => $servicio])
+
+            <input type="time" name="hora" id="hora" required class="my-4">
 
             <label for="direccion">Selecciona una dirección</label>
             <ul class="grid w-full gap-6 md:grid-cols-2">
@@ -34,8 +35,9 @@
                 @endforeach
             </ul>
 
-
-            <button>Guardad</button>
+            <div class="my-4">
+                <x-button>Guardad</x-button>
+            </div>
         </form>
     </div>
 </x-guest-layout>

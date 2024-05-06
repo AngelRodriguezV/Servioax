@@ -8,13 +8,34 @@ use Livewire\Component;
 
 class Horarios extends Component
 {
-    public $do_state = ['dia_semana' => 'Domingo'];
-    public $lu_state = ['dia_semana' => 'Lunes'];
-    public $ma_state = ['dia_semana' => 'Martes'];
-    public $mi_state = ['dia_semana' => 'Miercoles'];
-    public $ju_state = ['dia_semana' => 'Jueves'];
-    public $vi_state = ['dia_semana' => 'Viernes'];
-    public $sa_state = ['dia_semana' => 'Sabado'];
+    public $do_state = [
+        'dia_semana' => 'Domingo',
+        'N' => 7
+    ];
+    public $lu_state = [
+        'dia_semana' => 'Lunes',
+        'N' => 1
+    ];
+    public $ma_state = [
+        'dia_semana' => 'Martes',
+        'N' => 2
+    ];
+    public $mi_state = [
+        'dia_semana' => 'Miercoles',
+        'N' => 3
+    ];
+    public $ju_state = [
+        'dia_semana' => 'Jueves',
+        'N' => 4
+    ];
+    public $vi_state = [
+        'dia_semana' => 'Viernes',
+        'N' => 5
+    ];
+    public $sa_state = [
+        'dia_semana' => 'Sabado',
+        'N' => 6
+    ];
 
     public function mount()
     {
@@ -124,25 +145,46 @@ class Horarios extends Component
             $horario->delete();
             switch ($semana) {
                 case 'Domingo':
-                    $this->do_state = ['dia_semana' => 'Domingo'];
+                    $this->do_state = [
+                        'dia_semana' => 'Domingo',
+                        'N' => 7
+                    ];
                     break;
                 case 'Lunes':
-                    $this->lu_state = ['dia_semana' => 'Lunes'];
+                    $this->lu_state = [
+                        'dia_semana' => 'Lunes',
+                        'N' => 1
+                    ];
                     break;
                 case 'Martes':
-                    $this->ma_state = ['dia_semana' => 'Martes'];
+                    $this->ma_state = [
+                        'dia_semana' => 'Martes',
+                        'N' => 2
+                    ];
                     break;
                 case 'Miercoles':
-                    $this->mi_state = ['dia_semana' => 'Miercoles'];
+                    $this->mi_state = [
+                        'dia_semana' => 'Miercoles',
+                        'N' => 3
+                    ];
                     break;
                 case 'Jueves':
-                    $this->ju_state = ['dia_semana' => 'Jueves'];
+                    $this->ju_state = [
+                        'dia_semana' => 'Jueves',
+                        'N' => 4
+                    ];
                     break;
                 case 'Viernes':
-                    $this->vi_state = ['dia_semana' => 'Viernes'];
+                    $this->vi_state = [
+                        'dia_semana' => 'Viernes',
+                        'N' => 5
+                    ];
                     break;
                 case 'Sabado':
-                    $this->sa_state = ['dia_semana' => 'Sabado'];
+                    $this->sa_state = [
+                        'dia_semana' => 'Sabado',
+                        'N' => 6
+                    ];
                     break;
                 default:
                     # code...

@@ -18,17 +18,28 @@
         @endphp
         @while ($inicioCalendario <= $finCalendario)
             @php
+                $active = true;
+                if ($servicio->proveedor->horarios) {
+                    foreach ($servicio->proveedor->horarios as $horario) {
+                        if ($inicioCalendario->format('N') == $horario->N) {
+                            $active = false;
+                            break;
+                        }
+                    }
+                }
+            @endphp
+            @php
                 $extraClass = $inicioCalendario->format('m') != $currentDateTime->format('m') ? 'text-gray-400 ' : '';
                 $extraClass .=
                     $inicioCalendario->format('Y-m-d') < $fecha->format('Y-m-d')
                         ? ''
-                        : 'text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100';
+                        : ($active?'':'text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100');
             @endphp
 
             <div>
-                <input type="radio" id="f-{{ $inicioCalendario->format('Y-m-d') }}" name="fecha" value="{{ $inicioCalendario->format('Y-m-d') }}"
-                    class="hidden peer" required
-                    {{ $inicioCalendario->format('Y-m-d') < $fecha->format('Y-m-d') ? 'disabled' : '' }}/>
+                <input type="radio" id="f-{{ $inicioCalendario->format('Y-m-d') }}" name="fecha"
+                    value="{{ $inicioCalendario->format('Y-m-d') }}" class="hidden peer" required
+                    {{ $inicioCalendario->format('Y-m-d') < $fecha->format('Y-m-d') ? 'disabled' : ($active ? 'disabled' : '') }} />
                 <label for="f-{{ $inicioCalendario->format('Y-m-d') }}"
                     class="inline-flex items-center justify-between w-full p-5 {{ $extraClass }}">
                     <div class="block">

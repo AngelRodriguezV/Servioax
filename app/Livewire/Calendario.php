@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Servicio;
 use Livewire\Component;
 use Illuminate\Support\Carbon;
 
@@ -9,6 +10,8 @@ class Calendario extends Component
 {
 
     public $currentDateTime;
+
+    public $servicio;
 
     public $inicioCalendario;
     public $finCalendario;
@@ -29,8 +32,9 @@ class Calendario extends Component
         12 => 'Diciembre',
     ];
 
-    public function mount()
+    public function mount(Servicio $servicio)
     {
+        $this->servicio = $servicio;
         $this->currentDateTime = now();
 
         $this->inicioCalendario = $this->currentDateTime->copy()->firstOfMonth()->startOfWeek(Carbon::SUNDAY);

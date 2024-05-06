@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('proveedor_id');
             $table->string('dia_semana');
+            $table->integer('N');
             $table->time('hora_apertura');
             $table->time('hora_cierre');
             $table->timestamps();

@@ -28,9 +28,35 @@
                     </a>
                 </div>
 
-                <a href="{{ route('cliente.solicitarservicio', $servicio) }}"
-                    class="p-2 px-4 bg-blue-700 text-white mx-auto mt-2">Solicitar servicio</a>
+                <div class="mt-2">
+                    <p>Horario</p>
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <tbody>
+                                @forelse ($servicio->proveedor->horarios as $horario)
+                                    <tr class="bg-white border-b">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            {{ $horario->dia_semana }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            Silver
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            Laptop
+                                        </td>
+                                    </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
 
+                </div>
+                <div class="mt-4 p-6">
+                    <a href="{{ route('cliente.solicitarservicio', $servicio) }}"
+                        class="p-2 px-4 bg-blue-700 text-white mx-auto my-2">Solicitar servicio</a>
+                </div>
             </div>
 
 
@@ -78,8 +104,9 @@
                                 <img id="picture" src="{{ Storage::url($reseña->user->image->url) }}" alt=""
                                     class="w-10 h-10 rounded-full bg-gray-300">
                             @else
-                                <img id="picture" src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png" alt=""
-                                    class="w-10 h-10 rounded-full bg-gray-300">
+                                <img id="picture"
+                                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
                             @endisset
                             <a href=""
                                 class="my-auto ml-4">{{ $reseña->user->nombre . ' ' . $reseña->user->apellido_paterno }}</a>

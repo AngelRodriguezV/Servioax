@@ -44,7 +44,7 @@ class Solicitudes extends Component
             $query->where('estatus', $this->estatu);
         }
 
-        $solicitudes = $query->get();
+        $solicitudes = $query->latest('updated_at')->get();
         return view('livewire.cliente.solicitudes', compact('solicitudes'));
     }
 }

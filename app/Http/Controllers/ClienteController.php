@@ -6,6 +6,7 @@ use App\Models\Direccion;
 use App\Models\Servicio;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -48,6 +49,10 @@ class ClienteController extends Controller
 
     public function saveSolicitud(Request $request)
     {
-        return $request;
+        $request['cliente_id'] = Auth::user()->id;
+        $request['estatus'] = 'NUEVA';
+        $request['direccion_id'] = $request['direccion'];
+        Solicitud::create($request->all());
+        return redirect()->route('cliente.solicitudes');
     }
 }
