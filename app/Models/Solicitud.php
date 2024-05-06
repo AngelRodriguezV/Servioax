@@ -12,7 +12,7 @@ class Solicitud extends Model
 
     protected $table = 'solicitudes';
 
-    protected $fillable = ['fecha', 'hora', 'estatus'];
+    protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function cliente()
     {

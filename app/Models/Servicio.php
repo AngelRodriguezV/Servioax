@@ -12,7 +12,7 @@ class Servicio extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['nombre', 'slug', 'descripcion'];
+    protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function proveedor()
     {

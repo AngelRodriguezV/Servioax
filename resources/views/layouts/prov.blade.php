@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-slate-100">
+<body class="bg-slate-200">
 
     @livewire('navbar-proveedor')
     @livewire('sidebar-proveedor')

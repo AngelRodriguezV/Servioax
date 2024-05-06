@@ -20,9 +20,14 @@
         <p class="mb-3 font-normal text-gray-700">{{ $servicio->descripcion }}</p>
         {{-- Proveedor --}}
         <div class="flex mb-3">
-            <img class="w-10 h-10 rounded-full bg-slate-300"
-                src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
-                alt="Rounded avatar">
+            @isset($servicio->proveedor->image)
+                <img id="picture" src="{{ Storage::url($servicio->proveedor->image->url) }}" alt=""
+                    class="w-10 h-10 rounded-full bg-gray-300">
+            @else
+                <img id="picture"
+                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
+            @endisset
             <a href="" class="my-auto ml-4">{{ $servicio->proveedor->name }}</a>
         </div>
         {{-- Button --}}

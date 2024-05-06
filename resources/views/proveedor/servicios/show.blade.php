@@ -1,10 +1,34 @@
 <x-prov-layout>
-    <x-prov.info-servicio :servicio="$servicio"/>
-    <div class="flex items-center justify-center w-full mt-3">
-        <x-button>
-            <a href="{{route('proveedor.servicios.edit', $servicio)}}">
-                Editar Servicio
-            </a>
-        </x-button>
+    <div class="mx-auto max-w-7xl px-2 py-6">
+        <h1 class="font-bold text-xl">
+            Mi servicio
+        </h1>
+
+        <div class="grid lg:grid-cols-2 py-4">
+            <div class="mb-4 mx-4">
+                <img class="h-auto max-w-full rounded-lg shadow-xl object-cover object-center"
+                    src="{{ Storage::url($servicio->image->url) }}" alt="image description">
+            </div>
+            <div>
+                <div class="grid grid-cols-2 mb-4 font-bold">
+                    Nombre: <span class="font-normal">{{ $servicio->nombre }}</span>
+                </div>
+                <div class="grid grid-cols-2 mb-4 font-bold">
+                    Categoria: <span class="font-normal">{{ $servicio->categoria->nombre }}</span>
+                </div>
+                <div class="grid grid-cols-2 mb-4 font-bold">
+                    Descripción: <span class="font-normal">{{ $servicio->descripcion }}</span>
+                </div>
+                <div class="grid grid-cols-2 mb-4 font-bold">
+                    Estatus: <span
+                        class="font-normal p-2 bg-white border-2 border-gray-200 rounded-lg text-center">{{ $servicio->estatus }}</span>
+                </div>
+                @livewire('proveedor.servicio-delete', ['servicio' => $servicio])
+
+            </div>
+        </div>
+
+        @livewire('proveedor.servicio-solicitudes', ['servicio' => $servicio])
+
     </div>
 </x-prov-layout>
