@@ -1,7 +1,7 @@
 @props(['servicio'])
 <div class="max-w-sm bg-white border border-gray-300 rounded-lg shadow-xl">
     <a href="#">
-        <img class="object-cover object-center h-40 w-full rounded-t-lg" src="{{ Storage::url($servicio->image->url) }}" alt="" />
+        <img class="object-cover object-center h-40 w-full rounded-t-lg" src="{{ Storage::url($servicio->image ? $servicio->image->url : 'image/Carpinteria.jpg') }}" alt="" />
     </a>
     <div class="p-5">
         <a href="{{route('proveedor.servicios.show', $servicio)}}">

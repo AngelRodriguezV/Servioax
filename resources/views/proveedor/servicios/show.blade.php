@@ -7,7 +7,7 @@
         <div class="grid lg:grid-cols-2 py-4">
             <div class="mb-4 mx-4">
                 <img class="h-auto max-w-full rounded-lg shadow-xl object-cover object-center"
-                    src="{{ Storage::url($servicio->image->url) }}" alt="image description">
+                    src="{{ Storage::url($servicio->image ? $servicio->image->url : 'image/Carpinteria.jpg') }}" alt="image description">
             </div>
             <div>
                 <div class="grid grid-cols-2 mb-4 font-bold">
