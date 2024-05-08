@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Servicio;
+use App\Models\User;
 use App\Models\Valoracion;
 
 class HomeController extends Controller
@@ -62,5 +63,13 @@ class HomeController extends Controller
         }
 
         return view('cliente.servicio', compact('servicio', 'valoraciones', 'sv_pros', 'rating'));
+    }
+
+    public function proveedores() {
+        return view('cliente.proveedores');
+    }
+
+    public function proveedor(User $proveedor) {
+        return view('cliente.proveedor', compact('$proveedor'));
     }
 }

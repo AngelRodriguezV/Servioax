@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -78,7 +79,7 @@ class User extends Authenticatable
 
     public function documento()
     {
-        return $this->belongsTo(Documento::class);
+        return $this->hasOne(Documento::class, 'proveedor_id', $this->primaryKey);
     }
 
     public function solicitudes()
@@ -109,5 +110,33 @@ class User extends Authenticatable
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function rating()
+    {
+        $servicios = Servicio::select('id')->where('proveedor_id', $this->id)
+            ->where('estatus', 'ACEPTADA')->get();
+
+        $valoracion = Valoracion::select('valoracion', DB::raw('count(*) as rating'))
+            ->groupBy('valoracion')
+            ->whereIn('servicio_id', $servicios)
+            ->latest('rating')
+            ->get();
+
+        if (!$valoracion->isEmpty()) {
+            $valoracion = $valoracion->first();
+        } else {
+            $valoracion = [
+                'valoracion' => 0,
+                'rating' => 0
+            ];
+        }
+
+        return $valoracion;
+    }
+
+    public function topServicios()
+    {
+        return Servicio::where('proveedor_id', $this->id)->take(5)->get();
     }
 }

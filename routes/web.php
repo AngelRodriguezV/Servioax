@@ -20,6 +20,9 @@ Route::get('categorias/{categoria}', [HomeController::class, 'categoria'])->name
 Route::get('servicios', [HomeController::class, 'servicios'])->name('servicios');
 Route::get('servicio/{servicio}', [HomeController::class, 'servicio'])->name('servicio');
 
+Route::get('proveedores-de-servicio', [HomeController::class, 'proveedores'])->name('proveedores');
+Route::get('proveedor-de-servicio/{proveedor}', [HomeController::class, 'proveedor'])->name('proveedor');
+
 # Vistas que requieren auntenticación
 Route::middleware([
     'auth:sanctum',
