@@ -70,6 +70,6 @@ class HomeController extends Controller
     }
 
     public function proveedor(User $proveedor) {
-        return view('cliente.proveedor', compact('$proveedor'));
+        return view('cliente.proveedor', compact('proveedor'));
     }
 }

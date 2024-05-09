@@ -28,7 +28,7 @@
                     src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
                     alt="" class="w-10 h-10 rounded-full bg-gray-300">
             @endisset
-            <a href="" class="my-auto ml-4">{{ $servicio->proveedor->name }}</a>
+            <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre }}</a>
         </div>
         {{-- Button --}}
         <a href="{{ route('servicio', $servicio) }}"

@@ -2,7 +2,7 @@
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
     {{-- Image --}}
     <div class="p-5">
-        <div class="mb-3 w-[300px] h-[300px]">
+        <div class="mb-3 w-[250px] h-[250px]">
             @isset($proveedor->image)
                 <img id="picture" src="{{ Storage::url($proveedor->image->url) }}" alt=""
                     class="w-full rounded-full bg-gray-300">
@@ -13,7 +13,7 @@
             @endisset
         </div>
         {{-- Titulo --}}
-        <a href="">
+        <a href="{{ route('proveedor', $proveedor) }}">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-center">
                 {{ $proveedor->nombre }}
             </h5>
@@ -36,7 +36,7 @@
             @endforelse
         </div>
         {{-- Button --}}
-        <a href=""
+        <a href="{{ route('proveedor', $proveedor) }}"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
             Más información
             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

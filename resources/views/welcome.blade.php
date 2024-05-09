@@ -1,8 +1,10 @@
 <x-guest-layout>
 
     <div class="py-6 mx-auto max-w-7xl px-2">
+        <h2 class="text-2xl font-bold mt-4">Proveedores de servicio</h2>
+        @livewire('components.carousel-proveedores')
 
-        <h2 class="text-2xl font-bold">Categorias</h2>
+        <h2 class="text-2xl font-bold mt-4">Categorias</h2>
         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">

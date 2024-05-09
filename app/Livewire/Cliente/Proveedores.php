@@ -36,7 +36,13 @@ class Proveedores extends Component
     {
         $proveedores = User::whereHas('roles', function ($query) {
             $query->where('name', 'proveedor');
-        })->get();
+        });
+
+        if ($this->search) {
+            $proveedores->where('nombre', 'like', '%' . $this->search . '%');
+        }
+
+        $proveedores = $proveedores->get();
 
         $proveedores = $proveedores->filter(function ($user) {
             return $user->documento->estatus === 'ACEPTADA';
