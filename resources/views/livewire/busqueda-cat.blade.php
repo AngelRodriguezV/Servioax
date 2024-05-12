@@ -17,66 +17,62 @@
                             </th>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Correo electronico
+                                Descripcion
                             </th>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Telefono
+                                Slug
                             </th>
-                            <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Estado
-                            </th>
-                            <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Estado Servicios
+                            <th colspan="2"
+                                class="text-center px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Acciones
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($proveedors as $proveedor)
+                        @foreach ($categorias as $categoria)
                             <tr>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
-                                            <img class="w-full h-full rounded-full"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                                alt="" />
+                                            @if($categoria->image)
+                                                <img class="w-full h-full rounded-full" src="{{ Storage::url($categoria->image->url) }}" alt="{{ $categoria->slug }}" />
+                                            @else
+                                                <img class="w-full h-full rounded-full" src="https://as1.ftcdn.net/v2/jpg/00/95/83/46/1000_F_95834632_CL4kevuB3WZLoX72MB52KTLJqx4qhvQj.jpg" />
+                                            @endif
                                         </div>
                                             <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{$proveedor->nombre}}
+                                                    {{$categoria->nombre}}
                                                 </p>
                                             </div>
                                         </div>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">{{$proveedor->email}}</p>
+                                    <p class="text-gray-900 whitespace-no-wrap">{{$categoria->descripcion}}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        {{$proveedor->telefono}}
+                                        {{$categoria->slug}}
                                     </p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                    <span class="relative"><a href="{{ route('admin.aprobarCuentas', $proveedor->id) }}">Activo</a></span>
-                                    </span>
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        <span class="rounded-md bg-black px-4 py-2 text-white mt-4"><a href="{{ route('admin.editarCategoria', $categoria->id) }}">Editar</a></span>
+                                    </p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="{{ route('admin.gestionServicios', $proveedor->id) }}">
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-white leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-indigo-600 rounded-full"></span>
-                                    <span class="relative">Ver Servicios</span>
-                                    </span>
-                                    </a>
-                                </td>
-                                
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        <!--<span class="rounded-md bg-black px-4 py-2 text-white mt-4"><a href="{{ route('admin.editarCategoria', $categoria->id) }}">Habilitar</a></span>-->
+                                        <form method="POST" action="{{ route('admin.cambiarEstadoCategoria', $categoria->id) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="rounded-md bg-black px-4 py-2 text-white mt-0">
+                                                {{ $categoria->estado ? 'Deshabilitar' : 'Habilitar' }}
+                                            </button>
+                                        </form>
+                                    </p>
+                                </td>                                
                             </tr>
                         @endforeach
                     </tbody>

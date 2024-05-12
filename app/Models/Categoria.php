@@ -11,6 +11,10 @@ class Categoria extends Model
 
     protected $fillable = ['nombre', 'descripcion', 'slug'];
 
+    protected $casts = [
+        'estado' => 'boolean'
+    ];
+
     public function getRouteKeyName()
     {
         return "slug";

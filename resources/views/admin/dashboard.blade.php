@@ -16,9 +16,9 @@
                 Administrar perfil
                 <p class="font-normal mt-5">Edita tus datos personales</p>
             </a>
-            <a href="{{ route('admin.aprobarCuentas') }}" class="p-6 font-bold bg-gray-50 rounded-xl shadow-md border-2 hover:border-blue-500 hover:bg-gray-100">
-                Aprobar cuentas
-                <p class="font-normal mt-5">Valida documentos de identidad para aprobar nuevos proveedores</p>
+            <a href="{{ route('admin.gestionCategorias') }}" class="p-6 font-bold bg-gray-50 rounded-xl shadow-md border-2 hover:border-blue-500 hover:bg-gray-100">
+                Gestione las categorias de servicios
+                <p class="font-normal mt-5">Cree, modifique o elimine una categoria de servicio</p>
             </a>
         </div>
     </div>

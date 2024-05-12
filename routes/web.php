@@ -48,7 +48,13 @@ Route::middleware([
             Route::get('clientes', [AdminController::class, 'administrarCli'])->name("adminClie");
             Route::get('proveedor/{id}/servicios', [AdminController::class, 'gestionarServicios'])->name('gestionServicios');
             Route::get('perfil', [AdminController::class, 'verPerfil'])->name('perfil');
-            Route::get('aprobar-cuentas', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
+            Route::get('aprobar-cuenta/{id}', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
+            Route::get('crear-categoria',[AdminController::class, 'crearCategoria'])->name('crearCategoria');
+            Route::post('guardar-categoria', [AdminController::class, 'storeCategoria'])->name('storeCategoria');
+            Route::get('gestion-categorias', [AdminController::class, 'gestionCategorias'])->name('gestionCategorias');
+            Route::get('editar-categoria/{id}', [AdminController::class, 'editarCategoria'])->name('editarCategoria');
+            Route::put('actualizar-categoria', [AdminController::class, 'actualizarCategoria'])->name('actualizarCategoria');
+            Route::patch('cambiarEstadocat/{categoria', [AdminController::class, 'cambiarEstadoCategoria'])->name('cambiarEstadoCategoria');
         });
     });
 

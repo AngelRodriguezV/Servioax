@@ -1,3 +1,3 @@
 <x-admin-layout>
-    <!--Agregar funcionalidad para aprobar identificaciones de proveedores-->
+    @livewire('aprobar-prov', ['id' => $proveedor->id])
 </x-admin-layout>
