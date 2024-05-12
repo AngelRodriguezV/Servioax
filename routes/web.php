@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserRegisterController;
 use App\Models\Conversacion;
@@ -33,7 +34,8 @@ Route::middleware([
     Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
 
     # ---
-    Route::get('/seleccion-rol', [UserRegisterController::class, 'elegirRol'])->name('elegirRol');
+    Route::post('/register', [RegisterController::class, 'registerUser'])->name('register-user');
+    Route::get('/tipo-de-usuario', [RegisterController::class, 'tipoUsuario'])->name('tipo-usuario');
     Route::get('/subir-id', [UserRegisterController::class, 'subirId'])->name('subirId');
 
     # Vistas auntenticadas para el Administrador

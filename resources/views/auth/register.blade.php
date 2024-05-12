@@ -6,12 +6,27 @@
 
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register-user') }}">
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-label for="name" value="{{ __('Nombre') }}" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="nombre" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="apellido_paterno" value="{{ __('Apellido Paterno') }}" />
+                <x-input id="apellido_paterno" class="block mt-1 w-full" type="text" name="apellido_paterno" :value="old('apellido_paterno')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="apellido_materno" value="{{ __('Apellido Materno') }}" />
+                <x-input id="apellido_materno" class="block mt-1 w-full" type="text" name="apellido_materno" :value="old('apellido_materno')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="telefono" value="{{ __('Telefono') }}" />
+                <x-input id="telefono" class="block mt-1 w-full" type="tel" name="telefono" :value="old('telefono')" required />
             </div>
 
             <div class="mt-4">
