@@ -7,6 +7,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserRegisterController;
+use App\Http\Controllers\AdminController;
 use App\Models\Conversacion;
 use App\Models\User;
 use App\Livewire\Messenger;
@@ -50,10 +51,16 @@ Route::middleware([
         Route::prefix('admin')->name('admin.')->group(function() {
 
             # Agregar las rutas del admin
-            Route::get('dashboard', function () {
-                return 'Dashboard admin';
-            })->name('dashboard');
+            #Route::get('dashboard', function () {
+                #return 'Dashboard admin';
+            #})->name('dashboard');
 
+            Route::get('dashboard', [AdminController::class, 'dashboard'])->name('adminDashboard');
+            Route::get('proveedores', [AdminController::class, 'administrarProv'])->name('adminProv');
+            Route::get('clientes', [AdminController::class, 'administrarCli'])->name("adminClie");
+            Route::get('proveedor/{id}/servicios', [AdminController::class, 'gestionarServicios'])->name('gestionServicios');
+            Route::get('perfil', [AdminController::class, 'verPerfil'])->name('perfil');
+            Route::get('aprobar-cuentas', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
         });
     });
 
