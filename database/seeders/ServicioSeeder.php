@@ -30,11 +30,14 @@ class ServicioSeeder extends Seeder
         }
         $servicios = Servicio::factory(150)->create();
 
-        foreach ($servicios as $servicio) {
-            Image::factory()->create([
-                'imageable_id' => $servicio->id,
-                'imageable_type' => Servicio::class
-            ]);
-        }
+        /**
+         *
+        *foreach ($servicios as $servicio) {
+        *    Image::factory()->create([
+        *        'imageable_id' => $servicio->id,
+        *        'imageable_type' => Servicio::class
+        *       ]);
+        *   }
+        */
     }
 }

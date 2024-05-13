@@ -16,11 +16,14 @@ class CategoriaSeeder extends Seeder
     public function run(): void
     {
         $categorias = Categoria::factory(20)->create();
-        foreach ($categorias as $categoria) {
-            Image::factory()->create([
-                'imageable_id' => $categoria->id,
-                'imageable_type' => Categoria::class
-            ]);
-        }
+        /**
+        *
+        *foreach ($categorias as $categoria) {
+        *    Image::factory()->create([
+        *        'imageable_id' => $categoria->id,
+        *        'imageable_type' => Categoria::class
+        *    ]);
+        *}
+        */
     }
 }
