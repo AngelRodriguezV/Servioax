@@ -2,7 +2,7 @@
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" {{ $attributes }}>
     <a href="{{ route('categoria', $categoria) }}">
         <img class="rounded-t-lg"
-            src="{{ Storage::url($categoria->image ? $categoria->image->url : 'image/Carpinteria.jpg') }}"
+            src="{{ Storage::url($categoria->image ? $categoria->image->url : 'image/categorias') }}"
             alt="{{ $categoria->slug }}" />
     </a>
     <div class="p-5">

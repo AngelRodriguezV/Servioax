@@ -6,8 +6,8 @@
             <li>
                 <a href="{{ route('admin.adminDashboard') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                    <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
-                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                    <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path
                             d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                         <path
@@ -19,9 +19,13 @@
             <li>
                 <a href="{{ route('admin.perfil') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                    <svg class="w-6 h-6 text-gray-500 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
-                      </svg>
+                    <svg class="w-6 h-6 text-gray-500 transition duration-75" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                            clip-rule="evenodd" />
+                    </svg>
 
                     <span class="flex-1 ms-3 whitespace-nowrap">Perfil</span>
                 </a>
@@ -49,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.aprobarCuentas') }}"
+                <a href="{{ route('admin.gestionCategorias') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -59,12 +63,11 @@
                         <path
                             d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
                     </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Aprobar Cuentas</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Gestionar Categorias</span>
                 </a>
             </li>
             <li>
-                <a href="#"
-                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

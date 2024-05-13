@@ -18,6 +18,6 @@
             break;
     }
 @endphp
-<a {{ $attributes }} class="rounded-full px-3 py-2 text-white font-bold {{ $classes }}">
+<a {{ $attributes }} class="rounded-lg px-3 py-2 text-white font-bold {{ $classes }}">
     {{ $value }}
 </a>

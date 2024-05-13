@@ -65,17 +65,10 @@
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-status href="{{ route('admin.estatusProveedor', $proveedor) }}" :value="$proveedor->documento->estatus"/>
+                                <x-button-status href="{{ route('admin.aprobarCuentas', $proveedor) }}" :value="$proveedor->documento->estatus"/>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="{{ route('admin.gestionServicios', $proveedor->id) }}">
-                                    <span
-                                        class="relative inline-block px-3 py-2 font-semibold text-white leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-indigo-600 rounded-full"></span>
-                                        <span class="relative">Ver Servicios</span>
-                                    </span>
-                                </a>
+                                <x-button-route href="{{ route('admin.gestionServicios', $proveedor->id) }}" value="Ver Servicios"/>
                             </td>
 
                         </tr>
