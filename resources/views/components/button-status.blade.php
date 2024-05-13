@@ -2,7 +2,7 @@
 @php
     switch ($value) {
         case 'NUEVA':
-            $classes = 'bg-green-500';
+            $classes = 'bg-blue-500';
             break;
         case 'EN REVISION':
             $classes = 'bg-orange-500';

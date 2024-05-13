@@ -61,6 +61,7 @@ Route::middleware([
             Route::get('proveedor/{id}/servicios', [AdminController::class, 'gestionarServicios'])->name('gestionServicios');
             Route::get('perfil', [AdminController::class, 'verPerfil'])->name('perfil');
             Route::get('aprobar-cuentas', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
+            Route::get('estatus-proveedor/{proveedor}', [AdminController::class, 'estatusProveedor'])->name('estatusProveedor');
         });
     });
 

@@ -45,4 +45,9 @@ class AdminController extends Controller
     {
         return view('admin.aprobar');
     }
+
+    public function estatusProveedor(User $proveedor)
+    {
+        return view('admin.estatus-proveedor', compact('proveedor'));
+    }
 }

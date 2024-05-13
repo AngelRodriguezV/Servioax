@@ -65,7 +65,7 @@
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-status :value="$proveedor->documento->estatus" />
+                                <x-button-status href="{{ route('admin.estatusProveedor', $proveedor) }}" :value="$proveedor->documento->estatus"/>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <a href="{{ route('admin.gestionServicios', $proveedor->id) }}">
