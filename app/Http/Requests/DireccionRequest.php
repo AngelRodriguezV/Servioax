@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class DireccionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasRole('Proveedor');
     }
 
     /**
@@ -21,15 +21,14 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'nombre' => 'required',
-            'apellido_paterno' => 'required',
-            'apellido_materno' => 'required',
-            'telefono' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password'
+            'calle' => 'required',
+            'colonia' => 'required',
+            'municipio' => 'estado',
+            'num_exterior' => 'required|integer',
+            'num_interior' => 'integer',
+            'codigo_postal' => 'required|integer',
+            'referencias' => 'required'
         ];
     }
 }

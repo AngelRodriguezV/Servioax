@@ -10,6 +10,10 @@
             $classes = 'w-full h-40 md:h-56 lg:h-96';
             $img_defaut = 'svg/upload-lg-horizontal.svg';
             break;
+        case 'ine':
+            $classes = 'w-full h-60';
+            $img_defaut = 'svg/upload-lg-horizontal.svg';
+            break;
         default:
             $classes = 'w-96 h-96 rounded-lg';
             $img_defaut = 'svg/upload.svg';

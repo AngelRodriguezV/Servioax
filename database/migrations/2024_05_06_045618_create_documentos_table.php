@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('documentos', function (Blueprint $table) {
             $table->id();
             $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA']);
-            $table->unsignedBigInteger('direccion_id');
+            $table->unsignedBigInteger('direccion_id')->nullable();
             $table->unsignedBigInteger('proveedor_id');
-            $table->string('url_ine');
-            $table->string('url_domicilio');
+            $table->string('url_ine')->nullable();
+            $table->string('url_domicilio')->nullable();
             $table->timestamps();
             $table->foreign('direccion_id')->references('id')->on('direcciones')->onDelete('cascade');
             $table->foreign('proveedor_id')->references('id')->on('users')->onDelete('cascade');

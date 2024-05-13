@@ -18,7 +18,7 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('Cliente')) {
             return redirect()->route('cliente.dashboard');
         } else {
-            return "No tienes roll asignado";
+            return redirect()->route('tipo-usuario');
         }
 
     }

@@ -8,6 +8,9 @@
         @livewire('user.update-photo-form')
         <x-section-border />
 
+        @livewire('proveedor.ine')
+        <x-section-border />
+
         @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.update-password-form')

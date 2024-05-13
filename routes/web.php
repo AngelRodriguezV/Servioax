@@ -10,6 +10,7 @@ use App\Http\Controllers\UserRegisterController;
 use App\Models\Conversacion;
 use App\Models\User;
 use App\Livewire\Messenger;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 # Vistas que se muestran al cliente publicas
@@ -24,6 +25,8 @@ Route::get('servicio/{servicio}', [HomeController::class, 'servicio'])->name('se
 Route::get('proveedores-de-servicio', [HomeController::class, 'proveedores'])->name('proveedores');
 Route::get('proveedor-de-servicio/{proveedor}', [HomeController::class, 'proveedor'])->name('proveedor');
 
+Route::post('/register', [RegisterController::class, 'registerUser'])->name('register-user');
+
 # Vistas que requieren auntenticación
 Route::middleware([
     'auth:sanctum',
@@ -34,8 +37,12 @@ Route::middleware([
     Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
 
     # ---
-    Route::post('/register', [RegisterController::class, 'registerUser'])->name('register-user');
     Route::get('/tipo-de-usuario', [RegisterController::class, 'tipoUsuario'])->name('tipo-usuario');
+    Route::post('/tipo-de-usuario', [RegisterController::class, 'tipoUsuario'])->name('tipo-usuario');
+    Route::get('/set-direccion', [RegisterController::class, 'setDireccion'])->name('set-direccion');
+    Route::post('/set-direccion', [RegisterController::class, 'setDireccion'])->name('set-direccion');
+    Route::get('/set-ine', [RegisterController::class, 'setIne'])->name('set-ine');
+    Route::post('/set-ine', [RegisterController::class, 'setIne'])->name('set-ine');
     Route::get('/subir-id', [UserRegisterController::class, 'subirId'])->name('subirId');
 
     # Vistas auntenticadas para el Administrador
@@ -86,10 +93,17 @@ Route::middleware([
 
 # pruebas de consultas -- ingorar
 Route::get('/d', function() {
-    $user = User::all()->random();
-    $conversaciones = Conversacion::select('*')
-            ->join('mensajes', 'mensajes.conversacion_id', '=', 'conversaciones.id')
-            ->where('mensajes.remitente_id', $user->id)
-            ->get();
-    return $conversaciones;
+    #$user = User::all()->random();
+    #$conversaciones = Conversacion::select('*')
+    #        ->join('mensajes', 'mensajes.conversacion_id', '=', 'conversaciones.id')
+    #        ->where('mensajes.remitente_id', $user->id)
+    #        ->get();
+    $a = '';
+    if (count(Auth::user()->getRoleNames()) === 0) {
+        $a = 'No tiene rol';
+    }
+    else {
+        $a = 'Tiene rol';
+    }
+    return $a;
 });
