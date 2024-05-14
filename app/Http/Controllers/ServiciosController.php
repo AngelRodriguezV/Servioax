@@ -41,7 +41,7 @@ class ServiciosController extends Controller
         $servicio = Servicio::create($request->all());
 
         if ($request->file('file')) {
-            $url = Storage::disk('public')->put('posts', $request->file('file'));
+            $url = Storage::disk('public')->put('servicio', $request->file('file'));
             $servicio->image()->create([
                 'url' => $url
             ]);
@@ -82,7 +82,7 @@ class ServiciosController extends Controller
         $servicio->update($request->all());
 
         if ($request->file('file')) {
-            $url = Storage::disk('public')->put('posts', $request->file('file'));
+            $url = Storage::disk('public')->put('servicio', $request->file('file'));
             if ($servicio->image) {
                 Storage::disk('public')->delete($servicio->image->url);
                 $servicio->image->update([

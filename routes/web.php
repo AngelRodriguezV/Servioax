@@ -64,8 +64,8 @@ Route::middleware([
             Route::get('crear-categoria',[AdminController::class, 'crearCategoria'])->name('crearCategoria');
             Route::post('guardar-categoria', [AdminController::class, 'storeCategoria'])->name('storeCategoria');
             Route::get('gestion-categorias', [AdminController::class, 'gestionCategorias'])->name('gestionCategorias');
-            Route::get('editar-categoria/{id}', [AdminController::class, 'editarCategoria'])->name('editarCategoria');
-            Route::put('actualizar-categoria', [AdminController::class, 'actualizarCategoria'])->name('actualizarCategoria');
+            Route::get('editar-categoria/{categoria}', [AdminController::class, 'editarCategoria'])->name('editarCategoria');
+            Route::put('actualizar-categoria/{categoria}', [AdminController::class, 'actualizarCategoria'])->name('actualizarCategoria');
             Route::patch('cambiarEstadocat/{categoria', [AdminController::class, 'cambiarEstadoCategoria'])->name('cambiarEstadoCategoria');
         });
     });

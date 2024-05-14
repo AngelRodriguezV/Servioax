@@ -67,14 +67,35 @@ class AdminController extends Controller
         return view('admin.crearCategoria');
     }
 
-    public function editarCategoria($id){
-        $categorias = Categoria::where('id', $id)->first();
-        return view('admin.editarCategoria', compact('categorias'));
+    public function editarCategoria(Categoria $categoria){
+        return view('admin.editarCategoria', compact('categoria'));
     }
 
     public function actualizarCategoria(Request $request, Categoria $categoria)
     {
-        //Funcionalidad Pendiente
+        // Validar los datos del request
+        $data = $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'file' => 'image',
+        ]);
+
+        $data['slug'] = Str::slug($data['nombre']);
+        $categoria->update($data);
+
+        if ($request->file('file')) {
+            $url = Storage::disk('public')->put('categoria', $request->file('file'));
+            if ($categoria->image) {
+                Storage::disk('public')->delete($categoria->image->url);
+                $categoria->image->update([
+                    'url' => $url
+                ]);
+            } else {
+                $categoria->image()->create([
+                    'url' => $url,
+                ]);
+            }
+        }
         return redirect()->route('admin.gestionCategorias');
     }
 
@@ -84,28 +105,21 @@ class AdminController extends Controller
         $data = $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required|image',
+            'file' => 'required|image',
         ]);
 
         // Generar el slug a partir del nombre
         $data['slug'] = Str::slug($data['nombre']);
 
-        // Guardar la imagen en el directorio especificado y obtener su ruta
-        $rutaImagen = $request->file('imagen')->store('public/image/');
-
         // Crear una nueva categoria
-        $categoria = new Categoria;
-        $categoria->nombre = $data['nombre'];
-        $categoria->descripcion = $data['descripcion'];
-        $categoria->slug = $data['slug'];
+        $categoria = Categoria::create($data);
 
-        // Guardar la categoria
-        $categoria->save();
-
-        $categoria->image()->create([
-            'url' => $rutaImagen,
-        ]);
-
+        if ($request->file('file')) {
+            $url = Storage::disk('public')->put('categoria', $request->file('file'));
+            $categoria->image()->create([
+                'url' => $url
+            ]);
+        }
         return redirect()->route('admin.gestionCategorias');
     }
 

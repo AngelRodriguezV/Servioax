@@ -41,12 +41,15 @@
                                     <p class="text-gray-900 whitespace-no-wrap">{{$categoria->descripcion}}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <x-button-route href="{{ route('admin.editarCategoria', $categoria->id) }}" value="Editar" />
+                                    <x-button-route href="{{ route('admin.editarCategoria', $categoria) }}" value="Editar" />
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mx-4 my-2">
+                    {{ $categorias->links() }}
+                </div>
             </div>
         </div>
     </div>

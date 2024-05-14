@@ -6,7 +6,7 @@
                 <span class="text-xs">Listado de Categorias de servicios</span>
             </div>
             <div>
-                <span class="rounded-md bg-black px-4 py-2 text-white mt-4"><a href="{{ route('admin.crearCategoria') }}">Crear una nueva categoria</a></span>
+                <x-button-route href="{{ route('admin.crearCategoria') }}" value="Crear una nueva categoria"/>
             </div>
         </div>
         @livewire('admin.busqueda-categoria')

@@ -7,23 +7,28 @@
 
             <form action="{{ route('admin.storeCategoria') }}" method="POST" enctype="multipart/form-data" class="mt-10">
                 @csrf
-                <div class="grid gap-6 sm:grid-cols-2">
-                    <div class="relative z-0">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" class="form-control" required>
+                <div class="grid gap-6">
+                    <div>
+                        <x-label for="nombre">Nombre</x-label>
+                        <x-input type="text" id="nombre" name="nombre"
+                            value="{{ isset($categoria) ? $categoria->descripcion : old('nombre') }}"
+                            placeholder="Ingrese el nombre de la categoria" class="w-full" />
+                        <x-input-error for="nombre" />
                     </div>
-    
-                    <div class="relative z-0">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" class="form-control" required></textarea>
+                    <div>
+                        <x-label for="descripcion">Descripcion</x-label>
+                        <textarea id="descripcion" name="descripcion"
+                            class="w-full text-slate-950 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            placeholder="Ingrese la descripcion del servicio">{{ isset($categoria) ? $categoria->descripcion : old('descripcion') }}</textarea>
+                        <x-input-error for="descripcion" />
                     </div>
 
-                    <div class="relative z-0">
-                        <label for="imagen" class="form-label">Imagen</label>
-                        <input type="file" name="imagen" id="imagen" class="form-control" required>
+                    <div class="mb-3">
+                        <x-label for="nombre">Imagen</x-label>
+                        <x-input-img size="horizontal" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary t-5 rounded-md bg-black px-10 py-2 text-white mt-4">Crear Categoría</button>
+                <x-button type="submit">Crear categoría</x-button>
             </form>
         </div>
     </div>

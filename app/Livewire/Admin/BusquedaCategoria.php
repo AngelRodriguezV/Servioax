@@ -18,13 +18,16 @@ class BusquedaCategoria extends Component
 
     public function render()
     {
-        $query = Categoria::query();
+        $myQuery = Categoria::query();
 
         if ($this->search) {
-            $query->where('nombre', 'like', '%' . $this->search . '%');
+            $myQuery->where(function ($query) {
+                $query->where('nombre', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%');
+            });
         }
 
-        $categorias = $query->get();
+        $categorias = $myQuery->paginate(10);
 
         // Pasar las categorías a la vista
         return view('livewire.admin.busqueda-categoria', compact('categorias'));
