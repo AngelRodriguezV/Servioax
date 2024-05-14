@@ -17,12 +17,12 @@
                     <img id="ine" src="{{ Storage::url($img_defaut) }}" alt=""
                         class="object-cover object-center w-full">
                 @endisset
-                <input id="file" name="file" type="file" accept="image/*" class="hidden"
+                <input id="ine" name="ine" type="file" accept="image/*" class="hidden"
                     wire:model="photo" />
             </label>
 
             <script>
-                document.getElementById("file").addEventListener('change', cambiarImagen);
+                document.getElementById("ine").addEventListener('change', cambiarImagen);
 
                 function cambiarImagen(event) {
                     var file = event.target.files[0];

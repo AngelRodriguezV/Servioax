@@ -33,15 +33,14 @@ class Ine extends Component
     public function updatePhoto()
     {
         if ($this->photo) {
-            $url = Storage::disk('public')->put('photo', $this->photo);
+            $url = Storage::disk('public')->put('ine', $this->photo);
 
             if (Auth::user()->documento->url_ine != null) {
                 Storage::disk('public')->delete(Auth::user()->documento->url_ine);
-
-                Auth::user()->documento->update([
-                    'url_ine' => $url
-                ]);
             }
+            Auth::user()->documento->update([
+                'url_ine' => $url
+            ]);
 
             $this->dispatch('saved');
         }

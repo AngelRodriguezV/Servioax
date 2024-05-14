@@ -38,6 +38,11 @@ class AdminController extends Controller
         }
     }
 
+    public function aprobarServicio(User $proveedor, Servicio $servicio)
+    {
+        return view('admin.aprobarServicio', compact('proveedor','servicio'));
+    }
+
     public function verPerfil()
     {
         return view('admin.perfil');

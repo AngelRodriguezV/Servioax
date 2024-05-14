@@ -44,6 +44,21 @@
                 {{ $proveedor->created_at->format('d M Y') }}
             </p>
         </div>
+        {{-- Foto de perfil --}}
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Foto de perfil
+            </p>
+            <div class="flex-shrink-0 w-32 h-32">
+                @isset($proveedor->image)
+                    <img id="picture"
+                        src="{{ Storage::url($proveedor->image->url) }}"
+                        alt="" class="w-32 h-32 rounded-full bg-gray-300">
+                @else
+                    <p>Sin foto de perfil</p>
+                @endisset
+            </div>
+        </div>
         <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
             <p class="text-gray-600">
                 Estado de verificación
@@ -189,6 +204,14 @@
         <div class=" p-4 border-b">
             <p class="text-sm text-gray-500">
                 Cambiar el estatus del proveedor
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Estado de verificación
+            </p>
+            <p>
+                <x-button-status :value="$proveedor->documento->estatus" />
             </p>
         </div>
         <div class="grid lg:flex gap-2 mt-2">

@@ -66,6 +66,7 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Gestionar Categorias</span>
                 </a>
             </li>
+            {{--
             <li>
                 <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -77,6 +78,7 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Cerrar Sesión</span>
                 </a>
             </li>
+            --}}
         </ul>
     </div>
 </aside>

@@ -50,7 +50,7 @@
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-status href="" :value="$servicio->estatus"/>
+                                <x-button-status href="{{ route('admin.aprobarServicio', [$proveedor, $servicio]) }}" :value="$servicio->estatus"/>
                             </td>
                         </tr>
                     @endforeach

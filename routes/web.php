@@ -59,6 +59,7 @@ Route::middleware([
             Route::get('proveedores', [AdminController::class, 'administrarProv'])->name('adminProv');
             Route::get('clientes', [AdminController::class, 'administrarCli'])->name("adminClie");
             Route::get('proveedor/{proveedor}/servicios', [AdminController::class, 'gestionarServicios'])->name('gestionServicios');
+            Route::get('proveedor/{proveedor}/servicios/{servicio}', [AdminController::class, 'aprobarServicio'])->name('aprobarServicio');
             Route::get('perfil', [AdminController::class, 'verPerfil'])->name('perfil');
             Route::get('aprobar-cuenta/{id}', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
             Route::get('crear-categoria',[AdminController::class, 'crearCategoria'])->name('crearCategoria');
