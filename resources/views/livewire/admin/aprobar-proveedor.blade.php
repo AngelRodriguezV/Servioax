@@ -1,82 +1,184 @@
-<div class=" min-h-screen flex items-center justify-center px-4">
-    
-    <div class=" max-w-4xl  bg-white w-full rounded-lg shadow-xl">
+<div class="w-full">
+
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <h2 class="text-2xl ">
+            Datos del proveedor
+        </h2>
+    </div>
+
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
         <div class=" p-4 border-b">
-            <h2 class="text-2xl ">
-                Datos del proveedor
-            </h2>
             <p class="text-sm text-gray-500">
-                Personal details and application. 
+                Detalles de datos personales.
             </p>
         </div>
-        <div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Nombre completo
+            </p>
+            <p>
+                {{ $proveedor->nombre . ' ' . $proveedor->apellido_paterno . ' ' . $proveedor->apellido_materno }}
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Correo Electronico
+            </p>
+            <p>
+                {{ $proveedor->email }}
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Telefono
+            </p>
+            <p>
+                {{ $proveedor->telefono }}
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Fecha de registro
+            </p>
+            <p>
+                {{ $proveedor->created_at->format('d M Y') }}
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Estado de verificación
+            </p>
+            <p>
+                <x-button-status :value="$proveedor->documento->estatus" />
+            </p>
+        </div>
+    </div>
+    {{-- Direccion --}}
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <div class=" p-4 border-b">
+            <p class="text-sm text-gray-500">
+                Detalles de dirección
+            </p>
+        </div>
+        @if ($proveedor->documento->direccion)
+            {{-- Calle --}}
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Nombre
+                    Calle
                 </p>
                 <p>
-                    {{$proveedor->nombre .' '.$proveedor->apellido_paterno .' '.$proveedor->apellido_materno}}
+                    {{ $proveedor->documento->direccion->calle }}
                 </p>
             </div>
+            {{-- Numero exterior --}}
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Correo Electronico
+                    Numero exterior
                 </p>
                 <p>
-                    {{$proveedor->email}}
+                    {{ $proveedor->documento->direccion->num_exterior }}
                 </p>
             </div>
+            {{-- Numero interior --}}
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Telefono
+                    Numero Interior
                 </p>
                 <p>
-                    {{$proveedor->telefono}}
+                    {{ $proveedor->documento->direccion->num_interior }}
                 </p>
             </div>
+            {{-- Colonia --}}
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Fecha de registro
+                    Colonia
                 </p>
                 <p>
-                    {{$proveedor->email_verified_at}}
+                    {{ $proveedor->documento->direccion->colonia }}
                 </p>
             </div>
+            {{-- Municipio --}}
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Estado de verificación
+                    Municipio
                 </p>
                 <p>
-                    <span>Aqui va el estado de verificacion, Pendiente!!</span> 
+                    {{ $proveedor->documento->direccion->municipio }}
                 </p>
             </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4">
+            {{-- Estado --}}
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
                 <p class="text-gray-600">
-                    Documentos de verificación
+                    Estado
                 </p>
-                <div class="space-y-2">
-                    <!--
-                    <div class="border-2 flex items-center p-2 rounded justify-between space-x-2">
-                        <div class="space-x-2 truncate">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current inline text-gray-500" width="24" height="24" viewBox="0 0 24 24"><path d="M17 5v12c0 2.757-2.243 5-5 5s-5-2.243-5-5v-12c0-1.654 1.346-3 3-3s3 1.346 3 3v9c0 .551-.449 1-1 1s-1-.449-1-1v-8h-2v8c0 1.657 1.343 3 3 3s3-1.343 3-3v-9c0-2.761-2.239-5-5-5s-5 2.239-5 5v12c0 3.866 3.134 7 7 7s7-3.134 7-7v-12h-2z"/></svg>
-                            <span>
-                                resume_for_manager.pdf
-                            </span>
-                        </div>
-                        <a href="#" class="text-purple-700 hover:underline">
-                            Download
-                        </a>
-                    </div>-->
-                    <img src="https://portalanterior.ine.mx/archivos3/portal/historico/recursos/Internet/CredencialVotar_DERFE/imgs/conoce_credencial01.jpg" alt="">
-                    <div class="inline-flex">
-                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                            Aprobar documento
-                        </button>
-                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
-                            Rechazar documento
-                        </button>
-                    </div>
-                </div>
+                <p>
+                    {{ $proveedor->documento->direccion->estado }}
+                </p>
+            </div>
+            {{-- Codigo Postal --}}
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-gray-600">
+                    Codigo Postal
+                </p>
+                <p>
+                    {{ $proveedor->documento->direccion->codigo_postal }}
+                </p>
+            </div>
+            {{-- Referencias --}}
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-gray-600">
+                    Referencias
+                </p>
+                <p>
+                    {{ $proveedor->documento->direccion->referencias }}
+                </p>
+            </div>
+        @else
+            <div>
+                Aun no ha registrado su dirección
+            </div>
+        @endif
+    </div>
+    {{-- INE --}}
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <div class=" p-4 border-b">
+            <p class="text-sm text-gray-500">
+                INE
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4">
+            <p class="text-gray-600">
+                Credencial de identificación
+            </p>
+            <div>
+                @if($proveedor->documento->url_ine != null)
+                    <img src="{{ Storage::url($proveedor->documento->url_ine) }}" alt=""
+                        class="w-96 h-48 rounded-lg">
+                @else
+                    <p>Aun no sube su identificación</p>
+                @endif
+            </div>
+        </div>
+    </div>
+    {{-- Acciones --}}
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <div class=" p-4 border-b">
+            <p class="text-sm text-gray-500">
+                Cambiar el estatus del proveedor
+            </p>
+        </div>
+        <div class="grid lg:flex gap-2 mt-2">
+            <div class="relative">
+                <label for="estatus" class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">Estatus:</label>
+                <x-select-input aria-label="estatu" wire:model.live="estatu" :options="$estatus"/>
+            </div>
+            <div>
+                <x-button type="button" wire:click="actualizarEstado()">Guardar</x-button>
+            </div>
+            <div>
+                <x-action-message class="me-3" on="saved">
+                    {{ __('Saved.') }}
+                </x-action-message>
             </div>
         </div>
     </div>

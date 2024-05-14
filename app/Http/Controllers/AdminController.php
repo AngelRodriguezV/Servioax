@@ -36,7 +36,7 @@ class AdminController extends Controller
             $servicios = Servicio::where('proveedor_id', $proveedor->id)->get();
             return view('admin.servicios-gestion', compact('proveedor', 'servicios'));
         } else {
-            return "Este proveedor no existe!!!";
+            return redirect()->route('admin.adminProv');
         }
     }
 
@@ -52,7 +52,7 @@ class AdminController extends Controller
             $servicios = Servicio::where('proveedor_id', $proveedor->id)->get();
             return view('admin.aprobar', compact('proveedor', 'servicios'));
         }else {
-            return "Este proveedor no existe!!!";
+            return redirect()->route('admin.adminProv');
         }
     }
 
@@ -118,10 +118,5 @@ class AdminController extends Controller
 
         // Redirigir al usuario a la página anterior con un mensaje de éxito
         return back()->with('status', 'El estado de la categoría ha sido cambiado exitosamente.');
-    }
-
-    public function estatusProveedor(User $proveedor)
-    {
-        return view('admin.estatus-proveedor', compact('proveedor'));
     }
 }

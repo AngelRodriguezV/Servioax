@@ -8,21 +8,30 @@ use App\Models\Servicio;
 
 class AprobarProveedor extends Component
 {
-    public $id;
+    public $proveedor;
+    public $estatu;
+    public $estatus = [
+        'NUEVA' => 'Nueva',
+        'EN REVISION' => 'En revision',
+        'ACEPTADA' => 'Aceptada',
+        'RECHAZADA' => 'Rechezada'
+    ];
 
     public function mount($id)
     {
-        $this->id = $id;
+        $this->proveedor = User::role('Proveedor')->find($id);
+        $this->estatu = $this->proveedor->documento->estatus;
+    }
+
+    public function actualizarEstado() {
+        $this->proveedor->documento->update([
+            "estatus" => $this->estatu
+        ]);
+        $this->dispatch('saved');
     }
 
     public function render()
     {
-        $proveedor = User::role('Proveedor')->find($this->id);
-        if ($proveedor) {
-            $servicios = Servicio::where('proveedor_id', $proveedor->id)->get();
-            return view('livewire.admin.aprobar-proveedor', compact('proveedor', 'servicios'));
-        }else {
-            return "Este proveedor no existe!!!";
-        }
+        return view('livewire.admin.aprobar-proveedor');
     }
 }
