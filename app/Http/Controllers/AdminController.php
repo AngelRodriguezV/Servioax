@@ -29,12 +29,10 @@ class AdminController extends Controller
         return view('admin.clientes');
     }
 
-    public function gestionarServicios($id)
+    public function gestionarServicios(User $proveedor)
     {
-        $proveedor = User::role('Proveedor')->find($id);
-        if ($proveedor) {
-            $servicios = Servicio::where('proveedor_id', $proveedor->id)->get();
-            return view('admin.servicios-gestion', compact('proveedor', 'servicios'));
+        if ($proveedor->hasRole('Proveedor')) {
+            return view('admin.servicios-gestion', compact('proveedor'));
         } else {
             return redirect()->route('admin.adminProv');
         }

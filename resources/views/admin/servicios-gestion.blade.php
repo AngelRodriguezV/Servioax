@@ -1,7 +1,17 @@
 <x-admin-layout>
-<div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2">
-    @foreach ($servicios as $servicio)
-        <x-cards.servicioAdmin :servicio="$servicio"/>
-    @endforeach
-</div>
+    <div class="bg-white p-8 rounded-md w-full">
+        <div class="flex items-center justify-between pb-6">
+            <div>
+                <h2 class="text-gray-600 font-semibold">Servicios del Proveedores de servicios:</h2>
+                <span class="text-xs">{{ $proveedor->nombre . ' ' . $proveedor->apellido_paterno . ' ' . $proveedor->apellido_materno }}</span>
+            </div>
+            <div>
+                <h2 class="text-gray-600 font-semibold">Estatus del proveedor:</h2>
+                <span class="text-xs">
+                    <x-button-status href="{{ route('admin.aprobarCuentas', $proveedor) }}" :value="$proveedor->documento->estatus"/>
+                </span>
+            </div>
+        </div>
+        @livewire('admin.servicios', ['proveedor' => $proveedor])
+    </div>
 </x-admin-layout>

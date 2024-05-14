@@ -17,66 +17,47 @@
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Correo electronico
+                            Descripcion
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Telefono
+                            Categoria
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Estado
-                        </th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Estado Servicios
+                            Estatus
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($proveedors as $proveedor)
+                    @foreach ($servicios as $servicio)
                         <tr>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 w-10 h-10">
-                                        @isset($servicio->proveedor->image)
-                                            <img id="picture"
-                                                src="{{ Storage::url($servicio->proveedor->image->url) }}"
-                                                alt="" class="w-10 h-10 rounded-full bg-gray-300">
-                                        @else
-                                            <img id="picture"
-                                                src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
-                                                alt="" class="w-10 h-10 rounded-full bg-gray-300">
-                                        @endisset
-                                    </div>
                                     <div class="ml-3">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $proveedor->nombre . ' ' . $proveedor->apellido_paterno . ' ' . $proveedor->apellido_materno }}
+                                            {{ $servicio->nombre }}
                                         </p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ $proveedor->email }}</p>
+                                <p class="text-gray-900 whitespace-no-wrap">{{ $servicio->descripcion }}</p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $proveedor->telefono }}
+                                    {{ $servicio->categoria->nombre }}
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-status href="{{ route('admin.aprobarCuentas', $proveedor) }}" :value="$proveedor->documento->estatus"/>
+                                <x-button-status href="" :value="$servicio->estatus"/>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-route href="{{ route('admin.gestionServicios', $proveedor) }}" value="Ver Servicios"/>
-                            </td>
-
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="mx-4 my-2">
-                {{ $proveedors->links() }}
+                {{ $servicios->links() }}
             </div>
         </div>
     </div>

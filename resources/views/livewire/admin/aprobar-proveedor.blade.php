@@ -160,6 +160,30 @@
             </div>
         </div>
     </div>
+    {{-- Horarios --}}
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <div class=" p-4 border-b">
+            <p class="text-sm text-gray-500">
+                Horarios
+            </p>
+        </div>
+        @forelse ($proveedor->horarios as $horario)
+        <div class="grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4">
+            <p class="text-gray-600">
+                {{ $horario->dia_semana }}
+            </p>
+            <p class="text-gray-600">
+                {{ $horario->hora_apertura }}
+            </p>
+            <p class="text-gray-600">
+                {{ $horario->hora_cierre }}
+            </p>
+        </div>
+        @empty
+
+        @endforelse
+
+    </div>
     {{-- Acciones --}}
     <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
         <div class=" p-4 border-b">

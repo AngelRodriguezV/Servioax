@@ -10,7 +10,7 @@ class LoginController extends Controller
     public function login()
     {
         if (auth()->user()->hasRole('Admin')) {
-            return "Es admin";
+            return redirect()->route('admin.dashboard');
         }
         if (auth()->user()->hasRole('Proveedor')) {
             return redirect()->route('proveedor.dashboard');
