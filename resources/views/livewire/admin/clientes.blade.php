@@ -23,6 +23,10 @@
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Estado
                         </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Mensaje
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,6 +69,15 @@
                                         class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                     <span class="relative">Activo</span>
                                 </span>
+                            </td>
+                            <td class="mt-0">
+                                <a href="{{ route('admin.mensajes', $cliente) }}"
+                                    class="rounded-lg items-center px-4 py-3 block text-white bg-indigo-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="w-4 h-5 mx-auto" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z" />
+                                    </svg>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
