@@ -32,14 +32,22 @@ class ServicioHome extends Component
         $query = Servicio::where('proveedor_id', Auth::user()->id);
 
         if ($this->search) {
-            $query->where('nombre', 'like', '%' . $this->search . '%');
+            $query->where(function ($query) {
+                $query->where('nombre', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                    ->orwhere(function ($query) {
+                        $query->whereHas('categoria', function ($query) {
+                            $query->where('nombre', 'like', '%' . $this->search . '%');
+                        });
+                    });
+            });
         }
 
         if ($this->estatu != 'TODOS') {
             $query->where('estatus', $this->estatu);
         }
 
-        $servicios = $query->latest('updated_at')->get();
+        $servicios = $query->latest('updated_at')->paginate(10);
 
         return view('livewire.proveedor.servicio-home', compact('servicios'));
     }

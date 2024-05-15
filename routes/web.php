@@ -84,6 +84,8 @@ Route::middleware([
             Route::get('horarios', [ProveedorController::class, 'horarios'])->name('horarios');
 
             Route::resource('servicios', ServiciosController::class);
+
+            Route::get('mensajes/{user2}', [ProveedorController::class, 'mensajes'])->name('mensajes');
         });
     });
 

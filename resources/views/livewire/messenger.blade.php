@@ -45,7 +45,7 @@
         <div class="p-4 h-full rounded-lg content-end">
 
             @if ($conversacion_actual)
-                <div class="p-4 w-full border-2 border-gray-400 rounded-xl top-0 flex">
+                <div class="p-4 w-full border-2 bg-white rounded-xl top-0 flex">
                     @foreach ($conversacion_actual->users as $user)
                         @if (auth()->user()->id != $user->id)
                             @isset($user->image)

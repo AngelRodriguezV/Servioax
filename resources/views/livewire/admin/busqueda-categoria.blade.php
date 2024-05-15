@@ -1,13 +1,13 @@
 <div class="items-center justify-between pb-6">
     <div class="flex items-center justify-between">
-        <div class="flex bg-gray-50 items-center p-2 rounded-md">
+        <div class="flex items-center p-2 rounded-md">
             <x-search wire:model.live="search" />
-      </div>
+        </div>
 
     </div>
     <div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden bg-white">
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr>
@@ -30,18 +30,19 @@
                             <tr>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <div class="flex items-center">
-                                            <div class="ml-3">
-                                                <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{$categoria->nombre}}
-                                                </p>
-                                            </div>
+                                        <div class="ml-3">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                {{ $categoria->nombre }}
+                                            </p>
                                         </div>
+                                    </div>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">{{$categoria->descripcion}}</p>
+                                    <p class="text-gray-900 whitespace-no-wrap">{{ $categoria->descripcion }}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <x-button-route href="{{ route('admin.editarCategoria', $categoria) }}" value="Editar" />
+                                    <x-button-route href="{{ route('admin.editarCategoria', $categoria) }}"
+                                        value="Editar" />
                                 </td>
                             </tr>
                         @endforeach

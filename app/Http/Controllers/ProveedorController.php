@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
@@ -24,5 +25,10 @@ class ProveedorController extends Controller
     public function horarios()
     {
         return view('proveedor.horarios');
+    }
+
+    public function mensajes(User $user2)
+    {
+        return view('proveedor.mensajes', compact('user2'));
     }
 }

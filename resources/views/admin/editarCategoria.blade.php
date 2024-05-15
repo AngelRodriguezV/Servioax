@@ -1,6 +1,6 @@
 <x-admin-layout>
-    <div class="flex min-h-screen items-center justify-start bg-white">
-        <div class="mx-auto w-full max-w-lg">
+    <div class="flex min-h-screen items-center justify-start">
+        <div class="w-full max-w-lg">
             <h1 class="text-4xl font-medium">Editar categoria</h1>
             <p class="mt-3">Aqui puedes editar las categorias para los proveedores de servicios.</p>
 

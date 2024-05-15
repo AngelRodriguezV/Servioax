@@ -17,6 +17,9 @@
             <x-cards.servicioProv :servicio="$servicio" />
         @endforeach
 
+        <div class="mx-4 my-2 col-span-full">
+            {{ $servicios->links() }}
+        </div>
 
     </div>
 

@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-slate-200">
 
     @livewire('navbar-admin')
     @livewire('sidebar-admin')

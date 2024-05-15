@@ -20,8 +20,7 @@
                     Descripción: <span class="font-normal">{{ $servicio->descripcion }}</span>
                 </div>
                 <div class="grid grid-cols-2 mb-4 font-bold">
-                    Estatus: <span
-                        class="font-normal p-2 bg-white border-2 border-gray-200 rounded-lg text-center">{{ $servicio->estatus }}</span>
+                    Estatus: <x-button-status :value="$servicio->estatus"/>
                 </div>
                 @livewire('proveedor.servicio-delete', ['servicio' => $servicio])
 
