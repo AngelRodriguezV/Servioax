@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Conversacion;
 use App\Models\Mensaje;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class Messenger extends Component
 {
@@ -17,46 +18,50 @@ class Messenger extends Component
 
     public function mount(User $user2)
     {
-        $this->conversaciones = auth()->user()->conversaciones;
+        $this->conversaciones = Auth::user()->conversaciones;
 
-        foreach ($this->conversaciones as $conversacion) {
-            foreach ($conversacion->users as $user) {
-                if ($user->id == $user2->id) {
-                    $this->conversacion_actual = $conversacion;
-                    break;
+        if (Auth::user()->id != $user2->id) {
+
+            foreach ($this->conversaciones as $conversacion) {
+                foreach ($conversacion->users as $user) {
+                    if ($user->id == $user2->id) {
+                        $this->conversacion_actual = $conversacion;
+                        break;
+                    }
                 }
             }
+
+            if ($this->conversacion_actual == null) {
+                $this->conversacion_actual = Conversacion::create(['estatus' => 'ACTIVA']);
+                $this->conversacion_actual->users()->attach(Auth::user()->id);
+                $this->conversacion_actual->users()->attach($user2->id);
+            }
+        } else {
+            $this->conversacion_actual = null;
         }
-
-        if ($this->conversacion_actual == null) {
-            $this->conversacion_actual = Conversacion::create(['estatus' => 'ACTIVA']);
-            $this->conversacion_actual->users()->attach(auth()->user()->id);
-            $this->conversacion_actual->users()->attach($user2->id);
-        }
-
     }
-
-    public function hydrate()
-    {
-        $this->conversacion_actual = Conversacion::where('id', $this->conversacion_actual->id)->get()[0];
-    }
-
 
     public function setConversacion(Conversacion $conversacion)
     {
         $this->conversacion_actual = $conversacion;
     }
 
+    public function hydrate()
+    {
+        //$this->conversacion_actual = Conversacion::where('id', $this->conversacion_actual->id)->get()[0];
+        $this->conversaciones = Auth::user()->conversaciones;
+    }
+
     public function render()
     {
-        $this->conversaciones = auth()->user()->conversaciones;
+        $this->conversaciones = Auth::user()->conversaciones;
         return view('livewire.messenger');
     }
 
     public function save_mensaje()
     {
         Mensaje::create([
-            'remitente_id' => auth()->user()->id,
+            'remitente_id' => Auth::user()->id,
             'conversacion_id' => $this->conversacion_actual->id,
             'mensaje' => $this->mensaje,
             'estatus' => 'enviado',

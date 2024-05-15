@@ -12,7 +12,7 @@
     </button>
 
     <aside id="default-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        class="fixed top-14 left-0 md:left-64 z-40 w-72 h-full transition-transform -translate-x-full sm:translate-x-0 border-r-2 border-gray-200"
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50">
             <ul class="space-y-2 font-medium">
@@ -22,20 +22,18 @@
                         <button type="button" wire:click="setConversacion({{ $conversacion }})"
                             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-800 hover:text-white group w-full">
                             @foreach ($conversacion->users as $user)
-                                @if (auth()->user()->id != $user->id)
-                                @isset($user->image)
-                                <img id="picture" src="{{ Storage::url($user->image->url) }}" alt=""
-                                    class="w-10 h-10 rounded-full bg-gray-300">
-                            @else
-                                <img id="picture"
-                                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
-                                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
-                            @endisset
-                                    <span class="flex-1 ms-3 whitespace-nowrap">{{ $user->nombre }}</span>
+                                @if (Auth::user()->id != $user->id)
+                                    @isset($user->image)
+                                        <img id="picture" src="{{ Storage::url($user->image->url) }}" alt=""
+                                            class="w-8 h-8 rounded-full bg-gray-300">
+                                    @else
+                                        <img id="picture"
+                                            src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                                            alt="" class="w-8 h-8 rounded-full bg-gray-300">
+                                    @endisset
+                                    <span class="flex-1 whitespace-nowrap">{{ $user->nombre . ' ' . $user->apellido_paterno . ' ' . $user->apellido_materno }}</span>
                                 @endif
                             @endforeach
-                            <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">3</span>
                         </button>
                     </li>
                 @endforeach
@@ -43,7 +41,7 @@
         </div>
     </aside>
 
-    <div class="p-4 sm:ml-64 h-screen">
+    <div class="p-4 sm:ml-64 h-full">
         <div class="p-4 h-full rounded-lg content-end">
 
             @if ($conversacion_actual)
@@ -58,7 +56,7 @@
                                     src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
                                     alt="" class="w-10 h-10 rounded-full bg-gray-300">
                             @endisset
-                            <span class="flex-1 ms-3 whitespace-nowrap my-auto">{{ $user->nombre }}</span>
+                            <span class="flex-1 ms-3 whitespace-nowrap my-auto">{{ $user->nombre . ' ' . $user->apellido_paterno . ' ' . $user->apellido_materno }}</span>
                         @endif
                     @endforeach
                 </div>

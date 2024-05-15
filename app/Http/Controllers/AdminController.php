@@ -136,4 +136,9 @@ class AdminController extends Controller
         // Redirigir al usuario a la página anterior con un mensaje de éxito
         return back()->with('status', 'El estado de la categoría ha sido cambiado exitosamente.');
     }
+
+    public function mensajes(User $user2)
+    {
+        return view('admin.mensajes', compact('user2'));
+    }
 }
