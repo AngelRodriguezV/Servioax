@@ -37,9 +37,10 @@ class Servicio extends Model
     public function rating()
     {
         $valoracion = Valoracion::select('valoracion', DB::raw('count(*) as rating'))
-        ->groupBy('valoracion')
         ->where('servicio_id', $this->id)
-        ->latest('rating')
+        ->groupBy('valoracion')
+        ->orderBy('rating', 'desc')
+        ->orderBy('valoracion', 'desc')
         ->get();
         if (!$valoracion->isEmpty())
         {

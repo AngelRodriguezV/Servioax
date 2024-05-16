@@ -6,6 +6,18 @@
             src="{{ Storage::url($servicio->image ? $servicio->image->url : 'image/Carpinteria.jpg') }}" alt="" />
     </a>
     <div class="p-5">
+        {{-- Proveedor --}}
+        <div class="flex mb-3">
+            @isset($servicio->proveedor->image)
+                <img id="picture" src="{{ Storage::url($servicio->proveedor->image->url) }}" alt=""
+                    class="w-10 h-10 rounded-full bg-gray-300">
+            @else
+                <img id="picture"
+                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
+                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
+            @endisset
+            <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre . ' ' . $servicio->proveedor->apellido_paterno . ' ' . $servicio->proveedor->apellido_materno }}</a>
+        </div>
         {{-- Titulo --}}
         <a href="{{ route('servicio', $servicio) }}">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $servicio->nombre }}
@@ -18,18 +30,8 @@
         </div>
         {{-- Descripcion --}}
         <p class="mb-3 font-normal text-gray-700">{{ $servicio->descripcion }}</p>
-        {{-- Proveedor --}}
-        <div class="flex mb-3">
-            @isset($servicio->proveedor->image)
-                <img id="picture" src="{{ Storage::url($servicio->proveedor->image->url) }}" alt=""
-                    class="w-10 h-10 rounded-full bg-gray-300">
-            @else
-                <img id="picture"
-                    src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
-                    alt="" class="w-10 h-10 rounded-full bg-gray-300">
-            @endisset
-            <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre }}</a>
-        </div>
+        {{-- Categoria --}}
+        <p class="mb-3 font-normal text-gray-700">Categoria: {{ $servicio->categoria->nombre }}</p>
         {{-- Button --}}
         <a href="{{ route('servicio', $servicio) }}"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
