@@ -85,10 +85,14 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="inputColonia">Colonia</label>
+                    <x-input id="colonia" type="text" class="mt-1 block w-full" wire:model.live="state.colonia" required/>
+                    <x-input-error for="colonia" class="mt-2" />
+                    {{--
                     <select id="inputColonia" name="" wire:model="state.colonia"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="" selected>Selecciona su colonia..</option>
                     </select>
+                    --}}
                 </div>
                 <div>
                     <x-label for="estado" value="Estado" />
@@ -130,17 +134,18 @@
                     <x-input id="referencias" type="text" class="mt-1 block w-full" wire:model="state.referencias" required/>
                     <x-input-error for="referencias" class="mt-2" />
                 </div>
-                <div>
+                <div class="hidden">
                     <x-label for="latitud" value="Latitud" />
                     <x-input id="latitud" type="text" class="mt-1 block w-full" wire:model="state.latitud"/>
                     <x-input-error for="latitud" class="mt-2" />
                 </div>
-                <div>
+                <div class="hidden">
                     <x-label for="longitud" value="Longitud" />
                     <x-input id="longitud" type="text" class="mt-1 block w-full" wire:model="state.longitud"/>
                     <x-input-error for="longitud" class="mt-2" />
                 </div>
                 <x-button type="submit" class="my-4">Guardar</x-button>
+                {{--
                 <script>
                     let cp = document.getElementById('codigo_postal')
                     let colonia = document.getElementById('inputColonia')
@@ -175,6 +180,7 @@
                             })
                     })
                 </script>
+                --}}
             </form>
         </x-slot>
         <x-slot name="footer">

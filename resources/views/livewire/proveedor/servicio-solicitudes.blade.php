@@ -47,7 +47,7 @@
                                 {{ $solicitud->cliente->nombre }}
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <x-button-status href="#" :value="$solicitud->estatus" />
+                                <x-button-status href="{{ route('proveedor.aprobar', $solicitud) }}" :value="$solicitud->estatus" />
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 {{ $solicitud->created_at->format('Y-m-d') }}

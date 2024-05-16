@@ -87,6 +87,8 @@ Route::middleware([
 
             Route::resource('servicios', ServiciosController::class);
 
+            Route::get('aprobar/{solicitud}', [ProveedorController::class, 'abrobarSolicitud'])->name('aprobar');
+
             Route::get('mensajes/{user2}', [ProveedorController::class, 'mensajes'])->name('mensajes');
         });
     });
