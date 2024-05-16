@@ -11,8 +11,18 @@ use App\Models\Valoracion;
 class HomeController extends Controller
 {
     public function index() {
+        $proveedores = User::select('id')
+            ->whereHas('roles', function ($query) {
+                $query->where('name', 'Proveedor');
+            })
+            ->whereHas('documento', function ($query) {
+                $query->whereIn('estatus', ['ACEPTADA', 'EN REVISION']);
+            })
+            ->get();
+
         $categorias = Categoria::all();
-        $servicios = Servicio::where('estatus', 'ACEPTADA')->latest('updated_at')->get();
+        $servicios = Servicio::whereIn('proveedor_id', $proveedores)
+            ->where('estatus', 'ACEPTADA')->latest('updated_at')->get();
         return view('welcome', compact('categorias', 'servicios'));
     }
 
