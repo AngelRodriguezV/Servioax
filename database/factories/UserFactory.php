@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -26,11 +27,18 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $json = File::get(database_path('data/nombres.json'));
+        $nombres = json_decode($json);
+        $json = File::get(database_path('data/apellidos.json'));
+        $apellidos = json_decode($json);
+        $nombre = fake()->randomElement($nombres);
+        $apellido_p = fake()->randomElement($apellidos);
+        $apellido_m = fake()->randomElement($apellidos);
         return [
-            'nombre' => fake()->firstName(),
-            'apellido_paterno' => fake()->lastName(),
-            'apellido_materno' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+            'nombre' => $nombre,
+            'apellido_paterno' => $apellido_p,
+            'apellido_materno' => $apellido_m,
+            'email' => $nombre . $apellido_p . $apellido_m . '@email.com',
             'telefono' => fake()->unique()->phoneNumber(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
