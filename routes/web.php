@@ -107,7 +107,7 @@ Route::middleware([
             Route::get('solicitud/create', [ClienteController::class, 'saveSolicitud'])->name('solicitud.show');
 
             Route::get('solicitar-servicio/{servicio}', [ClienteController::class, 'solicitarServicio'])->name('solicitarservicio');
-
+            Route::get('mensajes/{user2}', [ClienteController::class, 'mensajes'])->name('mensajes');
         });
     });
 });

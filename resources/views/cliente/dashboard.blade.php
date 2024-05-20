@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-cliente-layout>
 
     <div class="mx-auto max-w-7xl px-2 py-6">
         <h1 class="font-bold text-xl">
@@ -17,11 +17,7 @@
                 Administrar Perfil
                 <p class="font-normal mt-5">Edita tus datos personales</p>
             </a>
-            <a href="{{ route('cliente.soporte') }}" class="p-6 font-bold bg-white rounded-xl shadow-md border-2 hover:border-blue-500 hover:bg-gray-100">
-                Soporte tecnico
-                <p class="font-normal mt-5">Soluciona problemas llamando al soporte tecnico</p>
-            </a>
         </div>
     </div>
 
-</x-guest-layout>
+</x-cliente-layout>

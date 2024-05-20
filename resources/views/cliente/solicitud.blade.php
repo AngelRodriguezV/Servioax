@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-cliente-layout>
 
     <div class="mx-auto max-w-7xl px-2 py-6">
         <div class="flex gap-4">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="mt-4">
-            <a href="{{ route('messenger', $solicitud->servicio->proveedor) }}" class="p-2 border-2 border-gray-200 rounded-lg hover:bg-blue-500">
+            <a href="{{ route('cliente.mensajes', $solicitud->servicio->proveedor) }}" class="p-2 border-2 border-gray-200 rounded-lg hover:bg-blue-500">
                 Mandale mensaje al proveedor de servicio
             </a>
         </div>
@@ -55,4 +55,4 @@
         @livewire('cliente.valoracion-form', ['solicitud' => $solicitud])
     </div>
 
-</x-guest-layout>
+</x-cliente-layout>

@@ -40,10 +40,10 @@
                                             {{ $horario->dia_semana }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            Silver
+                                            {{ $horario->hora_apertura }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Laptop
+                                            {{ $horario->hora_cierre }}
                                         </td>
                                     </tr>
                                 @empty

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Direccion;
 use App\Models\Servicio;
 use App\Models\Solicitud;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,5 +55,10 @@ class ClienteController extends Controller
         $request['direccion_id'] = $request['direccion'];
         Solicitud::create($request->all());
         return redirect()->route('cliente.solicitudes');
+    }
+
+    public function mensajes(User $user2)
+    {
+        return view('cliente.mensajes', compact('user2'));
     }
 }

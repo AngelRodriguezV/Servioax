@@ -25,13 +25,13 @@ class ClienteSeeder extends Seeder
                 'user_id' => $user->id
             ]);
         }
-        
-        $solicitudes = Solicitud::factory(250)->create();
+
+        $solicitudes = Solicitud::factory(250) ->create();
 
         foreach ($solicitudes as $solicitud) {
             Valoracion::factory()->create([
                 'user_id' => $solicitud->cliente->id,
-                'servicio_id' => $solicitud->servicio->id,
+                'servicio_id' => Servicio::whereIn('estatus', ['ACEPTADA', 'EN REVISION'])->get()->random()->id
             ]);
         }
     }
