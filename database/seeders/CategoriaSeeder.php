@@ -7,6 +7,9 @@ use App\Models\Image;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class CategoriaSeeder extends Seeder
 {
@@ -15,15 +18,7 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        $categorias = Categoria::factory(20)->create();
-        /**
-        *
-        *foreach ($categorias as $categoria) {
-        *    Image::factory()->create([
-        *        'imageable_id' => $categoria->id,
-        *        'imageable_type' => Categoria::class
-        *    ]);
-        *}
-        */
+        Categoria::factory()->count(20)->create();
+        
     }
 }

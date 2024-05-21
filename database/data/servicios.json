@@ -1,0 +1,128 @@
+{
+    "Artes Graficas y Diseño": [
+        "Diseño de Logos",
+        "Creación de Folletos",
+        "Diseño de Tarjetas de Visita",
+        "Diseño de Publicidad",
+        "Ilustraciones Personalizadas"
+    ],
+    "Programacion y Tecnologia": [
+        "Desarrollo de Software a Medida",
+        "Creación de Páginas Web",
+        "Mantenimiento de Sistemas",
+        "Consultoría IT",
+        "Desarrollo de Aplicaciones Móviles"
+    ],
+    "Marketing Digital": [
+        "Gestión de Redes Sociales",
+        "Publicidad en Línea",
+        "SEO y SEM",
+        "Email Marketing",
+        "Analítica Web"
+    ],
+    "Video y Animacion": [
+        "Producción de Videos Corporativos",
+        "Edición de Video",
+        "Animación 2D y 3D",
+        "Grabación de Eventos",
+        "Video Marketing"
+    ],
+    "Estructura e Investigacion": [
+        "Investigación de Mercado",
+        "Redacción de Artículos Científicos",
+        "Asesoría en Tesis",
+        "Estudios de Factibilidad",
+        "Desarrollo de Proyectos"
+    ],
+    "Mecanica Automotriz": [
+        "Mantenimiento Preventivo",
+        "Reparación de Motores",
+        "Servicio de Frenos",
+        "Revisión de Emisiones",
+        "Diagnóstico Electrónico"
+    ],
+    "Construccion": [
+        "Construcción de Viviendas",
+        "Reformas y Remodelaciones",
+        "Diseño de Interiores",
+        "Supervisión de Obras",
+        "Mantenimiento de Edificios"
+    ],
+    "Reparaciones Hogar": [
+        "Electricidad y Fontanería",
+        "Reparación de Electrodomésticos",
+        "Pintura y Decoración",
+        "Carpintería",
+        "Servicios de Jardinería"
+    ],
+    "Consultoria Empresarial": [
+        "Asesoría Financiera",
+        "Consultoría Estratégica",
+        "Optimización de Procesos",
+        "Gestión de Recursos Humanos",
+        "Desarrollo de Negocios"
+    ],
+    "Asesoria Legal": [
+        "Asesoría en Derecho Laboral",
+        "Consultoría en Derecho Corporativo",
+        "Representación Legal",
+        "Redacción de Contratos",
+        "Asesoría en Derecho Fiscal"
+    ],
+    "Salud y Bienestar": [
+        "Terapia Física",
+        "Consultas Nutricionales",
+        "Sesiones de Yoga",
+        "Entrenamiento Personal",
+        "Consultas Psicológicas"
+    ],
+    "Educacion y Tutoria": [
+        "Clases Particulares",
+        "Preparación para Exámenes",
+        "Tutoring en Línea",
+        "Cursos de Idiomas",
+        "Formación Profesional"
+    ],
+    "Transporte y Logistica": [
+        "Servicios de Mudanza",
+        "Transporte de Mercancías",
+        "Logística Inversa",
+        "Almacenamiento",
+        "Distribución"
+    ],
+    "Mantenimiento y Limpieza": [
+        "Limpieza Doméstica",
+        "Mantenimiento de Oficinas",
+        "Servicios de Fumigación",
+        "Limpieza de Alfombras",
+        "Limpieza Industrial"
+    ],
+    "Planificacion de Eventos": [
+        "Organización de Bodas",
+        "Planificación de Eventos Corporativos",
+        "Coordinación de Fiestas",
+        "Alquiler de Equipos",
+        "Decoración de Eventos"
+    ],
+    "Alimentos y Bebidas": [
+        "Servicio de Catering",
+        "Chef a Domicilio",
+        "Clases de Cocina",
+        "Pastelería Artesanal",
+        "Venta de Comida Gourmet"
+    ],
+    "Jardineria y Paisajismo": [
+        "Diseño de Jardines",
+        "Mantenimiento de Áreas Verdes",
+        "Instalación de Sistemas de Riego",
+        "Podas y Recortes",
+        "Construcción de Jardines Verticales"
+    ],
+    "Desarrollo Personal": [
+        "Coaching Personal",
+        "Terapia de Pareja",
+        "Desarrollo de Habilidades Blandas",
+        "Talleres de Autoayuda",
+        "Mentoría Profesional"
+    ]
+}
