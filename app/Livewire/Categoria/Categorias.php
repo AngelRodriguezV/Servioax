@@ -22,10 +22,10 @@ class Categorias extends Component
         $query = Categoria::select('*');
 
         if ($this->search) {
-            $query->where('nombre', 'like', '%' . $this->search . '%')->get();
+            $query->where('nombre', 'like', '%' . $this->search . '%');
         }
 
-        $categorias = $query->get();
+        $categorias = $query->paginate(12);
         return view('livewire.categoria.categorias', compact('categorias'));
     }
 }

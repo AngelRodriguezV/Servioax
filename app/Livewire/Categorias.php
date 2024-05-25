@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\Categoria;
 use App\Models\Servicio;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -42,24 +44,37 @@ class Categorias extends Component
 
     public function render()
     {
-        $query = Servicio::where('categoria_id', $this->categoria->id)->where('estatus', 'ACEPTADA');
+        $proveedores = User::select('id')
+            ->whereHas('roles', function ($query) {
+                $query->where('name', 'Proveedor');
+            })
+            ->whereHas('documento', function ($query) {
+                $query->whereIn('estatus', ['ACEPTADA', 'EN REVISION']);
+            })
+            ->get();
+
+        $queryServicios = Servicio::whereIn('proveedor_id', $proveedores)
+            ->whereIn('estatus', ['ACEPTADA', 'EN REVISION'])
+            ->where('categoria_id', $this->categoria->id);
 
         if ($this->search) {
-            $query->where('nombre', 'like', '%' . $this->search . '%')->get();
+            $queryServicios->where(function ($query) {
+                $query->where('nombre', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere(function ($query) {
+                        $query->whereHas('proveedor', function ($query) {
+                            $query->where(DB::raw("CONCAT(nombre,' ',apellido_paterno,' ',apellido_materno)"), 'like', '%' . $this->search . '%');
+                        });
+                    });
+            });
         }
 
-        $aux = $query->get();
-
-        $servicios = collect([]);
+        $servicios = $queryServicios->get();
 
         if ($this->rating != 0) {
-            foreach ($aux as $servicio) {
-                if ($servicio->rating()['valoracion'] == $this->rating) {
-                    $servicios->push($servicio);
-                }
-            }
-        } else {
-            $servicios = $aux;
+            $servicios = $servicios->filter(function ($servicio) {
+                return $servicio->rating()['valoracion'] === $this->rating;
+            });
         }
 
         return view('livewire.categorias', compact('servicios'));
