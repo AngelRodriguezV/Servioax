@@ -26,7 +26,7 @@ class ServicioSeeder extends Seeder
                 'user_id' => $user->id
             ]);
             Documento::factory()->create([
-                'proveedor_id' => $user->id,
+                'user_id' => $user->id,
                 'direccion_id' => $direccion->id
             ]);
             Horario::factory()->create([

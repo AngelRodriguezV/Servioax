@@ -1,3 +1,3 @@
 <x-admin-layout>
-    @livewire('admin.aprobar-proveedor', ['id' => $proveedor->id])
+    @livewire('admin.aprobar-proveedor', ['user' => $user])
 </x-admin-layout>

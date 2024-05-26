@@ -63,7 +63,7 @@ Route::middleware([
             Route::get('proveedor/{proveedor}/servicios', [AdminController::class, 'gestionarServicios'])->name('gestionServicios');
             Route::get('proveedor/{proveedor}/servicios/{servicio}', [AdminController::class, 'aprobarServicio'])->name('aprobarServicio');
             Route::get('perfil', [AdminController::class, 'verPerfil'])->name('perfil');
-            Route::get('aprobar-cuenta/{id}', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
+            Route::get('aprobar-cuenta/{user}', [AdminController::class, 'aprobarCuentas'])->name('aprobarCuentas');
             Route::get('crear-categoria',[AdminController::class, 'crearCategoria'])->name('crearCategoria');
             Route::post('guardar-categoria', [AdminController::class, 'storeCategoria'])->name('storeCategoria');
             Route::get('gestion-categorias', [AdminController::class, 'gestionCategorias'])->name('gestionCategorias');

@@ -2,7 +2,7 @@
 
     <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
         <h2 class="text-2xl ">
-            Datos del proveedor
+            Datos del usuario
         </h2>
     </div>
 
@@ -152,6 +152,27 @@
                 Aun no ha registrado su dirección
             </div>
         @endif
+    </div>
+    {{-- Comprobante de domicilio --}}
+    <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
+        <div class=" p-4 border-b">
+            <p class="text-sm text-gray-500">
+                Comprobante de domicilio
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4">
+            <p class="text-gray-600">
+                Comprobante de domicilio
+            </p>
+            <div>
+                @if ($proveedor->documento->url_domicilio != null)
+                    <img src="{{ Storage::url($proveedor->documento->url_domicilio) }}" alt=""
+                        class="w-96 h-48 rounded-lg">
+                @else
+                    <p>Aun no sube su comprobante de domicilio</p>
+                @endif
+            </div>
+        </div>
     </div>
     {{-- INE --}}
     <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">

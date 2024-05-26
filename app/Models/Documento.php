@@ -13,7 +13,7 @@ class Documento extends Model
 
     protected $table = 'documentos';
 
-    public function proveedor()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

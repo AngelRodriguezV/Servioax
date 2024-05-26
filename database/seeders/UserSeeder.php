@@ -30,8 +30,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('servioax2024'),
         ])->assignRole('Cliente');
 
-        Direccion::factory()->create([
+        $direccion = Direccion::factory()->create([
             'user_id' => $user->id
+        ]);
+
+        Documento::factory()->create([
+            'user_id' => $user->id,
+            'direccion_id' => $direccion->id
         ]);
 
         $proveedor = User::factory()->create([
@@ -43,7 +48,7 @@ class UserSeeder extends Seeder
             'user_id' => $proveedor->id
         ]);
         Documento::factory()->create([
-            'proveedor_id' => $proveedor->id,
+            'user_id' => $proveedor->id,
             'direccion_id' => $direccion->id
         ]);
         Horario::factory()->create([

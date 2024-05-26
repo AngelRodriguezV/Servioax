@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Direccion;
+use App\Models\Documento;
 use App\Models\Servicio;
 use App\Models\Solicitud;
 use App\Models\User;
@@ -21,8 +22,12 @@ class ClienteSeeder extends Seeder
         foreach ($users as $user) {
 
             $user->assignRole('Cliente');
-            Direccion::factory()->create([
+            $direccion = Direccion::factory()->create([
                 'user_id' => $user->id
+            ]);
+            Documento::factory()->create([
+                'user_id' => $user->id,
+                'direccion_id' => $direccion->id
             ]);
         }
 

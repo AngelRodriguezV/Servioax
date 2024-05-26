@@ -17,9 +17,9 @@ class AprobarProveedor extends Component
         'RECHAZADA' => 'Rechezada'
     ];
 
-    public function mount($id)
+    public function mount($user)
     {
-        $this->proveedor = User::role('Proveedor')->find($id);
+        $this->proveedor = $user;
         $this->estatu = $this->proveedor->documento->estatus;
     }
 

@@ -48,15 +48,9 @@ class AdminController extends Controller
         return view('admin.perfil');
     }
 
-    public function aprobarCuentas($id)
+    public function aprobarCuentas(User $user)
     {
-        $proveedor = User::role('Proveedor')->find($id);
-        if ($proveedor) {
-            $servicios = Servicio::where('proveedor_id', $proveedor->id)->get();
-            return view('admin.aprobar', compact('proveedor', 'servicios'));
-        }else {
-            return redirect()->route('admin.adminProv');
-        }
+        return view('admin.aprobar', compact('user'));
     }
 
     public function gestionCategorias(){

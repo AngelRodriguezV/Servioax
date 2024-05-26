@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function documento()
     {
-        return $this->hasOne(Documento::class, 'proveedor_id', $this->primaryKey);
+        return $this->hasOne(Documento::class, 'user_id', $this->primaryKey);
     }
 
     public function solicitudes()
