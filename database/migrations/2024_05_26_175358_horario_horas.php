@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('horario_id');
             $table->unsignedBigInteger('solicitud_id');
             $table->time('hora');
-            $table->enum('estatus', ['Libre','Reservada','En espera','Ocupado']);
+            $table->enum('estatus', ['Libre','Reservada','En espera','Ocupado',"No Disponible"]);
             $table->timestamps();
             $table->foreign('horario_id')->references('id')->on('horarios')->onDelete('cascade');
             $table->foreign('solicitud_id')->references('id')->on('solicitudes')->onDelete('cascade');
