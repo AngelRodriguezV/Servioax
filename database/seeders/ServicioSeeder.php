@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Categoria;
+use App\Models\DiasTrabajo;
 use App\Models\Direccion;
 use App\Models\Documento;
 use App\Models\Horario;
@@ -34,26 +35,29 @@ class ServicioSeeder extends Seeder
                 'user_id' => $user->id,
                 'direccion_id' => $direccion->id
             ]);
-            Horario::factory()->create([
+            $dia1 = DiasTrabajo::factory()->create([
                 'proveedor_id' => $user->id,
                 'dia_semana' => 'Lunes',
                 'N' => 1,
-                'hora_apertura' => '09:00:00',
-                'hora_cierre' => '17:00:00'
             ]);
-            Horario::factory()->create([
+            $dia2 = DiasTrabajo::factory()->create([
                 'proveedor_id' => $user->id,
                 'dia_semana' => 'Martes',
                 'N' => 2,
-                'hora_apertura' => '09:00:00',
-                'hora_cierre' => '17:00:00'
+            ]);
+            $dia3 = DiasTrabajo::factory()->create([
+                'proveedor_id' => $user->id,
+                'dia_semana' => 'Miercoles',
+                'N' => 3,
             ]);
             Horario::factory()->create([
-                'proveedor_id' => $user->id,
-                'dia_semana' => 'Viernes',
-                'N' => 5,
-                'hora_apertura' => '09:00:00',
-                'hora_cierre' => '17:00:00'
+                'dia_trabajo_id' => $dia1->id,
+            ]);
+            Horario::factory()->create([
+                'dia_trabajo_id' => $dia2->id,
+            ]);
+            Horario::factory()->create([
+                'dia_trabajo_id' => $dia3->id,
             ]);
         }
 

@@ -15,7 +15,7 @@
                     <img class="w-10 h-10 rounded-full bg-gray-300"
                         src="https://cdn.icon-icons.com/icons2/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png"
                         alt="Rounded avatar">
-                    <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre }}</a>
+                    <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre . ' ' . $servicio->proveedor->apellido_paterno . ' ' . $servicio->proveedor->apellido_materno }}</a>
                 </div>
 
                 <p class="mt-3">{{ $servicio->descripcion }}</p>
@@ -33,12 +33,18 @@
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <tbody>
-                                @forelse ($servicio->proveedor->horarios as $horario)
+                                @forelse ($servicio->proveedor->diasTrabajo as $dia)
                                     <tr class="bg-white border-b">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                            {{ $horario->dia_semana }}
+                                            {{ $dia->dia_semana }}
                                         </th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    @forelse ($dia->horarios as $horario)
+                                    <tr class="bg-white border-b">
+                                        <th></th>
                                         <td class="px-6 py-4">
                                             {{ $horario->hora_apertura }}
                                         </td>
@@ -46,6 +52,9 @@
                                             {{ $horario->hora_cierre }}
                                         </td>
                                     </tr>
+                                    @empty
+
+                                    @endforelse
                                 @empty
                                 @endforelse
                             </tbody>

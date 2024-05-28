@@ -13,8 +13,8 @@ class Horario extends Model
 
     protected $guarded = ['id', 'created_at', 'update_at'];
 
-    public function proveedor()
+    public function diaTrabajo()
     {
-        return $this->hasMany(User::class, 'id', $this->primaryKey);
+        return $this->hasMany(DiasTrabajo::class, 'id', $this->primaryKey);
     }
 }

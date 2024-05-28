@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('horarios', function (Blueprint $table) {
+        Schema::create('dias_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proveedor_id');
             $table->string('dia_semana');
             $table->integer('N');
-            $table->time('hora_apertura');
-            $table->time('hora_cierre');
+            $table->unsignedBigInteger('proveedor_id');
             $table->timestamps();
             $table->foreign('proveedor_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('horarios');
+        Schema::dropIfExists('dias_trabajos');
     }
 };

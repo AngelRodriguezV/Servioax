@@ -72,9 +72,9 @@ class User extends Authenticatable
         return $this->hasMany(Direccion::class);
     }
 
-    public function horarios()
+    public function diasTrabajo()
     {
-        return $this->hasMany(Horario::class, 'proveedor_id', $this->primaryKey);
+        return $this->hasMany(DiasTrabajo::class, 'proveedor_id', $this->primaryKey);
     }
 
     public function documento()

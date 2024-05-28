@@ -29,9 +29,9 @@
         @while ($inicioCalendario <= $finCalendario)
             @php
                 $active = true;
-                if ($servicio->proveedor->horarios) {
-                    foreach ($servicio->proveedor->horarios as $horario) {
-                        if ($inicioCalendario->format('N') == $horario->N) {
+                if ($servicio->proveedor->diasTrabajo) {
+                    foreach ($servicio->proveedor->diasTrabajo as $dia) {
+                        if ($inicioCalendario->format('N') == $dia->N) {
                             $active = false;
                             break;
                         }

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Horario>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DiasTrabajo>
  */
-class HorarioFactory extends Factory
+class DiasTrabajoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class HorarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'hora_apertura' => '09:00:00',
-            'hora_cierre' => '17:00:00',
+            //
         ];
     }
 }

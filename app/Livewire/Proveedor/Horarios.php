@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Proveedor;
 
+use App\Models\DiasTrabajo;
 use App\Models\Horario;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -44,29 +45,29 @@ class Horarios extends Component
 
     public function actualizar()
     {
-        $horarios = Horario::where('proveedor_id', Auth::user()->id)->get();
-        foreach ($horarios as $horario) {
-            switch ($horario->dia_semana) {
+        $dias = DiasTrabajo::where('proveedor_id', Auth::user()->id)->get();
+        foreach ($dias as $dia) {
+            switch ($dia->dia_semana) {
                 case 'Domingo':
-                    $this->do_state = $horario->withoutRelations()->toArray();
+                    $this->do_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Lunes':
-                    $this->lu_state = $horario->withoutRelations()->toArray();
+                    $this->lu_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Martes':
-                    $this->ma_state = $horario->withoutRelations()->toArray();
+                    $this->ma_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Miercoles':
-                    $this->mi_state = $horario->withoutRelations()->toArray();
+                    $this->mi_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Jueves':
-                    $this->ju_state = $horario->withoutRelations()->toArray();
+                    $this->ju_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Viernes':
-                    $this->vi_state = $horario->withoutRelations()->toArray();
+                    $this->vi_state = $dia->withoutRelations()->toArray();
                     break;
                 case 'Sabado':
-                    $this->sa_state = $horario->withoutRelations()->toArray();
+                    $this->sa_state = $dia->withoutRelations()->toArray();
                     break;
                 default:
                     # code...
@@ -77,30 +78,57 @@ class Horarios extends Component
 
     public function save($semana)
     {
-        $horario = Horario::where('proveedor_id', Auth::user()->id)
+        switch ($semana) {
+            case 'Domingo':
+                DiasTrabajo::create(array_merge($this->do_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Lunes':
+                DiasTrabajo::create(array_merge($this->lu_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Martes':
+                DiasTrabajo::create(array_merge($this->ma_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Miercoles':
+                DiasTrabajo::create(array_merge($this->mi_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Jueves':
+                DiasTrabajo::create(array_merge($this->ju_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Viernes':
+                DiasTrabajo::create(array_merge($this->vi_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            case 'Sabado':
+                DiasTrabajo::create(array_merge($this->sa_state, ['proveedor_id' => Auth::user()->id]));
+                break;
+            default:
+                # code...
+                break;
+        }
+        /*
+        $dia = DiasTrabajo::where('proveedor_id', Auth::user()->id)
             ->where('dia_semana', $semana)->first();
-        if ($horario) {
-            switch ($semana) {
+        if ($dia) {
+            switch ($dia) {
                 case 'Domingo':
-                    $horario->update($this->do_state);
+                    $dia->update($this->do_state);
                     break;
                 case 'Lunes':
-                    $horario->update($this->lu_state);
+                    $dia->update($this->lu_state);
                     break;
                 case 'Martes':
-                    $horario->update($this->ma_state);
+                    $dia->update($this->ma_state);
                     break;
                 case 'Miercoles':
-                    $horario->update($this->mi_state);
+                    $dia->update($this->mi_state);
                     break;
                 case 'Jueves':
-                    $horario->update($this->ju_state);
+                    $dia->update($this->ju_state);
                     break;
                 case 'Viernes':
-                    $horario->update($this->vi_state);
+                    $dia->update($this->vi_state);
                     break;
                 case 'Sabado':
-                    $horario->update($this->sa_state);
+                    $dia->update($this->sa_state);
                     break;
                 default:
                     # code...
@@ -133,16 +161,16 @@ class Horarios extends Component
                     # code...
                     break;
             }
-        }
+        }*/
         $this->actualizar();
     }
 
     public function delete($semana)
     {
-        $horario = Horario::where('proveedor_id', Auth::user()->id)
+        $dia = DiasTrabajo::where('proveedor_id', Auth::user()->id)
             ->where('dia_semana', $semana)->first();
-        if ($horario) {
-            $horario->delete();
+        if ($dia) {
+            $dia->delete();
             switch ($semana) {
                 case 'Domingo':
                     $this->do_state = [
