@@ -202,17 +202,16 @@
                 Horarios
             </p>
         </div>
-        @forelse ($proveedor->horarios as $horario)
+        @forelse ($proveedor->diasTrabajo as $dia)
             <div class="grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4">
                 <p class="text-gray-600">
-                    {{ $horario->dia_semana }}
+                    {{ $dia->dia_semana }}
                 </p>
-                <p class="text-gray-600">
-                    {{ $horario->hora_apertura }}
-                </p>
-                <p class="text-gray-600">
-                    {{ $horario->hora_cierre }}
-                </p>
+                @foreach ($dia->horarios as $horario)
+                    <p class="text-gray-600">
+                        {{ $horario->hora_apertura }} - {{ $horario->hora_cierre }}
+                    </p>
+                @endforeach
             </div>
         @empty
         @endforelse
