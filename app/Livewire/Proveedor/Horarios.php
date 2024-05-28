@@ -38,6 +38,9 @@ class Horarios extends Component
         'N' => 6
     ];
 
+    public $new_time = [];
+    public $edit_time = [];
+
     public function mount()
     {
         $this->actualizar();
@@ -222,8 +225,86 @@ class Horarios extends Component
         $this->actualizar();
     }
 
+    public function saveTime()
+    {
+        /*$this->validate([
+            'new_time.dia_trabajo_id' => 'required',
+            'new_time.hora_apertura' => 'required|date_format:H:i',
+            'new_time.hora_cierre' => 'required|date_format:H:i|after:new_time.hora_apertura',
+        ]);*/
+        $old_times = Horario::where('dia_trabajo_id', $this->new_time['dia_trabajo_id'])->get();
+        $valido = true;
+
+        foreach ($old_times as $time) {
+            if (
+                ($this->new_time['hora_apertura'] <= $time->hora_cierre && $this->new_time['hora_apertura'] >= $time->hora_apertura)
+                || ($this->new_time['hora_cierre'] <= $time->hora_cierre && $this->new_time['hora_cierre'] >= $time->hora_apertura)
+                || ($time->hora_apertura <= $this->new_time['hora_cierre'] && $time->hora_apertura >= $this->new_time['hora_apertura'])
+                || ($time->hora_cierre <= $this->new_time['hora_cierre'] && $time->hora_cierre >= $this->new_time['hora_apertura'])
+            ) {
+                $valido = false;
+                break;
+            }
+        }
+        if ($valido) {
+            Horario::create($this->new_time);
+            $this->new_time = [];
+            session()->flash('message', 'Horario creado con éxito.');
+        } else {
+            session()->flash('error', 'El horario se solapa con un horario existente.');
+        }
+    }
+
+    public function deleteHorario($id)
+    {
+        $horario = Horario::find($id);
+        if ($horario) {
+            $horario->delete();
+        }
+    }
+
+    public function updateHorario($id)
+    {
+        $old_times = Horario::where('dia_trabajo_id', $this->edit_time[$id]['dia_trabajo_id'])->distinct('id', $id)->get();
+        $valido = true;
+
+        foreach ($old_times as $time) {
+            if (
+                ($this->edit_time[$id]['hora_apertura'] <= $time->hora_cierre && $this->edit_time[$id]['hora_apertura'] >= $time->hora_apertura)
+                || ($this->edit_time[$id]['hora_cierre'] <= $time->hora_cierre && $this->edit_time[$id]['hora_cierre'] >= $time->hora_apertura)
+                || ($time->hora_apertura <= $this->edit_time[$id]['hora_cierre'] && $time->hora_apertura >= $this->edit_time[$id]['hora_apertura'])
+                || ($time->hora_cierre <= $this->edit_time[$id]['hora_cierre'] && $time->hora_cierre >= $this->edit_time[$id]['hora_apertura'])
+            ) {
+                $valido = false;
+                break;
+            }
+        }
+        if ($valido) {
+            $horario = Horario::find($id);
+            if ($horario) {
+                $horario->update($this->edit_time[$id]);
+                session()->flash('message', 'Horario actualizo con éxito.');
+            }
+        } else {
+            session()->flash('error', 'El horario se solapa con un horario existente.');
+        }
+    }
+
     public function render()
     {
-        return view('livewire.proveedor.horarios');
+        $dias = DiasTrabajo::where('proveedor_id', Auth::user()->id)->pluck('dia_semana', 'id');
+        $dias2 = DiasTrabajo::select('id')->where('proveedor_id', Auth::user()->id)->get();
+        $horarios = Horario::whereIn('dia_trabajo_id', $dias2)->get();
+        foreach ($horarios as $horario) {
+            $this->edit_time[$horario->id] = [
+                'dia_trabajo_id' => $horario->dia_trabajo_id,
+                'hora_apertura' => $horario->hora_apertura,
+                'hora_cierre' => $horario->hora_cierre,
+            ];
+        }
+
+        $this->new_time['dia_trabajo_id'] = $dias->keys()->first();
+
+        return view('livewire.proveedor.horarios', compact('dias', 'horarios'));
     }
 }

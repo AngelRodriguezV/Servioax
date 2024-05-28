@@ -11,6 +11,8 @@ use App\Http\Controllers\AdminController;
 use App\Models\Conversacion;
 use App\Models\User;
 use App\Livewire\Messenger;
+use App\Models\DiasTrabajo;
+use App\Models\Horario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -120,12 +122,6 @@ Route::get('/d', function() {
     #        ->join('mensajes', 'mensajes.conversacion_id', '=', 'conversaciones.id')
     #        ->where('mensajes.remitente_id', $user->id)
     #        ->get();
-    $a = '';
-    if (count(Auth::user()->getRoleNames()) === 0) {
-        $a = 'No tiene rol';
-    }
-    else {
-        $a = 'Tiene rol';
-    }
-    return $a;
+    $dias = DiasTrabajo::where('proveedor_id', Auth::user()->id)->pluck('dia_semana', 'id');
+    return $dias->keys()->first();
 });
