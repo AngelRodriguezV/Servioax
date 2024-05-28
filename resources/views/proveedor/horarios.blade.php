@@ -6,7 +6,9 @@
         </h1>
 
         @livewire('proveedor.horarios')
-
+        <h1 class="font-bold text-xl">
+            Horas Disponibles
+        </h1>
     </div>
 
 </x-prov-layout>
