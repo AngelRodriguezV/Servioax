@@ -11,10 +11,17 @@ class Horario extends Model
 
     protected $primaryKey = 'id';
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    // Relación de uno a muchos con HorarioHora
+    public function horarioHoras()
+    {
+        return $this->hasMany(HorarioHora::class);
+    }
+
+    // Relación de muchos a uno con User (Proveedor)
     public function proveedor()
     {
-        return $this->hasMany(User::class, 'id', $this->primaryKey);
+        return $this->belongsTo(User::class, 'proveedor_id');
     }
 }

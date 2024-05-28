@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('direccion_id');
             $table->date('fecha');
             $table->time('hora');
-            $table->$table->integer('tiempo_aproximado')->unsigned()->nullable()->default(1);
+            $table->integer('tiempo_aproximado')->unsigned()->nullable()->default(1);
             $table->enum('tiempo_medida', ['dias','horas','minutos']);
             $table->decimal('costo', 8, 2);
             $table->enum('estatus', ['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO','COMPLETADA','CANCELADA']);

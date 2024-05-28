@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('historial_servicios', function (Blueprint $table) {
             $table->id();
-            $table->bigIncrements('id_historial_servicios'); // id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
             $table->unsignedBigInteger('id_cliente'); // id_cliente BIGINT UNSIGNED NOT NULL
             $table->unsignedBigInteger('id_prov_serv'); // id_prov_serv BIGINT UNSIGNED NOT NULL
             $table->unsignedBigInteger('id_direccion'); // id_direccion BIGINT UNSIGNED NOT NULL
@@ -23,10 +22,10 @@ return new class extends Migration
             $table->text('descripccion'); // descripccion TEXT
 
             // Definición de claves foráneas
-            $table->foreign('id_cliente')->references('id_usuario')->on('usuarios');
-            $table->foreign('id_prov_serv')->references('id_usuario')->on('usuarios');
-            $table->foreign('id_direccion')->references('id_direccion')->on('direcciones');
-            $table->foreign('id_valoracion')->references('id_valoracion')->on('valoracion');
+            $table->foreign('id_cliente')->references('id')->on('users');
+            $table->foreign('id_prov_serv')->references('id')->on('users');
+            $table->foreign('id_direccion')->references('id')->on('direcciones');
+            $table->foreign('id_valoracion')->references('id')->on('valoraciones');
             $table->timestamps();
         });
     }

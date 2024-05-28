@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('horario_horas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('horario_id');
-            $table->unsignedBigInteger('solicitud_id');
+            $table->unsignedBigInteger('solicitud_id')->nullable();
             $table->time('hora');
             $table->enum('estatus', ['Libre','Reservada','En espera','Ocupado',"No Disponible"]);
             $table->timestamps();
