@@ -25,7 +25,8 @@ class SolicitudFactory extends Factory
             'servicio_id' => Servicio::all()->random()->id,
             'direccion_id' => $user->direcciones[0]->id,
             'fecha' => fake()->date(),
-            'hora' => fake()->time(),
+            'hora_inicio' => fake()->time(),
+            'hora_termino' => fake()->time(),
             'estatus' => fake()->randomElement(['NUEVA','EN REVISION','ACEPTADA','RECHAZADA','EN PROCESO','COMPLETADA','CANCELADA']),
         ];
     }

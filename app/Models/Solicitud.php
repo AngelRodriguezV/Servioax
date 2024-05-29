@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 class Solicitud extends Model
 {
@@ -13,6 +14,10 @@ class Solicitud extends Model
     protected $table = 'solicitudes';
 
     protected $guarded = ['id', 'created_at', 'update_at'];
+
+    protected $dates = [
+        'fecha'
+    ];
 
     public function cliente()
     {

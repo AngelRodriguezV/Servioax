@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Direccion;
+use App\Models\Horario;
 use App\Models\Servicio;
 use App\Models\Solicitud;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class ClienteController extends Controller
 {
@@ -50,6 +52,24 @@ class ClienteController extends Controller
 
     public function saveSolicitud(Request $request)
     {
+        $proveedor = Servicio::find($request['servicio_id'])->proveedor;
+        $servicios = Servicio::select('id')->where('proveedor_id', $proveedor->id)->get();
+        $old_times = Solicitud::whereIn('servicio_id', $servicios)->where('fecha', $request['fecha'])->get();
+        $valido = true;
+        foreach ($old_times as $time) {
+            if (
+                ($request['hora_inicio'] <= $time->hora_termino && $request['hora_inicio'] >= $time->hora_inicio)
+                || ($request['hora_termino'] <= $time->hora_termino && $request['hora_termino'] >= $time->hora_inicio)
+                || ($time->hora_inicio <= $request['hora_termino'] && $time->hora_inicio >= $request['hora_inicio'])
+                || ($time->hora_termino <= $request['hora_termino'] && $time->hora_termino >= $request['hora_inicio'])
+            ) {
+                $valido = false;
+                break;
+            }
+        }
+        if (!$valido) {
+            return redirect()->back()->withErrors("La hora que selecciono ya no esta disponible")->withInput();
+        }
         $request['cliente_id'] = Auth::user()->id;
         $request['estatus'] = 'NUEVA';
         $request['direccion_id'] = $request['direccion'];

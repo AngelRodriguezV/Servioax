@@ -11,7 +11,10 @@
 
             @livewire('calendario', ["servicio" => $servicio])
 
-            <input type="time" name="hora" id="hora" required class="my-4">
+            <x-label class="mt-4">Hora de Inicio</x-label>
+            <input type="time" name="hora_inicio" id="hora_inicio" required class="my-4">
+            <x-label>Hora de final</x-label>
+            <input type="time" name="hora_termino" id="hora_termino" required class="my-4">
 
             <label for="direccion">Selecciona una dirección</label>
             <ul class="grid w-full gap-6 md:grid-cols-2">

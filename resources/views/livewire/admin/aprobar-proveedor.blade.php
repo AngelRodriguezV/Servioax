@@ -196,6 +196,7 @@
         </div>
     </div>
     {{-- Horarios --}}
+    @if ($proveedor->hasRole('Proveedor'))
     <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
         <div class=" p-4 border-b">
             <p class="text-sm text-gray-500">
@@ -217,6 +218,7 @@
         @endforelse
 
     </div>
+    @endif
     {{-- Acciones --}}
     <div class="bg-white w-full border-t rounded-lg shadow-xl mb-4 p-4">
         <div class=" p-4 border-b">
