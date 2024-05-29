@@ -37,7 +37,8 @@ class UserSeeder extends Seeder
 
         Documento::factory()->create([
             'user_id' => $user->id,
-            'direccion_id' => $direccion->id
+            'direccion_id' => $direccion->id,
+            'estatus' => 'ACEPTADA'
         ]);
 
         $proveedor = User::factory()->create([
@@ -50,7 +51,8 @@ class UserSeeder extends Seeder
         ]);
         Documento::factory()->create([
             'user_id' => $proveedor->id,
-            'direccion_id' => $direccion->id
+            'direccion_id' => $direccion->id,
+            'estatus' => 'ACEPTADA'
         ]);
         $dia1 = DiasTrabajo::factory()->create([
             'proveedor_id' => $proveedor->id,

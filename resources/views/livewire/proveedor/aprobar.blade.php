@@ -163,10 +163,18 @@
         </div>
         <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
             <p class="text-gray-600">
-                Hora solicitada
+                Hora Inicio
             </p>
             <p>
-                {{ $solicitud->hora }}
+                {{ $solicitud->hora_inicio }}
+            </p>
+        </div>
+        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <p class="text-gray-600">
+                Hora termino
+            </p>
+            <p>
+                {{ $solicitud->hora_termino }}
             </p>
         </div>
         <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">

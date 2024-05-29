@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Conversacion;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,14 +15,13 @@ class ConversacionesSeeder extends Seeder
     public function run(): void
     {
 
-        $conversacion1 = Conversacion::factory()->create();
+        $users = User::where('id', '!=', 1)->get();
 
-        $conversacion2 = Conversacion::factory()->create();
-
-        $conversacion1->users()->attach(2);
-        $conversacion1->users()->attach(3);
-        $conversacion2->users()->attach(2);
-        $conversacion2->users()->attach(1);
+        foreach ($users as $user) {
+            $conversacion = Conversacion::factory()->create();
+            $conversacion->users()->attach(1);
+            $conversacion->users()->attach($user->id);
+        }
 
     }
 }
