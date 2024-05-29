@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
+use App\Models\Conversacion;
 use App\Models\Direccion;
 use App\Models\Documento;
 use App\Models\User;
@@ -41,6 +42,11 @@ class RegisterController extends Controller
             'estatus' => 'NUEVA',
             'user_id' => $user->id,
         ]);
+        $conversacion = Conversacion::create([
+            'estatus' => 'activa'
+        ]);
+        $conversacion->users()->attach(1);
+        $conversacion->users()->attach($user->id);
         return redirect()->route('set-direccion');
     }
 

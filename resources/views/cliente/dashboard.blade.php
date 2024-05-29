@@ -17,6 +17,10 @@
                 Administrar Perfil
                 <p class="font-normal mt-5">Edita tus datos personales</p>
             </a>
+            <a href="{{ route('cliente.mensajes', App\Models\User::find(1)) }}"
+                class="p-6 font-bold bg-gray-50 rounded-xl shadow-md border-2 hover:border-blue-500 hover:bg-gray-100">
+                Contactar con el Administrador
+            </a>
         </div>
     </div>
 
