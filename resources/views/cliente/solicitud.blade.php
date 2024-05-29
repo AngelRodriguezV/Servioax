@@ -12,12 +12,21 @@
                     Servicio: <span class="font-normal">{{ $solicitud->servicio->nombre }}</span>
                 </p>
                 <p class="font-bold mt-2">
-                    Proveedor: <span class="font-normal">{{ $solicitud->servicio->proveedor->nombre }}</span>
+                    Proveedor: <span class="font-normal">{{ $solicitud->servicio->proveedor->nombre . ' ' . $solicitud->servicio->proveedor->apellido_paterno . ' ' . $solicitud->servicio->proveedor->apellido_materno }}</span>
                 </p>
                 <p class="font-bold mt-2">
                     Categoria: <span class="font-normal">{{ $solicitud->servicio->categoria->nombre }}</span>
                 </p>
-                <p class="mt-2 rounded-lg p-2 w-32 bg-gray-300 text-center">
+                <p class="font-bold mt-2">
+                    Fecha: <span class="font-normal">{{ $solicitud->fecha }}</span>
+                </p>
+                <p class="font-bold mt-2">
+                    Hora inicio: <span class="font-normal">{{ $solicitud->hora_inicio }}</span>
+                </p>
+                <p class="font-bold mt-2">
+                    Hora termino: <span class="font-normal">{{ $solicitud->hora_termino }}</span>
+                </p>
+                <p class="mt-2 rounded-lg px-3 py-2 text-center text-white font-bold {{$solicitud->estatus=='NUEVA'?'bg-blue-500':''}} {{$solicitud->estatus=='EN REVISION'?'bg-orange-500':''}} {{$solicitud->estatus=='ACEPTADA'?'bg-green-500':''}} {{$solicitud->estatus=='RECHAZADA'?'bg-red-500':''}} {{$solicitud->estatus=='CANCELADA'?'bg-red-500':''}} {{$solicitud->estatus=='COMPLETADA'?'bg-purple-500':''}}">
                     {{ $solicitud->estatus }}
                 </p>
             </div>
@@ -47,7 +56,7 @@
             </div>
         </div>
         <div class="mt-4">
-            <a href="{{ route('cliente.mensajes', $solicitud->servicio->proveedor) }}" class="p-2 border-2 border-gray-200 rounded-lg hover:bg-blue-500">
+            <a href="{{ route('cliente.mensajes', $solicitud->servicio->proveedor) }}" class="p-2 border-2 bg-blue-300 border-gray-200 rounded-lg hover:bg-blue-500">
                 Mandale mensaje al proveedor de servicio
             </a>
         </div>

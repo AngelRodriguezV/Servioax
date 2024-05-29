@@ -37,7 +37,11 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ]);
-        return redirect()->route('tipo-usuario');
+        Documento::create([
+            'estatus' => 'NUEVA',
+            'user_id' => $user->id,
+        ]);
+        return redirect()->route('set-direccion');
     }
 
     public function tipoUsuario(Request $request)
@@ -46,16 +50,11 @@ class RegisterController extends Controller
             if ($request->has('tipo_user')) {
                 if ($request['tipo_user'] == 'cliente') {
                     Auth::user()->assignRole('Cliente');
-                    return redirect()->route('dashboard');
+                    return redirect()->route('cliente.perfil');
                 }
                 if ($request['tipo_user'] == 'proveedor') {
-                    $user = Auth::user();
-                    $user->assignRole('Proveedor');
-                    Documento::create([
-                        'estatus' => 'NUEVA',
-                        'proveedor_id' => $user->id,
-                    ]);
-                    return redirect()->route('set-direccion');
+                    Auth::user()->assignRole('Proveedor');
+                    return redirect()->route('proveedor.perfil');
                 }
             }
             return view('auth.asignar-rol');
@@ -82,7 +81,7 @@ class RegisterController extends Controller
                 Auth::user()->documento->update([
                     'direccion_id' => $direccion->id
                 ]);
-                return redirect()->route('set-ine');
+                return redirect()->route('tipo-usuario');
             }
             return view('auth.set-direccion');
         } else {

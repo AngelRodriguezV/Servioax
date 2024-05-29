@@ -25,7 +25,7 @@
                     <p class="font-bold mt-2">
                         Proveedor: <span class="font-normal">{{ $solicitud->servicio->proveedor->nombre }}</span>
                     </p>
-                    <p class="mt-2 rounded-lg p-2 w-32 bg-gray-300 text-center">
+                    <p class="mt-2 rounded-lg px-3 py-2 text-center text-white font-bold {{$solicitud->estatus=='NUEVA'?'bg-blue-500':''}} {{$solicitud->estatus=='EN REVISION'?'bg-orange-500':''}} {{$solicitud->estatus=='ACEPTADA'?'bg-green-500':''}} {{$solicitud->estatus=='RECHAZADA'?'bg-red-500':''}} {{$solicitud->estatus=='CANCELADA'?'bg-red-500':''}} {{$solicitud->estatus=='COMPLETADA'?'bg-purple-500':''}}">
                         {{ $solicitud->estatus }}
                     </p>
                 </div>
