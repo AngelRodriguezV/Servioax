@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\AdminController;
+use App\Livewire\Cliente\Scheduler;
 use App\Models\Conversacion;
 use App\Models\User;
 use App\Livewire\Messenger;
@@ -40,6 +41,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
     Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
+    Route::get('/scheduler', Scheduler::class)->name('scheduler');
 
     # ---
     Route::get('/tipo-de-usuario', [RegisterController::class, 'tipoUsuario'])->name('tipo-usuario');
