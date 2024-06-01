@@ -15,8 +15,10 @@ class Solicitud extends Model
 
     protected $guarded = ['id', 'created_at', 'update_at'];
 
-    protected $dates = [
-        'fecha'
+    protected $casts=[
+        'hora_inicio' => 'datetime:H:i:s',
+        'hora_termino' => 'datetime:H:i:s',
+        'fecha' => 'datetime:Y-m-d',
     ];
 
     public function cliente()

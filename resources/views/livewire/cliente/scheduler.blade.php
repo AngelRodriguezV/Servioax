@@ -21,20 +21,55 @@
             @if ($inicioCalendario->format('y-m-d') >= $fecha->format('y-m-d'))
                 <div class="h-full grid gap-1 p-2 w-40">
                     <div>
-                        {{ $semanas[$inicioCalendario->format('N')]}} {{ $inicioCalendario->format('d') }} {{ $meses[$inicioCalendario->format('n')]}}
+                        {{ $semanas[$inicioCalendario->format('N')] }} {{ $inicioCalendario->format('d') }}
+                        {{ $meses[$inicioCalendario->format('n')] }}
                     </div>
                     @for ($i = 0; $i < 15; $i++)
                         <div>
                             @php
-                                $extraClass = $diasDisponibles->contains($inicioCalendario->format('N')) ? 'bg-white cursor-pointer peer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-blue-600 hover:text-gray-600 hover:bg-gray-100' : 'bg-gray-200';
+                                $hi = Carbon\Carbon::now()->setTime($i + 6, 0, 0);
+                                $hf = Carbon\Carbon::now()->setTime($i + 7, 0, 0);
+                                $extraClass = ' ';
+                                $color = ' bg-gray-200';
+                                #$color = $diasDisponibles->contains($inicioCalendario->format('N')) ? ' bg-red-200' : ' bg-gray-200';
+                                $active = false;
+                                foreach ($horasDisponibles as $hora) {
+                                    if (strval($hora->diaTrabajo->N) === $inicioCalendario->format('N')) {
+                                        if (
+                                            $hi->format('H:i') >= $hora->hora_apertura->format('H:i') && $hi->format('H:i') < $hora->hora_cierre->format('H:i') &&
+                                            $hf->format('H:i') <= $hora->hora_cierre->format('H:i') && $hf->format('H:i') > $hora->hora_apertura->format('H:i')
+                                        ) {
+                                            $color = ' bg-green-200';
+                                            $active = true;
+                                            $extraClass = 'cursor-pointer peer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-blue-600 hover:text-gray-600 hover:bg-gray-100';
+                                            break;
+                                        }
+                                    }
+                                }
+                                foreach ($horasOcupadas as $hora) {
+                                    if ($hora->fecha->format('Y-m-d') === $inicioCalendario->format('Y-m-d')) {
+                                        if (
+                                            $hi->format('H:i') >= $hora->hora_inicio->format('H:i') && $hi->format('H:i') < $hora->hora_termino->format('H:i') &&
+                                            $hf->format('H:i') <= $hora->hora_termino->format('H:i') && $hf->format('H:i') > $hora->hora_inicio->format('H:i')
+                                        ) {
+                                            $color = ' bg-red-200';
+                                            $active = false;
+                                            $extraClass = ' ';
+                                            break;
+                                        }
+                                    }
+                                }
+                                $extraClass .= $color;
                             @endphp
                             <input type="radio" id="{{ $inicioCalendario->format('Y-m-d') }}-{{ $i }}"
-                                name="fecha" class="hidden peer" {{ $diasDisponibles->contains($inicioCalendario->format('N')) ? ' ' : 'disabled' }} required/>
+                                name="fecha" class="hidden peer"
+                                {{ $active ? ' ' : 'disabled' }}
+                                required />
                             <label for="{{ $inicioCalendario->format('Y-m-d') }}-{{ $i }}"
                                 class="inline-flex items-center justify-center w-full p-1 rounded-md border border-gray-200 text-gray-500 {{ $extraClass }}">
                                 <div class="block">
                                     <p>
-                                        {{ $i + 6 }} - {{ $i + 7 }}
+                                        {{ $hi->format('H:i') }} - {{ $hf->format('H:i') }}
                                     </p>
                                 </div>
                             </label>
@@ -47,5 +82,4 @@
             @endphp
         @endwhile
     </div>
-    <script></script>
 </div>

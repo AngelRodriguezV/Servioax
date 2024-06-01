@@ -5,6 +5,8 @@ namespace App\Livewire\Cliente;
 use App\Livewire\Proveedor\Horarios;
 use App\Models\DiasTrabajo;
 use App\Models\Horario;
+use App\Models\Servicio;
+use App\Models\Solicitud;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -36,6 +38,7 @@ class Scheduler extends Component
 
     public $diasDisponibles;
     public $horasDisponibles;
+    public $horasOcupadas;
 
     public $currentDateTime;
     public $inicioCalendario;
@@ -51,7 +54,8 @@ class Scheduler extends Component
         $this->diasDisponibles = collect(DiasTrabajo::select('N')->where('proveedor_id', Auth::user()->id)->get())->pluck('N');
         $this->horasDisponibles = Horario::whereIn('dia_trabajo_id', DiasTrabajo::select('id')->where('proveedor_id', Auth::user()->id)->get())
             ->get();
-
+        $this->horasOcupadas = Solicitud::whereIn('servicio_id', Servicio::select('id')->where('proveedor_id', Auth::user()->id)->get())
+            ->get();
     }
 
     public function incrementar()
@@ -69,14 +73,6 @@ class Scheduler extends Component
             $this->inicioCalendario = $this->currentDateTime->copy();
             $this->finCalendario = $this->inicioCalendario->copy()->addDays(6);
         }
-    }
-
-    public function validarDia($valor)
-    {
-        $validacion = $this->diasDisponibles->contains(function ($elemento) use ($valor) {
-            return $elemento['N'] == $valor;
-        });
-        return $validacion ? ' ' : 'disabled';
     }
 
     public function render()

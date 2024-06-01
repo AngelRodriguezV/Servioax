@@ -13,8 +13,13 @@ class Horario extends Model
 
     protected $guarded = ['id', 'created_at', 'update_at'];
 
+    protected $casts=[
+        'hora_apertura' => 'datetime:H:i:s',
+        'hora_cierre' => 'datetime:H:i:s',
+    ];
+
     public function diaTrabajo()
     {
-        return $this->hasMany(DiasTrabajo::class, 'id', $this->primaryKey);
+        return $this->belongsTo(DiasTrabajo::class);
     }
 }
