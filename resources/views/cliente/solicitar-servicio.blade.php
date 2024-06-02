@@ -16,7 +16,7 @@
                 @foreach ($direcciones as $direccion)
 
                     <li>
-                        <input type="radio" id="direccion-{{ $direccion->id }}" name="direccion" value="{{ $direccion->id }}" class="hidden peer"
+                        <input type="radio" id="direccion-{{ $direccion->id }}" name="direccion_id" value="{{ $direccion->id }}" class="hidden peer"
                             required />
                         <label for="direccion-{{ $direccion->id }}"
                             class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
