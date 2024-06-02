@@ -41,7 +41,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'login'])->name('dashboard');
     Route::get('/messenger/{user2}', Messenger::class)->name('messenger');
-    Route::get('/scheduler', Scheduler::class)->name('scheduler');
+    #Route::get('/scheduler', Scheduler::class)->name('scheduler');
 
     # ---
     Route::get('/tipo-de-usuario', [RegisterController::class, 'tipoUsuario'])->name('tipo-usuario');

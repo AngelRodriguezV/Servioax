@@ -2,19 +2,14 @@
 
     <div class="w-4/5 mx-auto py-6">
 
-        <h1 class="my-4">
+        <h1 class="my-4 font-bold text-2xl">
             Solicitud del servicio {{ $servicio->nombre }}
         </h1>
 
         <form method="GET" action="{{ route('cliente.solicitud.show') }}" class="grid">
             <input type="text" name="servicio_id" value="{{$servicio->id}}" hidden>
 
-            @livewire('calendario', ["servicio" => $servicio])
-
-            <x-label class="mt-4">Hora de Inicio</x-label>
-            <input type="time" name="hora_inicio" id="hora_inicio" required class="my-4">
-            <x-label>Hora de final</x-label>
-            <input type="time" name="hora_termino" id="hora_termino" required class="my-4">
+            @livewire('cliente.scheduler', ['proveedor' => $servicio->proveedor])
 
             <label for="direccion">Selecciona una dirección</label>
             <ul class="grid w-full gap-6 md:grid-cols-2">

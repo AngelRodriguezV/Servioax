@@ -49,8 +49,11 @@
             @endphp
 
             <div>
-                <input type="radio" id="f-{{ $inicioCalendario->format('Y-m-d') }}" name="fecha"
-                    value="{{ $inicioCalendario->format('Y-m-d') }}" class="hidden peer" required
+                <input type="radio"
+                    id="f-{{ $inicioCalendario->format('Y-m-d') }}"
+                    name="fecha"
+                    value="{{ $inicioCalendario->format('Y-m-d') }}"
+                    class="hidden peer" required
                     {{ $inicioCalendario->format('Y-m-d') < $fecha->format('Y-m-d') ? 'disabled' : ($active ? 'disabled' : '') }} />
                 <label for="f-{{ $inicioCalendario->format('Y-m-d') }}"
                     class="inline-flex items-center justify-between w-full p-4 {{ $extraClass }}">
