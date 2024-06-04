@@ -1,4 +1,4 @@
-<div class="text-center p-4" x-on="{}">
+<div class="text-center p-4">
 
     <div class="grid grid-cols-2 gap-2 font-bold text-center">
         <i wire:click="decrementar()" class="bg-gray-200 hover:bg-blue-600 hover:text-white rounded-md">
@@ -18,7 +18,7 @@
     <div class="grid grid-flow-col overflow-x-scroll">
         @while ($inicioCalendario <= $finCalendario)
 
-            @if ($inicioCalendario->format('y-m-d') >= $fecha->format('y-m-d'))
+            @if ($inicioCalendario->format('y-m-d') >= $currentDateTime->format('y-m-d'))
                 <div class="h-full grid gap-1 p-2 w-40">
                     <div>
                         {{ $semanas[$inicioCalendario->format('N')] }} {{ $inicioCalendario->format('d') }}

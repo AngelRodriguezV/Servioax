@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Livewire\Cliente;
+namespace App\Livewire\Proveedor;
 
-use App\Livewire\Proveedor\Horarios;
 use App\Models\DiasTrabajo;
 use App\Models\Horario;
 use App\Models\Servicio;
 use App\Models\Solicitud;
-use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -36,24 +34,22 @@ class Scheduler extends Component
         '10' => 'Octubre',
         '11' => 'Noviembre',
         '12' => 'Diciembre'];
-
     public $diasDisponibles;
     public $horasDisponibles;
     public $horasOcupadas;
-
     public $currentDateTime;
     public $inicioCalendario;
     public $finCalendario;
 
-    public function mount(User $proveedor)
+    public function mount()
     {
         $this->currentDateTime = now();
         $this->inicioCalendario = $this->currentDateTime->copy();
         $this->finCalendario = $this->inicioCalendario->copy()->addDays(6);
-        $this->diasDisponibles = collect(DiasTrabajo::select('N')->where('proveedor_id', $proveedor->id)->get())->pluck('N');
-        $this->horasDisponibles = Horario::whereIn('dia_trabajo_id', DiasTrabajo::select('id')->where('proveedor_id', $proveedor->id)->get())
+        $this->diasDisponibles = collect(DiasTrabajo::select('N')->where('proveedor_id', Auth::user()->id)->get())->pluck('N');
+        $this->horasDisponibles = Horario::whereIn('dia_trabajo_id', DiasTrabajo::select('id')->where('proveedor_id', Auth::user()->id)->get())
             ->get();
-        $this->horasOcupadas = Solicitud::whereIn('servicio_id', Servicio::select('id')->where('proveedor_id', $proveedor->id)->get())
+        $this->horasOcupadas = Solicitud::whereIn('servicio_id', Servicio::select('id')->where('proveedor_id', Auth::user()->id)->get())
             ->get();
     }
 
@@ -76,6 +72,6 @@ class Scheduler extends Component
 
     public function render()
     {
-        return view('livewire.cliente.scheduler');
+        return view('livewire.proveedor.scheduler');
     }
 }

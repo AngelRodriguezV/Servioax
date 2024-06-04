@@ -5,7 +5,7 @@
             Mis Dias de trabajo y horarios
         </h1>
 
-        @livewire('proveedor.horarios')
+        @livewire('proveedor.scheduler2')
 
     </div>
 

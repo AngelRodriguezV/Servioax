@@ -3,14 +3,10 @@
         <h1 class="font-bold text-xl text-center mb-2">
             Solicitudes
         </h1>
-        @livewire('proveedor.solicitudes')
+        @livewire('proveedor.scheduler')
     </div>
 
-    <div class="mx-auto max-w-7xl px-2 py-6">
-        <h1 class="font-bold text-xl text-center">
-            ¡Bienvenido
-            {{ Auth::user()->nombre . ' ' . Auth::user()->apellido_paterno . ' ' . Auth::user()->apellido_materno }}!
-        </h1>
+    <div class="mx-auto max-w-7xl px-2 py-2">
         <div class="grid grid-cols-2 gap-4 mt-4">
             <a href="{{ route('proveedor.servicios.index') }}"
                 class="p-6 font-bold bg-gray-50 rounded-xl shadow-md border-2 hover:border-blue-500 hover:bg-gray-100">
