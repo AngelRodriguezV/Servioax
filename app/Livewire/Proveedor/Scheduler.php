@@ -63,11 +63,6 @@ class Scheduler extends Component
     {
         $this->finCalendario = $this->finCalendario->copy()->subDays(7);
         $this->inicioCalendario = $this->finCalendario->copy()->subDays(6);
-        if ($this->finCalendario < $this->currentDateTime)
-        {
-            $this->inicioCalendario = $this->currentDateTime->copy();
-            $this->finCalendario = $this->inicioCalendario->copy()->addDays(6);
-        }
     }
 
     public function render()

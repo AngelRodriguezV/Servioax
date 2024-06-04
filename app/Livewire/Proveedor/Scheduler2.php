@@ -22,6 +22,11 @@ class Scheduler2 extends Component
     public $diasDisponibles;
     public $horasDisponibles;
 
+    public $dia_current;
+    public $hora_current;
+    public $dia_delete = false;
+    public $hora_delete = false;
+
     public function mount()
     {
         $this->diasDisponibles = DiasTrabajo::where('proveedor_id', Auth::user()->id)->get();
@@ -88,10 +93,17 @@ class Scheduler2 extends Component
 
     public function eliminar_dia($variable)
     {
-        $dia = DiasTrabajo::where('proveedor_id', Auth::user()->id)->where('dia_semana', $variable)->get()->first();
-        if ($dia) {
-            $dia->delete();
+        $this->dia_current = DiasTrabajo::where('proveedor_id', Auth::user()->id)->where('dia_semana', $variable)->get()->first();
+        $this->dia_delete = true;
+    }
+
+    public function deleteDia()
+    {
+        if ($this->dia_current) {
+            $this->dia_current->delete();
         }
+        $this->dia_current = null;
+        $this->dia_delete = false;
     }
 
     public function crear_hora($variable)
@@ -109,16 +121,24 @@ class Scheduler2 extends Component
 
     public function eliminar_hora($variable)
     {
+
         $data = explode('-',$variable);
         $dia = DiasTrabajo::where('proveedor_id', Auth::user()->id)->where('dia_semana', $data[0])->get()->first();
         if ($dia) {
-            $hora = Horario::where('dia_trabajo_id', $dia->id)->where('hora_apertura', $data[1])->where('hora_cierre', $data[2])->get()->first();
-            if ($hora) {
-                $hora->delete();
-            }
+            $this->hora_current = Horario::where('dia_trabajo_id', $dia->id)->where('hora_apertura', $data[1])->where('hora_cierre', $data[2])->get()->first();
+            $this->hora_delete = true;
+
         }
     }
 
+    public function deleteHora()
+    {
+        if ($this->hora_current) {
+            $this->hora_current->delete();
+        }
+        $this->hora_current = null;
+        $this->hora_delete = false;
+    }
 
     public function render()
     {

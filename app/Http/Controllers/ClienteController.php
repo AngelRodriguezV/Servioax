@@ -52,6 +52,7 @@ class ClienteController extends Controller
 
     public function saveSolicitud(Request $request)
     {
+        #Validar la hora
         $data = explode('/',$request['date-times']);
         $request['fecha'] = $data[0];
         $request['hora_inicio'] = $data[1];

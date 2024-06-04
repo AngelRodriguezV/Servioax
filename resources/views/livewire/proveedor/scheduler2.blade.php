@@ -54,4 +54,41 @@
             </div>
         @endforeach
     </div>
+    <x-dialog-modal wire:model.live="hora_delete">
+        <x-slot name="title">
+            Eliminar Horario
+        </x-slot>
+        <x-slot name="content">
+            <p>Estas seguro de eliminar el Horario:</p>
+            {{ isset($hora_current) ? $hora_current->diaTrabajo->dia_semana . ' ' . $hora_current->hora_apertura->format('H:i') . '-' . $hora_current->hora_cierre->format('H:i') : ''}}
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('hora_delete')" wire:loading.attr="disabled">
+                Cancelar
+            </x-secondary-button>
+
+            <x-danger-button class="ms-3" wire:click="deleteHora" wire:loading.attr="disabled">
+                Eliminar
+            </x-danger-button>
+        </x-slot>
+    </x-dialog-modal>
+    <x-dialog-modal wire:model.live="dia_delete">
+        <x-slot name="title">
+            Eliminar Dia
+        </x-slot>
+        <x-slot name="content">
+            <p>Estas seguro de eliminar el Dia de la semana:</p>
+            {{ isset($dia_current) ? $dia_current->dia_semana  : ''}}
+            <p>Se eliminarán también todos los horarios asociados.</p>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('dia_delete')" wire:loading.attr="disabled">
+                Cancelar
+            </x-secondary-button>
+
+            <x-danger-button class="ms-3" wire:click="deleteDia" wire:loading.attr="disabled">
+                Eliminar
+            </x-danger-button>
+        </x-slot>
+    </x-dialog-modal>
 </div>

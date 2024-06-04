@@ -54,6 +54,8 @@ class Scheduler extends Component
         $this->horasDisponibles = Horario::whereIn('dia_trabajo_id', DiasTrabajo::select('id')->where('proveedor_id', $proveedor->id)->get())
             ->get();
         $this->horasOcupadas = Solicitud::whereIn('servicio_id', Servicio::select('id')->where('proveedor_id', $proveedor->id)->get())
+            ->where('estatus', '!=', 'RECHAZADA')
+            ->Where('estatus', '!=', 'CANCELADA')
             ->get();
     }
 
