@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DiasTrabajo;
 use App\Models\Direccion;
 use App\Models\Horario;
 use App\Models\Servicio;
@@ -53,7 +54,37 @@ class ClienteController extends Controller
     public function saveSolicitud(Request $request)
     {
         #Validar la hora
-        $data = explode('/',$request['date-times']);
+        $data = explode('/', $request['date-times']);
+        $data2 = explode('-', $data[0]);
+        $fecha = now()->setDate($data2[0], $data2[1], $data2[2]);
+        $proveedor = Servicio::find($request->servicio_id)->proveedor;
+        $dia_semana = DiasTrabajo::where('proveedor_id', $proveedor->id)->where('N', $fecha->format('N'))->first();
+        $valido = false;
+        if ($dia_semana) {
+            $hora = Horario::where('dia_trabajo_id', $dia_semana->id)
+                ->where('hora_apertura', $data[1])
+                ->where('hora_cierre', $data[2])
+                ->first();
+            if ($hora) {
+                $valido = true;
+            }
+        }
+
+        $horaOcupada = Solicitud::whereIn('servicio_id', Servicio::select('id')->where('proveedor_id', $proveedor->id)->get())
+            ->where('fecha', $data[0])
+            ->where('hora_inicio', $data[1])
+            ->where('hora_termino', $data[2])
+            ->where('estatus', '!=', 'RECHAZADA')
+            ->Where('estatus', '!=', 'CANCELADA')
+            ->first();
+        if ($horaOcupada) {
+            $valido = true;
+        }
+
+        if (!$valido) {
+            return redirect()->back()->withErrors("La hora que selecciono ya no esta disponible")->withInput();
+        }
+
         $request['fecha'] = $data[0];
         $request['hora_inicio'] = $data[1];
         $request['hora_termino'] = $data[2];
