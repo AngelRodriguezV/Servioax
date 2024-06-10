@@ -33,6 +33,6 @@
         </div>
     @endforeach
     <div class="mx-4 my-2 col-span-full">
-        {{ $solicitudes->links() }}
+        {{ $solicitudes->links() gi}}
     </div>
 </div>
