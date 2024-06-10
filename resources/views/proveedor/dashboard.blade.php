@@ -3,7 +3,7 @@
         <h1 class="font-bold text-xl text-center mb-2">
             Solicitudes
         </h1>
-        @livewire('proveedor.scheduler')
+        @livewire('proveedor.solicitudes')
     </div>
 
     <div class="mx-auto max-w-7xl px-2 py-2">
