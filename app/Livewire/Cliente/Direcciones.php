@@ -15,6 +15,8 @@ class Direcciones extends Component
 
     public $state = [];
 
+    public $documento;
+
     public function confirmCrearDireccion()
     {
         $this->direccion_current = null;
@@ -52,8 +54,16 @@ class Direcciones extends Component
         $this->confirmingDeleteDireccion = false;
     }
 
+    public function setDireccion($id)
+    {
+        $this->documento->update([
+            'direccion_id' => $id
+        ]);
+    }
+
     public function render()
     {
+        $this->documento = Auth::user()->documento;
         $direcciones = Direccion::where('user_id', auth()->user()->id)
             ->latest('updated_at')
             ->get();

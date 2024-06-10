@@ -41,7 +41,8 @@
                                         ) {
                                             $color = ' bg-green-200';
                                             $active = true;
-                                            $extraClass = 'cursor-pointer peer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-blue-600 hover:text-gray-600 hover:bg-gray-100';
+                                            #$extraClass = 'cursor-pointer peer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-blue-600 hover:text-gray-600 hover:bg-gray-100';
+                                            $extraClass = 'hover:bg-blue-600 hover:text-white';
                                             break;
                                         }
                                     }
@@ -61,20 +62,12 @@
                                 }
                                 $extraClass .= $color;
                             @endphp
-                            <input type="radio"
-                                id="f-{{$inicioCalendario->format('Y-m-d')}}-{{$hi->format('H:i:s')}}-{{$hf->format('H:i:s')}}"
-                                value="{{$inicioCalendario->format('Y-m-d')}}/{{$hi->format('H:i:s')}}/{{$hf->format('H:i:s')}}"
-                                name="date-times" class="hidden peer"
-                                {{ $active ? ' ' : 'disabled' }}
-                                required />
-                            <label for="f-{{$inicioCalendario->format('Y-m-d')}}-{{$hi->format('H:i:s')}}-{{$hf->format('H:i:s')}}"
-                                class="inline-flex items-center justify-center w-full p-1 rounded-md border border-gray-200 text-gray-500 {{ $extraClass }}">
-                                <div class="block">
-                                    <p>
-                                        {{ $hi->format('H:i') }} - {{ $hf->format('H:i') }}
-                                    </p>
-                                </div>
-                            </label>
+                            <button type="button"
+                                class="p-1 w-full rounded-md border border-gray-200 text-gray-500 {{ $extraClass }}"
+                                wire:click="select('{{$inicioCalendario->format('Y-m-d')}}/{{$hi->format('H:i:s')}}/{{$hf->format('H:i:s')}}')"
+                                {{ $active ? ' ' : 'disabled' }}>
+                                {{ $hi->format('H:i') }} - {{ $hf->format('H:i') }}
+                            </button>
                         </div>
                     @endfor
                 </div>
@@ -83,5 +76,26 @@
                 $inicioCalendario->addDay();
             @endphp
         @endwhile
+        <input type="text" name="date-times" wire:model="value" aria-label="date time" required hidden>
     </div>
+    <x-dialog-modal wire:model.live="modal">
+        <x-slot name="title">
+            Selección del horario
+        </x-slot>
+        <x-slot name="content">
+            <p>Deseas guardar el horario seleccionado:</p>
+            <p>Fecha: {{ $value[0] }}</p>
+            <p>Hora inicio: {{ $value[1] }}</p>
+            <p>Hora cierre: {{ $value[2] }}</p>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="cancel()">
+                Cancelar
+            </x-secondary-button>
+
+            <x-button class="ms-3">
+                Guardar
+            </x-button>
+        </x-slot>
+    </x-dialog-modal>
 </div>

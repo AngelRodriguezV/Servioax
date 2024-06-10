@@ -54,10 +54,10 @@ class ClienteController extends Controller
     public function saveSolicitud(Request $request)
     {
         #Validar la hora
-        $data = explode('/', $request['date-times']);
+        $data = explode(',', $request['date-times']);
         $data2 = explode('-', $data[0]);
         $fecha = now()->setDate($data2[0], $data2[1], $data2[2]);
-        $proveedor = Servicio::find($request->servicio_id)->proveedor;
+        $proveedor = Servicio::find($request['servicio_id'])->proveedor;
         $dia_semana = DiasTrabajo::where('proveedor_id', $proveedor->id)->where('N', $fecha->format('N'))->first();
         $valido = false;
         if ($dia_semana) {
@@ -90,6 +90,7 @@ class ClienteController extends Controller
         $request['hora_termino'] = $data[2];
         $request['estatus'] = 'NUEVA';
         $request['cliente_id'] = Auth::user()->id;
+        $request['direccion_id'] = Auth::user()->documento->direccion_id;
         Solicitud::create($request->all());
         return redirect()->route('cliente.solicitudes');
     }

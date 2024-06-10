@@ -41,6 +41,16 @@
                 Referencias:
                 <span>{{ $direccion->referencias }}</span>
             </div>
+            <div>
+                @if ($direccion->id != $documento->direccion_id)
+                    <button
+                        type="button"
+                        wire:click="setDireccion({{$direccion->id}})"
+                        class="text-blue-400">
+                        Seleccionar como predeterminado
+                    </button>
+                @endif
+            </div>
             <div class="grid grid-cols-2 gap-2 text-center mt-2">
                 <x-button wire:click="confirmUpdateDireccion({{ $direccion->id }})"
                     wire:loading.attr="disabled">Editar</x-button>
@@ -80,12 +90,14 @@
                 {{-- Codigo postal --}}
                 <div>
                     <x-label for="codigo_postal" value="Codigo Postal" />
-                    <x-input id="codigo_postal" type="text" wire:model.live="state.codigo_postal" class="mt-1 block w-full" required/>
+                    <x-input id="codigo_postal" type="text" wire:model.live="state.codigo_postal"
+                        class="mt-1 block w-full" required />
                     <x-input-error for="codigo_postal" class="mt-2" />
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="inputColonia">Colonia</label>
-                    <x-input id="colonia" type="text" class="mt-1 block w-full" wire:model.live="state.colonia" required/>
+                    <x-input id="colonia" type="text" class="mt-1 block w-full" wire:model.live="state.colonia"
+                        required />
                     <x-input-error for="colonia" class="mt-2" />
                     {{--
                     <select id="inputColonia" name="" wire:model="state.colonia"
@@ -96,52 +108,60 @@
                 </div>
                 <div>
                     <x-label for="estado" value="Estado" />
-                    <x-input id="estado" type="text" class="mt-1 block w-full" wire:model.live="state.estado" required/>
+                    <x-input id="estado" type="text" class="mt-1 block w-full" wire:model.live="state.estado"
+                        required />
                     <x-input-error for="estado" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="municipio" value="Municipio" />
-                    <x-input id="municipio" type="text" class="mt-1 block w-full" wire:model="state.municipio" required/>
+                    <x-input id="municipio" type="text" class="mt-1 block w-full" wire:model="state.municipio"
+                        required />
                     <x-input-error for="municipio" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="calle" value="Calle" />
-                    <x-input id="calle" type="text" class="mt-1 block w-full" wire:model="state.calle" required/>
+                    <x-input id="calle" type="text" class="mt-1 block w-full" wire:model="state.calle"
+                        required />
                     <x-input-error for="calle" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="num_exterior" value="Numero exterior" />
-                    <x-input id="num_exterior" type="text" class="mt-1 block w-full" wire:model="state.num_exterior" required/>
+                    <x-input id="num_exterior" type="text" class="mt-1 block w-full" wire:model="state.num_exterior"
+                        required />
                     <x-input-error for="num_exterior" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="num_interior" value="Numero interior" />
-                    <x-input id="num_interior" type="text" class="mt-1 block w-full" wire:model="state.num_interior"/>
+                    <x-input id="num_interior" type="text" class="mt-1 block w-full"
+                        wire:model="state.num_interior" />
                     <x-input-error for="num_interior" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="entre_calle1" value="Entre calle" />
-                    <x-input id="entre_calle1" type="text" class="mt-1 block w-full" wire:model="state.entre_calle1"/>
+                    <x-input id="entre_calle1" type="text" class="mt-1 block w-full"
+                        wire:model="state.entre_calle1" />
                     <x-input-error for="entre_calle1" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="entre_calle2" value="Entre calle" />
-                    <x-input id="entre_calle2" type="text" class="mt-1 block w-full" wire:model="state.entre_calle2"/>
+                    <x-input id="entre_calle2" type="text" class="mt-1 block w-full"
+                        wire:model="state.entre_calle2" />
                     <x-input-error for="entre_calle2" class="mt-2" />
                 </div>
                 <div>
                     <x-label for="referencias" value="Referencias" />
-                    <x-input id="referencias" type="text" class="mt-1 block w-full" wire:model="state.referencias" required/>
+                    <x-input id="referencias" type="text" class="mt-1 block w-full"
+                        wire:model="state.referencias" required />
                     <x-input-error for="referencias" class="mt-2" />
                 </div>
                 <div class="hidden">
                     <x-label for="latitud" value="Latitud" />
-                    <x-input id="latitud" type="text" class="mt-1 block w-full" wire:model="state.latitud"/>
+                    <x-input id="latitud" type="text" class="mt-1 block w-full" wire:model="state.latitud" />
                     <x-input-error for="latitud" class="mt-2" />
                 </div>
                 <div class="hidden">
                     <x-label for="longitud" value="Longitud" />
-                    <x-input id="longitud" type="text" class="mt-1 block w-full" wire:model="state.longitud"/>
+                    <x-input id="longitud" type="text" class="mt-1 block w-full" wire:model="state.longitud" />
                     <x-input-error for="longitud" class="mt-2" />
                 </div>
                 <x-button type="submit" class="my-4">Guardar</x-button>

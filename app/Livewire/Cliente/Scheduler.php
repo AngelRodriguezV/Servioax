@@ -45,6 +45,10 @@ class Scheduler extends Component
     public $inicioCalendario;
     public $finCalendario;
 
+    public $date_times = '';
+    public $value = ['','',''];
+    public $modal = false;
+
     public function mount(User $proveedor)
     {
         $this->currentDateTime = now();
@@ -76,8 +80,28 @@ class Scheduler extends Component
         }
     }
 
+    public function select($value)
+    {
+        $this->date_times = $value;
+        $this->value = explode('/', $value);
+        $this->modal = true;
+    }
+
+    public function cancel()
+    {
+        $this->date_times = '';
+        $this->modal = false;
+    }
+
+    public function save()
+    {
+
+        $this->modal = false;
+    }
+
     public function render()
     {
+        $this->inicioCalendario = $this->finCalendario->copy()->subDays(6);
         return view('livewire.cliente.scheduler');
     }
 }
