@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use App\Notifications\SolicitudNotification;
+use App\Events\SolicitudEvent;
 
 class ClienteController extends Controller
 {
@@ -91,7 +93,11 @@ class ClienteController extends Controller
         $request['estatus'] = 'NUEVA';
         $request['cliente_id'] = Auth::user()->id;
         $request['direccion_id'] = Auth::user()->documento->direccion_id;
-        Solicitud::create($request->all());
+        $solicitud = Solicitud::create($request->all());
+
+        //Envio de la notificacion de solicitud de un servicio al proveedor
+        //$proveedor->notify(new SolicitudNotification($solicitud));
+        event(new SolicitudEvent($solicitud));
         return redirect()->route('cliente.solicitudes');
     }
 

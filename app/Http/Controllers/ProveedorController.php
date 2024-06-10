@@ -36,4 +36,22 @@ class ProveedorController extends Controller
     public function abrobarSolicitud(Solicitud $solicitud) {
         return view('proveedor.aprobar', compact('solicitud'));
     }
+
+    public function mostrarNotificaionesPro()
+    {
+        $solicitudNotification = auth()->user()->notifications;
+        return view('proveedor.notifications', compact('solicitudNotification'));
+    }
+
+    public function deleteNotification($id)
+    {
+        $notification = auth()->user()->notifications()->find($id);
+
+        if ($notification) {
+            $notification->delete();
+        }
+
+        return redirect()->back();
+    }
+
 }
