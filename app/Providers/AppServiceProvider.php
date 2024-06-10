@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**
@@ -22,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
         if (!empty( env('NGROK_URL') ) && $request->server->has('HTTP_X_ORIGINAL_HOST')) {
             $this->app['url']->forceRootUrl(env('NGROK_URL'));
         }
+        Carbon::setLocale('es');
     }
 }

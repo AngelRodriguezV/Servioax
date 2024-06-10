@@ -94,6 +94,26 @@ Route::middleware([
             Route::get('aprobar/{solicitud}', [ProveedorController::class, 'abrobarSolicitud'])->name('aprobar');
 
             Route::get('mensajes/{user2}', [ProveedorController::class, 'mensajes'])->name('mensajes');
+
+            #Notificaciones
+            Route::get('notificaciones', [ProveedorController::class, 'mostrarNotificaionesPro'])->name('notificacionP');
+            
+            Route::get('markAsRead/{id}', function($id) {
+                $notification = auth()->user()->unreadNotifications()->find($id);
+            
+                if ($notification) {
+                    $notification->markAsRead();
+                }
+            
+                return redirect()->back();
+            })->name('markAsReadId');
+
+            Route::get('markAsRead', function(){
+                auth()->user()->unreadNotifications->markAsRead();
+                return redirect()->back();
+            })->name('markAsRead');
+
+            Route::get('deleteNotification/{id}', [ProveedorController::class, 'deleteNotification'])->name('deleteNotification');
         });
     });
 
