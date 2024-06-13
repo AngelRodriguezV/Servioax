@@ -118,22 +118,26 @@ Route::middleware([
     });
 
     # Vistas auntenticadas para el Cliente
-    Route::group(['middleware' => ['role:Cliente']], function () {
+    #Route::group(['middleware' => ['role:Cliente']], function () {
         Route::prefix('cliente')->name('cliente.')->group(function() {
 
             # Agregar las rutas del proveedor
-            Route::get('home', [ClienteController::class, 'dashboard'])->name('dashboard');
-            Route::get('mis-solicitudes', [ClienteController::class, 'solicitudes'])->name('solicitudes');
-            Route::get('mis-solicitudes/{solicitud}', [ClienteController::class, 'solicitud'])->name('solicitud');
-            Route::get('direcciones', [ClienteController::class, 'direcciones'])->name('direcciones');
-            Route::get('perfil', [ClienteController::class, 'perfil'])->name('perfil');
-            Route::get('soporte', [ClienteController::class, 'soporte'])->name('soporte');
-            Route::get('solicitud/create', [ClienteController::class, 'saveSolicitud'])->name('solicitud.show');
+            Route::get('home', [ClienteController::class, 'dashboard'])->middleware('can:cliente-ver-dashboard')->name('dashboard');
+            Route::get('mis-solicitudes', [ClienteController::class, 'solicitudes'])->middleware('can:cliente-ver-solicitudes')->name('solicitudes');
+            Route::get('mis-solicitudes/{solicitud}', [ClienteController::class, 'solicitud'])->middleware('can:cliente-ver-solicitud')->name('solicitud');
+            Route::get('direcciones', [ClienteController::class, 'direcciones'])->middleware('can:cliente-ver-direcciones')->name('direcciones');
+            Route::get('perfil', [ClienteController::class, 'perfil'])->middleware('can:cliente-ver-perfil')->name('perfil');
+            Route::get('soporte', [ClienteController::class, 'soporte'])->middleware('can:cliente-ver-soporte')->name('soporte');
+            Route::get('solicitud/create', [ClienteController::class, 'saveSolicitud'])->middleware('can:cliente-crear-solicitud')->name('solicitud.show');
 
-            Route::get('solicitar-servicio/{servicio}', [ClienteController::class, 'solicitarServicio'])->name('solicitarservicio');
-            Route::get('mensajes/{user2}', [ClienteController::class, 'mensajes'])->name('mensajes');
+            Route::get('solicitar-servicio/{servicio}', [ClienteController::class, 'solicitarServicio'])->middleware('can:cliente-solicitar-servicio')->name('solicitarservicio');
+            Route::get('mensajes/{user2}', [ClienteController::class, 'mensajes'])->middleware('can:cliente-ver-mensajes')->name('mensajes');
+            
+            #Convierte al cliente en proveedor
+            Route::get('convertir-proveedor-view', [ClienteController::class, 'convertirAProveedorview'])->name('convertirAProveedorView');
+            Route::get('convertir-proveedor', [ClienteController::class, 'convertirAProveedor'])->name('convertirAProveedor');
         });
-    });
+    #});
 });
 
 

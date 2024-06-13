@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use App\Notifications\SolicitudNotification;
 use App\Events\SolicitudEvent;
+use Spatie\Permission\Models\Role;
 
 class ClienteController extends Controller
 {
 
     public function solicitarServicio(Servicio $servicio)
     {
-        $direcciones = auth()->user()->direcciones;
-        return view('cliente.solicitar-servicio', compact('servicio', 'direcciones'));
+        return view('cliente.solicitar-servicio', compact('servicio'));
     }
 
     public function dashboard()
@@ -50,7 +50,10 @@ class ClienteController extends Controller
 
     public function solicitud(Solicitud $solicitud)
     {
-        return view('cliente.solicitud', compact('solicitud'));
+        if ($solicitud->cliente_id == Auth::user()->id) {
+            return view('cliente.solicitud', compact('solicitud'));
+        }
+        return view('404');
     }
 
     public function saveSolicitud(Request $request)
@@ -104,5 +107,18 @@ class ClienteController extends Controller
     public function mensajes(User $user2)
     {
         return view('cliente.mensajes', compact('user2'));
+    }
+
+    public function convertirAProveedor()
+    {
+        
+        $user = Auth::user();
+        $user->roles()->sync(Role::where('name', 'Proveedor')->first()->id);
+        
+        return redirect()->route('proveedor.dashboard');
+    }
+
+    public function convertirAProveedorview(){
+        return view('cliente.convertirAProveedor');
     }
 }
