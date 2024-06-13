@@ -76,6 +76,14 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Mensajes</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('cliente.dashboard') }}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+                    <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 14 3-3m-3 3 3 3m-3-3h16v-3m2-7-3 3m3-3-3-3m3 3H3v3"/>
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Cambiar a cliente</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

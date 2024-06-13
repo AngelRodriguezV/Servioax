@@ -3,7 +3,7 @@
     <div class="w-4/5 mx-auto py-6">
 
         <h1 class="my-4 font-bold text-2xl">
-            Solicitud del servicio {{ $servicio->nombre }}
+            Calendario de horas disponibles - {{ $servicio->nombre }}
         </h1>
 
         <form method="GET" action="{{ route('cliente.solicitud.show') }}" class="grid">

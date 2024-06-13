@@ -18,7 +18,7 @@ class HorarioFactory extends Factory
     {
         return [
             'hora_apertura' => '09:00:00',
-            'hora_cierre' => '17:00:00',
+            'hora_cierre' => '10:00:00',
         ];
     }
 }
