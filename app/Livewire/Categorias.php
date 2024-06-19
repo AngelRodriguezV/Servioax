@@ -14,10 +14,10 @@ class Categorias extends Component
     use WithPagination;
 
     public $search;
-
     public $rating = 0;
-
     public $categoria;
+    public $latitude;
+    public $longitude;
 
     public function mount($categoria)
     {
@@ -54,7 +54,7 @@ class Categorias extends Component
             ->get();
 
         $queryServicios = Servicio::whereIn('proveedor_id', $proveedores)
-            ->whereIn('estatus', ['ACEPTADA', 'EN REVISION'])
+            ->where('estatus', 'ACEPTADA')
             ->where('categoria_id', $this->categoria->id);
 
         if ($this->search) {
@@ -77,6 +77,32 @@ class Categorias extends Component
             });
         }
 
+        if ($this->latitude && $this->longitude) {
+            $servicios = $servicios->map(function ($servicio) {
+                $distancia = $this->calcularDistancia(
+                    $this->latitude,
+                    $this->longitude,
+                    $servicio->proveedor->direcciones->first()->latitud,
+                    $servicio->proveedor->direcciones->first()->longitud
+                );
+                $servicio->distancia = $distancia;
+                return $servicio;
+            })->sortBy('distancia');
+        }
+
         return view('livewire.categorias', compact('servicios'));
+    }
+
+    private function calcularDistancia($lat1, $lon1, $lat2, $lon2)
+    {
+        $radioTierra = 6371; // Radio de la Tierra en kilómetros
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+            sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $distancia = $radioTierra * $c;
+        return $distancia;
     }
 }

@@ -7,7 +7,7 @@
     </a>
     <div class="p-5">
         {{-- Proveedor --}}
-        <div class="flex mb-3">
+        <div class="mb-3">
             @isset($servicio->proveedor->image)
                 <img id="picture" src="{{ Storage::url($servicio->proveedor->image->url) }}" alt=""
                     class="w-10 h-10 rounded-full bg-gray-300">
@@ -17,6 +17,7 @@
                     alt="" class="w-10 h-10 rounded-full bg-gray-300">
             @endisset
             <a href="" class="my-auto ml-4">{{ $servicio->proveedor->nombre . ' ' . $servicio->proveedor->apellido_paterno . ' ' . $servicio->proveedor->apellido_materno }}</a>
+            <p class="mt-2">Direccion: {{ $servicio->proveedor->documento->direccion->calle. ' ' .$servicio->proveedor->documento->direccion->num_exterior. ', '.$servicio->proveedor->documento->direccion->colonia.', '.$servicio->proveedor->documento->direccion->municipio.', '.$servicio->proveedor->documento->direccion->estado}}</p>
         </div>
         {{-- Titulo --}}
         <a href="{{ route('servicio', $servicio) }}">
