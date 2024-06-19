@@ -7,12 +7,19 @@
         <h2 class="text-2xl font-bold mt-4">Categorias</h2>
         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
             <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <div class="hidden md:block relative h-56 overflow-hidden rounded-lg md:h-96">
                 @for ($i = 0; $i < count($categorias) / 4; $i = $i + 4)
                     <div class="grid grid-cols-4 px-16 p-4 gap-2" data-carousel-item>
                         @for ($j = 0; $j < 4; $j++)
                             <x-cards.categoria :categoria="$categorias[$i + $j]" />
                         @endfor
+                    </div>
+                @endfor
+            </div>
+            <div class="block md:hidden relative h-56 overflow-hidden rounded-lg md:h-96">
+                @for ($i = 0; $i < count($categorias); $i++)
+                    <div class="px-16 p-4" data-carousel-item>
+                        <x-cards.categoria :categoria="$categorias[$i]" />
                     </div>
                 @endfor
             </div>

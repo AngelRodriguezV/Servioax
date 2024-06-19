@@ -1,6 +1,6 @@
 <div id="indicators-carousel" class="relative w-full" data-carousel="static">
     <!-- Carousel wrapper -->
-    <div class="relative h-[600px] overflow-hidden rounded-lg">
+    <div class="hidden md:block relative h-[600px] overflow-scroll rounded-lg">
         @for ($i = 0; $i < round(count($proveedores) / 4); $i = $i + 4)
             <div class="grid grid-cols-4 px-16 p-4 gap-2" data-carousel-item>
                 @for ($j = 0; $j < 4; $j++)
@@ -8,6 +8,13 @@
                         <x-cards.proveedor :proveedor="$proveedores[$i + $j]" />
                     @endif
                 @endfor
+            </div>
+        @endfor
+    </div>
+    <div class="block md:hidden relative h-[600px] overflow-scroll rounded-lg">
+        @for ($i = 0; $i < count($proveedores); $i++)
+            <div class="px-16 p-4" data-carousel-item>
+                <x-cards.proveedor :proveedor="$proveedores[$i]" />
             </div>
         @endfor
     </div>

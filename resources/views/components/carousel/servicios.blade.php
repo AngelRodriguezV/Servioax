@@ -1,7 +1,7 @@
 @props(['servicios'])
 <div id="indicators-carousel" class="relative w-full" data-carousel="static">
     <!-- Carousel wrapper -->
-    <div class="relative h-[500px] overflow-hidden rounded-lg">
+    <div class="hidden md:block relative h-[500px] overflow-visible rounded-lg">
         @for ($i = 0; $i < count($servicios) / 4; $i = $i + 4)
             <div class="grid grid-cols-4 px-16 p-4 gap-2" data-carousel-item>
                 @for ($j = 0; $j < 4; $j++)
@@ -9,6 +9,13 @@
                     <x-cards.servicio :servicio="$servicios[$i + $j]" />
                     @endif
                 @endfor
+            </div>
+        @endfor
+    </div>
+    <div class="block md:hidden relative h-[500px] overflow-y-visible rounded-lg">
+        @for ($i = 0; $i < count($servicios); $i++)
+            <div class="px-16 p-4" data-carousel-item>
+                <x-cards.servicio :servicio="$servicios[$i]" />
             </div>
         @endfor
     </div>

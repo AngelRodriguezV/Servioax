@@ -36,7 +36,7 @@
         {{-- Telefono --}}
         <div class="col-span-6 sm:col-span-4">
             <x-label for="telefono" value="Telefono" />
-            <x-input id="telefono" type="tel" class="mt-1 block w-full" wire:model="state.telefono" required />
+            <x-input id="telefono" type="tel" class="mt-1 block w-full" placeholder="Telefono a 10 digitos" wire:model="state.telefono" required pattern="\d{10}" title="El número de teléfono debe tener 10 dígitos" />
             <x-input-error for="telefono" class="mt-2" />
         </div>
 

@@ -16,6 +16,7 @@ use App\Models\DiasTrabajo;
 use App\Models\Horario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WaController;
 
 # Vistas que se muestran al cliente publicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -114,6 +115,8 @@ Route::middleware([
             })->name('markAsRead');
 
             Route::get('deleteNotification/{id}', [ProveedorController::class, 'deleteNotification'])->name('deleteNotification');
+            //Notificacion de Whatsapp
+            Route::get('/envia-wa', [WaController::class, 'sendWaNotification']);
         });
     });
 

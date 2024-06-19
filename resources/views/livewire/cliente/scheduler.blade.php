@@ -1,4 +1,13 @@
 <div class="text-center p-4">
+    <!-- Dropdown for selecting month -->
+    <div class="mb-4">
+        <label for="month-select" class="block mb-2">Selecciona un mes:</label>
+        <select id="month-select" wire:model="selectedMonth" class="p-2 border border-gray-300 rounded-md">
+            @foreach ($nextMonths as $month)
+                <option value="{{ $month['value'] }}">{{ $month['name'] }}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="grid grid-cols-2 gap-2 font-bold text-center">
         <i wire:click="decrementar()" class="bg-gray-200 hover:bg-blue-600 hover:text-white rounded-md">
@@ -17,7 +26,6 @@
 
     <div class="grid grid-flow-col overflow-x-scroll">
         @while ($inicioCalendario <= $finCalendario)
-
             @if ($inicioCalendario->format('y-m-d') >= $currentDateTime->format('y-m-d'))
                 <div class="h-full grid gap-1 p-2 w-40">
                     <div>
@@ -31,7 +39,6 @@
                                 $hf = Carbon\Carbon::now()->setTime($i + 7, 0, 0);
                                 $extraClass = ' ';
                                 $color = ' bg-gray-200';
-                                #$color = $diasDisponibles->contains($inicioCalendario->format('N')) ? ' bg-red-200' : ' bg-gray-200';
                                 $active = false;
                                 foreach ($horasDisponibles as $hora) {
                                     if (strval($hora->diaTrabajo->N) === $inicioCalendario->format('N')) {
@@ -41,7 +48,6 @@
                                         ) {
                                             $color = ' bg-green-200';
                                             $active = true;
-                                            #$extraClass = 'cursor-pointer peer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-blue-600 hover:text-gray-600 hover:bg-gray-100';
                                             $extraClass = 'hover:bg-blue-600 hover:text-white';
                                             break;
                                         }

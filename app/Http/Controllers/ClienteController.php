@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 use App\Notifications\SolicitudNotification;
 use App\Events\SolicitudEvent;
 use Spatie\Permission\Models\Role;
+use App\Notifications\WhatsAppNotification;
 
 class ClienteController extends Controller
 {
@@ -100,7 +101,9 @@ class ClienteController extends Controller
 
         //Envio de la notificacion de solicitud de un servicio al proveedor
         //$proveedor->notify(new SolicitudNotification($solicitud));
+        $phoneNumber = '52'.$proveedor->telefono;
         event(new SolicitudEvent($solicitud));
+        $proveedor->notify(new WhatsAppNotification($phoneNumber));
         return redirect()->route('cliente.solicitudes');
     }
 

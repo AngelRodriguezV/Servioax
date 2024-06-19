@@ -2,14 +2,12 @@
 
 namespace App\Livewire\Cliente;
 
-use App\Livewire\Proveedor\Horarios;
 use App\Models\DiasTrabajo;
 use App\Models\Horario;
 use App\Models\Servicio;
 use App\Models\Solicitud;
 use App\Models\User;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -18,10 +16,10 @@ class Scheduler extends Component
     public $semanas = [
         '1' => 'Lunes',
         '2' => 'Martes',
-        '3' => 'Miercoles',
+        '3' => 'Miércoles',
         '4' => 'Jueves',
         '5' => 'Viernes',
-        '6' => 'Sabado',
+        '6' => 'Sábado',
         '7' => 'Domingo'];
     public $meses = [
         '1' => 'Enero',
@@ -49,6 +47,9 @@ class Scheduler extends Component
     public $value = ['','',''];
     public $modal = false;
 
+    public $selectedMonth;
+    public $nextMonths;
+
     public function mount(User $proveedor)
     {
         $this->currentDateTime = now();
@@ -61,6 +62,24 @@ class Scheduler extends Component
             ->where('estatus', '!=', 'RECHAZADA')
             ->Where('estatus', '!=', 'CANCELADA')
             ->get();
+
+        $this->nextMonths = collect();
+        for ($i = 0; $i < 12; $i++) {
+            $monthDate = Carbon::now()->addMonthsNoOverflow($i);
+            $this->nextMonths->push([
+                'value' => $monthDate->format('Y-m'),
+                'name' => $this->meses[$monthDate->format('n')] . ' ' . $monthDate->format('Y')
+            ]);
+        }
+    }
+
+    public function updatedSelectedMonth($value)
+    {
+        $selectedDate = Carbon::createFromFormat('Y-m', $value);
+        if ($selectedDate->greaterThanOrEqualTo(Carbon::now())) {
+            $this->inicioCalendario = $selectedDate->copy()->startOfMonth();
+            $this->finCalendario = $this->inicioCalendario->copy()->addDays(6);
+        }
     }
 
     public function incrementar()
@@ -73,8 +92,7 @@ class Scheduler extends Component
     {
         $this->finCalendario = $this->finCalendario->copy()->subDays(7);
         $this->inicioCalendario = $this->finCalendario->copy()->subDays(6);
-        if ($this->finCalendario < $this->currentDateTime)
-        {
+        if ($this->finCalendario < $this->currentDateTime) {
             $this->inicioCalendario = $this->currentDateTime->copy();
             $this->finCalendario = $this->inicioCalendario->copy()->addDays(6);
         }
@@ -95,7 +113,7 @@ class Scheduler extends Component
 
     public function save()
     {
-
+        // Implementa la lógica para guardar la selección
         $this->modal = false;
     }
 
