@@ -49,6 +49,7 @@ class UserSeeder extends Seeder
         $direccion = Direccion::factory()->create([
             'user_id' => $proveedor->id
         ]);
+
         Documento::factory()->create([
             'user_id' => $proveedor->id,
             'direccion_id' => $direccion->id,

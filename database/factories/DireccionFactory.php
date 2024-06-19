@@ -16,17 +16,51 @@ class DireccionFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'calle' => fake()->text(15),
-            'colonia' => fake()->text(15),
-            'municipio' => fake()->text(15),
-            'estado' => fake()->text(15),
-            'num_interior' => 0,
-            'num_exterior' => 0,
-            'codigo_postal' => 0,
-            'referencias' => fake()->text(30),
-            'entre_calle1' => '',
-            'entre_calle2' => '',
-        ];
+        $apiKey = 'AIzaSyCPQPf8PLFzC3CdyHzuX8ooThc9krKYrAs';
+        $location = '17.0732,-96.7266';
+        $radius = 10000;  # Radio en metros
+        $url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={$location}&radius={$radius}&key={$apiKey}";
+        $response = file_get_contents($url);
+        $json = json_decode($response, true);
+        $datos = collect($json['results']);
+
+        $data = [];
+
+        while (count($data) < 7) {
+
+            $place_id = $datos->random()['place_id'];
+            $details_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id={$place_id}&key={$apiKey}";
+            $response = file_get_contents($details_url);
+            $json = json_decode($response, true);
+
+            $data['latitud'] = $json['result']['geometry']['location']['lat'];
+            $data['longitud'] = $json['result']['geometry']['location']['lng'];
+
+            foreach ($json['result']['address_components'] as $result) {
+                if (in_array('street_number', $result['types'])) {
+                    $data['num_exterior'] = $result['long_name'];
+                }
+                if (in_array('route', $result['types'])) {
+                    $data['calle'] =  $result['long_name'];
+                }
+                if (in_array('sublocality', $result['types'])) {
+                    $data['colonia'] = $result['long_name'];
+                }
+                if (in_array('locality', $result['types'])) {
+                    $data['municipio'] = $result['long_name'];
+                }
+                if (in_array('administrative_area_level_1', $result['types'])) {
+                    $data['estado'] = $result['long_name'];
+                }
+                if (in_array('postal_code', $result['types'])) {
+                    $data['codigo_postal'] = $result['long_name'];
+                }
+            }
+        }
+        $data['num_interior'] = 0;
+        $data['referencias'] = fake()->text(30);
+        $data['entre_calle1'] = '';
+        $data['entre_calle2'] = '';
+        return $data;
     }
 }
