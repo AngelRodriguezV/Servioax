@@ -15,7 +15,7 @@ class CarouselProveedores extends Component
         ->whereHas('documento', function ($query) {
             $query->where('estatus', 'ACEPTADA');
         })
-        ->latest('updated_at')->get();
+        ->latest('updated_at')->paginate(4);
 
         return view('livewire.components.carousel-proveedores', compact('proveedores'));
     }

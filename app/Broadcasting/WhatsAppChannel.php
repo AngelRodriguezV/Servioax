@@ -12,9 +12,9 @@ class WhatsAppChannel
     {
         $message = $notification->toWhatsApp($notifiable);
         //Aqui va la url
-        $url = '';
+        $url = 'https://graph.facebook.com/v20.0/343006412232213/messages';
         //Aqui va el token
-        $token = '';
+        $token = 'EAAXCOZCHCNbMBO9XMVBggrC6Ye7AY8MEriQYyh4WChBQljuJ5eg1lf9LdUKV3higCDT5cnPXRJH5NGNW24VTfYoB5W3BN6aF5IZBZBlJSKS1Q187qwzFoniCNC9mBiQ336F9OZA5iqSSiP95pUo7JZBXljET0JjUlkF1IJhxpkgqQqfjNgFiIPlxxN1RmxxVwxsp7sZCTZCRkKKm95N67YJzUoKDNoZD';
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,

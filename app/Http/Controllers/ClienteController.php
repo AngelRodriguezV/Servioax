@@ -101,9 +101,9 @@ class ClienteController extends Controller
 
         //Envio de la notificacion de solicitud de un servicio al proveedor
         //$proveedor->notify(new SolicitudNotification($solicitud));
-        $phoneNumber = '52'.$proveedor->telefono;
+        //$phoneNumber = '52'.$proveedor->telefono;
         event(new SolicitudEvent($solicitud));
-        $proveedor->notify(new WhatsAppNotification($phoneNumber));
+        //$proveedor->notify(new WhatsAppNotification($phoneNumber));
         return redirect()->route('cliente.solicitudes');
     }
 

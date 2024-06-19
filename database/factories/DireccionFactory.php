@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Direccion>
@@ -16,17 +17,22 @@ class DireccionFactory extends Factory
      */
     public function definition(): array
     {
+        $json = File::get(database_path('data/direcciones.json'));
+        $direcciones = json_decode($json);
+        $direccion = fake()->randomElement($direcciones);
         return [
-            'calle' => fake()->text(15),
-            'colonia' => fake()->text(15),
-            'municipio' => fake()->text(15),
-            'estado' => fake()->text(15),
-            'num_interior' => 0,
-            'num_exterior' => 0,
-            'codigo_postal' => 0,
-            'referencias' => fake()->text(30),
-            'entre_calle1' => '',
-            'entre_calle2' => '',
+            'calle' => $direccion->calle,
+            'colonia' => $direccion->colonia,
+            'municipio' => $direccion->municipio,
+            'estado' => $direccion->estado,
+            'num_interior' => $direccion->num_interior !== "" ? $direccion->num_interior : null,
+            'num_exterior' => $direccion->num_exterior,
+            'codigo_postal' => $direccion->codigo_postal,
+            'referencias' => $direccion->referencias,
+            'entre_calle1' => $direccion->entre_calle1,
+            'entre_calle2' => $direccion->entre_calle2,
+            'latitud' => $direccion->latitud,
+            'longitud' => $direccion->longitud
         ];
     }
 }

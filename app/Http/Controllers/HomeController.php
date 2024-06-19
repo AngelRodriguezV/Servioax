@@ -20,9 +20,9 @@ class HomeController extends Controller
             })
             ->get();
 
-        $categorias = Categoria::all();
+        $categorias = Categoria::paginate(4);
         $servicios = Servicio::whereIn('proveedor_id', $proveedores)
-            ->where('estatus', 'ACEPTADA')->latest('updated_at')->get();
+            ->where('estatus', 'ACEPTADA')->latest('updated_at')->paginate(4);
         return view('welcome', compact('categorias', 'servicios'));
     }
 
