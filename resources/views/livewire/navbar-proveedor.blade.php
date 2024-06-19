@@ -18,7 +18,7 @@
                     </svg>
                 </button>
                 <a href="{{ route('proveedor.dashboard') }}" class="flex ms-2 md:me-24">
-                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">ServiMex</span>
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">HandyMex</span>
                 </a>
             </div>
             <div class="flex items-center">
